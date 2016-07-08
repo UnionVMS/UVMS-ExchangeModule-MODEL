@@ -1,0 +1,290 @@
+
+package un.unece.uncefact.data.standard.reusableaggregatebusinessinformationentity._18;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlType;
+import un.unece.uncefact.data.standard.unqualifieddatatype._18.IDType;
+
+
+/**
+ * 
+ * <pre>
+ * &lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;ccts:UniqueID xmlns:ccts="urn:un:unece:uncefact:documentation:standard:CoreComponentsTechnicalSpecification:2" xmlns:qdt="urn:un:unece:uncefact:data:standard:QualifiedDataType:17" xmlns:ram="urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:18" xmlns:udt="urn:un:unece:uncefact:data:standard:UnqualifiedDataType:18" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;UN01006864&lt;/ccts:UniqueID&gt;
+ * </pre>
+ * 
+ * <pre>
+ * &lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;ccts:Acronym xmlns:ccts="urn:un:unece:uncefact:documentation:standard:CoreComponentsTechnicalSpecification:2" xmlns:qdt="urn:un:unece:uncefact:data:standard:QualifiedDataType:17" xmlns:ram="urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:18" xmlns:udt="urn:un:unece:uncefact:data:standard:UnqualifiedDataType:18" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;ABIE&lt;/ccts:Acronym&gt;
+ * </pre>
+ * 
+ * <pre>
+ * &lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;ccts:DictionaryEntryName xmlns:ccts="urn:un:unece:uncefact:documentation:standard:CoreComponentsTechnicalSpecification:2" xmlns:qdt="urn:un:unece:uncefact:data:standard:QualifiedDataType:17" xmlns:ram="urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:18" xmlns:udt="urn:un:unece:uncefact:data:standard:UnqualifiedDataType:18" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;CIDDH_ Supply Chain_ Trade Transaction. Details&lt;/ccts:DictionaryEntryName&gt;
+ * </pre>
+ * 
+ * <pre>
+ * &lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;ccts:Version xmlns:ccts="urn:un:unece:uncefact:documentation:standard:CoreComponentsTechnicalSpecification:2" xmlns:qdt="urn:un:unece:uncefact:data:standard:QualifiedDataType:17" xmlns:ram="urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:18" xmlns:udt="urn:un:unece:uncefact:data:standard:UnqualifiedDataType:18" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;1.0&lt;/ccts:Version&gt;
+ * </pre>
+ * 
+ * <pre>
+ * &lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;ccts:Definition xmlns:ccts="urn:un:unece:uncefact:documentation:standard:CoreComponentsTechnicalSpecification:2" xmlns:qdt="urn:un:unece:uncefact:data:standard:QualifiedDataType:17" xmlns:ram="urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:18" xmlns:udt="urn:un:unece:uncefact:data:standard:UnqualifiedDataType:18" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;Trade line items, trade agreement, trade delivery and trade settlement details included in a Cross Industry Delivery Despatch Advice Header (CIDDH).&lt;/ccts:Definition&gt;
+ * </pre>
+ * 
+ * <pre>
+ * &lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;ccts:ObjectClassTerm xmlns:ccts="urn:un:unece:uncefact:documentation:standard:CoreComponentsTechnicalSpecification:2" xmlns:qdt="urn:un:unece:uncefact:data:standard:QualifiedDataType:17" xmlns:ram="urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:18" xmlns:udt="urn:un:unece:uncefact:data:standard:UnqualifiedDataType:18" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;Trade Transaction&lt;/ccts:ObjectClassTerm&gt;
+ * </pre>
+ * 
+ * <pre>
+ * &lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;ccts:ObjectClassQualifierTerm xmlns:ccts="urn:un:unece:uncefact:documentation:standard:CoreComponentsTechnicalSpecification:2" xmlns:qdt="urn:un:unece:uncefact:data:standard:QualifiedDataType:17" xmlns:ram="urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:18" xmlns:udt="urn:un:unece:uncefact:data:standard:UnqualifiedDataType:18" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;CIDDH&lt;/ccts:ObjectClassQualifierTerm&gt;
+ * </pre>
+ * 
+ * <pre>
+ * &lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;ccts:ObjectClassQualifierTerm xmlns:ccts="urn:un:unece:uncefact:documentation:standard:CoreComponentsTechnicalSpecification:2" xmlns:qdt="urn:un:unece:uncefact:data:standard:QualifiedDataType:17" xmlns:ram="urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:18" xmlns:udt="urn:un:unece:uncefact:data:standard:UnqualifiedDataType:18" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;Supply Chain&lt;/ccts:ObjectClassQualifierTerm&gt;
+ * </pre>
+ * 
+ * <pre>
+ * &lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;ccts:BusinessProcessContextValue xmlns:ccts="urn:un:unece:uncefact:documentation:standard:CoreComponentsTechnicalSpecification:2" xmlns:qdt="urn:un:unece:uncefact:data:standard:QualifiedDataType:17" xmlns:ram="urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:18" xmlns:udt="urn:un:unece:uncefact:data:standard:UnqualifiedDataType:18" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;Delivering&lt;/ccts:BusinessProcessContextValue&gt;
+ * </pre>
+ * 
+ * <pre>
+ * &lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;ccts:GeopoliticalOrRegionContextValue xmlns:ccts="urn:un:unece:uncefact:documentation:standard:CoreComponentsTechnicalSpecification:2" xmlns:qdt="urn:un:unece:uncefact:data:standard:QualifiedDataType:17" xmlns:ram="urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:18" xmlns:udt="urn:un:unece:uncefact:data:standard:UnqualifiedDataType:18" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;In All Contexts&lt;/ccts:GeopoliticalOrRegionContextValue&gt;
+ * </pre>
+ * 
+ * <pre>
+ * &lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;ccts:OfficialConstraintContextValue xmlns:ccts="urn:un:unece:uncefact:documentation:standard:CoreComponentsTechnicalSpecification:2" xmlns:qdt="urn:un:unece:uncefact:data:standard:QualifiedDataType:17" xmlns:ram="urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:18" xmlns:udt="urn:un:unece:uncefact:data:standard:UnqualifiedDataType:18" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;None&lt;/ccts:OfficialConstraintContextValue&gt;
+ * </pre>
+ * 
+ * <pre>
+ * &lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;ccts:ProductContextValue xmlns:ccts="urn:un:unece:uncefact:documentation:standard:CoreComponentsTechnicalSpecification:2" xmlns:qdt="urn:un:unece:uncefact:data:standard:QualifiedDataType:17" xmlns:ram="urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:18" xmlns:udt="urn:un:unece:uncefact:data:standard:UnqualifiedDataType:18" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;In All Contexts&lt;/ccts:ProductContextValue&gt;
+ * </pre>
+ * 
+ * <pre>
+ * &lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;ccts:IndustryContextValue xmlns:ccts="urn:un:unece:uncefact:documentation:standard:CoreComponentsTechnicalSpecification:2" xmlns:qdt="urn:un:unece:uncefact:data:standard:QualifiedDataType:17" xmlns:ram="urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:18" xmlns:udt="urn:un:unece:uncefact:data:standard:UnqualifiedDataType:18" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;In All Contexts&lt;/ccts:IndustryContextValue&gt;
+ * </pre>
+ * 
+ * <pre>
+ * &lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;ccts:BusinessProcessRoleContextValue xmlns:ccts="urn:un:unece:uncefact:documentation:standard:CoreComponentsTechnicalSpecification:2" xmlns:qdt="urn:un:unece:uncefact:data:standard:QualifiedDataType:17" xmlns:ram="urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:18" xmlns:udt="urn:un:unece:uncefact:data:standard:UnqualifiedDataType:18" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;In All Contexts&lt;/ccts:BusinessProcessRoleContextValue&gt;
+ * </pre>
+ * 
+ * <pre>
+ * &lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;ccts:SupportingRoleContextValue xmlns:ccts="urn:un:unece:uncefact:documentation:standard:CoreComponentsTechnicalSpecification:2" xmlns:qdt="urn:un:unece:uncefact:data:standard:QualifiedDataType:17" xmlns:ram="urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:18" xmlns:udt="urn:un:unece:uncefact:data:standard:UnqualifiedDataType:18" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;In All Contexts&lt;/ccts:SupportingRoleContextValue&gt;
+ * </pre>
+ * 
+ * <pre>
+ * &lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;ccts:SystemCapabilitiesContextValue xmlns:ccts="urn:un:unece:uncefact:documentation:standard:CoreComponentsTechnicalSpecification:2" xmlns:qdt="urn:un:unece:uncefact:data:standard:QualifiedDataType:17" xmlns:ram="urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:18" xmlns:udt="urn:un:unece:uncefact:data:standard:UnqualifiedDataType:18" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;In All Contexts&lt;/ccts:SystemCapabilitiesContextValue&gt;
+ * </pre>
+ * 
+ * 
+ * <p>Java class for CIDDHSupplyChainTradeTransactionType complex type.
+ * 
+ * <p>The following schema fragment specifies the expected content contained within this class.
+ * 
+ * <pre>
+ * &lt;complexType name="CIDDHSupplyChainTradeTransactionType">
+ *   &lt;complexContent>
+ *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
+ *       &lt;sequence>
+ *         &lt;element name="ShipmentID" type="{urn:un:unece:uncefact:data:standard:UnqualifiedDataType:18}IDType" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element name="ApplicableCIDDHSupplyChainTradeAgreement" type="{urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:18}CIDDHSupplyChainTradeAgreementType"/>
+ *         &lt;element name="ApplicableCIDDHSupplyChainTradeDelivery" type="{urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:18}CIDDHSupplyChainTradeDeliveryType"/>
+ *         &lt;element name="ApplicableCIDDHSupplyChainTradeSettlement" type="{urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:18}CIDDHSupplyChainTradeSettlementType"/>
+ *         &lt;element name="IncludedCIDDLSupplyChainTradeLineItem" type="{urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:18}CIDDLSupplyChainTradeLineItemType" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element name="SpecifiedCIDDLLogisticsPackage" type="{urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:18}CIDDLLogisticsPackageType" maxOccurs="unbounded" minOccurs="0"/>
+ *       &lt;/sequence>
+ *     &lt;/restriction>
+ *   &lt;/complexContent>
+ * &lt;/complexType>
+ * </pre>
+ * 
+ * 
+ */
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "CIDDHSupplyChainTradeTransactionType", propOrder = {
+    "shipmentID",
+    "applicableCIDDHSupplyChainTradeAgreement",
+    "applicableCIDDHSupplyChainTradeDelivery",
+    "applicableCIDDHSupplyChainTradeSettlement",
+    "includedCIDDLSupplyChainTradeLineItem",
+    "specifiedCIDDLLogisticsPackage"
+})
+public class CIDDHSupplyChainTradeTransactionType
+    implements Serializable
+{
+
+    private final static long serialVersionUID = 1L;
+    @XmlElement(name = "ShipmentID")
+    protected List<IDType> shipmentID;
+    @XmlElement(name = "ApplicableCIDDHSupplyChainTradeAgreement", required = true)
+    protected CIDDHSupplyChainTradeAgreementType applicableCIDDHSupplyChainTradeAgreement;
+    @XmlElement(name = "ApplicableCIDDHSupplyChainTradeDelivery", required = true)
+    protected CIDDHSupplyChainTradeDeliveryType applicableCIDDHSupplyChainTradeDelivery;
+    @XmlElement(name = "ApplicableCIDDHSupplyChainTradeSettlement", required = true)
+    protected CIDDHSupplyChainTradeSettlementType applicableCIDDHSupplyChainTradeSettlement;
+    @XmlElement(name = "IncludedCIDDLSupplyChainTradeLineItem")
+    protected List<CIDDLSupplyChainTradeLineItemType> includedCIDDLSupplyChainTradeLineItem;
+    @XmlElement(name = "SpecifiedCIDDLLogisticsPackage")
+    protected List<CIDDLLogisticsPackageType> specifiedCIDDLLogisticsPackage;
+
+    /**
+     * Gets the value of the shipmentID property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the shipmentID property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getShipmentID().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link IDType }
+     * 
+     * 
+     */
+    public List<IDType> getShipmentID() {
+        if (shipmentID == null) {
+            shipmentID = new ArrayList<IDType>();
+        }
+        return this.shipmentID;
+    }
+
+    /**
+     * Gets the value of the applicableCIDDHSupplyChainTradeAgreement property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link CIDDHSupplyChainTradeAgreementType }
+     *     
+     */
+    public CIDDHSupplyChainTradeAgreementType getApplicableCIDDHSupplyChainTradeAgreement() {
+        return applicableCIDDHSupplyChainTradeAgreement;
+    }
+
+    /**
+     * Sets the value of the applicableCIDDHSupplyChainTradeAgreement property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link CIDDHSupplyChainTradeAgreementType }
+     *     
+     */
+    public void setApplicableCIDDHSupplyChainTradeAgreement(CIDDHSupplyChainTradeAgreementType value) {
+        this.applicableCIDDHSupplyChainTradeAgreement = value;
+    }
+
+    /**
+     * Gets the value of the applicableCIDDHSupplyChainTradeDelivery property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link CIDDHSupplyChainTradeDeliveryType }
+     *     
+     */
+    public CIDDHSupplyChainTradeDeliveryType getApplicableCIDDHSupplyChainTradeDelivery() {
+        return applicableCIDDHSupplyChainTradeDelivery;
+    }
+
+    /**
+     * Sets the value of the applicableCIDDHSupplyChainTradeDelivery property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link CIDDHSupplyChainTradeDeliveryType }
+     *     
+     */
+    public void setApplicableCIDDHSupplyChainTradeDelivery(CIDDHSupplyChainTradeDeliveryType value) {
+        this.applicableCIDDHSupplyChainTradeDelivery = value;
+    }
+
+    /**
+     * Gets the value of the applicableCIDDHSupplyChainTradeSettlement property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link CIDDHSupplyChainTradeSettlementType }
+     *     
+     */
+    public CIDDHSupplyChainTradeSettlementType getApplicableCIDDHSupplyChainTradeSettlement() {
+        return applicableCIDDHSupplyChainTradeSettlement;
+    }
+
+    /**
+     * Sets the value of the applicableCIDDHSupplyChainTradeSettlement property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link CIDDHSupplyChainTradeSettlementType }
+     *     
+     */
+    public void setApplicableCIDDHSupplyChainTradeSettlement(CIDDHSupplyChainTradeSettlementType value) {
+        this.applicableCIDDHSupplyChainTradeSettlement = value;
+    }
+
+    /**
+     * Gets the value of the includedCIDDLSupplyChainTradeLineItem property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the includedCIDDLSupplyChainTradeLineItem property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getIncludedCIDDLSupplyChainTradeLineItem().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link CIDDLSupplyChainTradeLineItemType }
+     * 
+     * 
+     */
+    public List<CIDDLSupplyChainTradeLineItemType> getIncludedCIDDLSupplyChainTradeLineItem() {
+        if (includedCIDDLSupplyChainTradeLineItem == null) {
+            includedCIDDLSupplyChainTradeLineItem = new ArrayList<CIDDLSupplyChainTradeLineItemType>();
+        }
+        return this.includedCIDDLSupplyChainTradeLineItem;
+    }
+
+    /**
+     * Gets the value of the specifiedCIDDLLogisticsPackage property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the specifiedCIDDLLogisticsPackage property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getSpecifiedCIDDLLogisticsPackage().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link CIDDLLogisticsPackageType }
+     * 
+     * 
+     */
+    public List<CIDDLLogisticsPackageType> getSpecifiedCIDDLLogisticsPackage() {
+        if (specifiedCIDDLLogisticsPackage == null) {
+            specifiedCIDDLLogisticsPackage = new ArrayList<CIDDLLogisticsPackageType>();
+        }
+        return this.specifiedCIDDLLogisticsPackage;
+    }
+
+}
