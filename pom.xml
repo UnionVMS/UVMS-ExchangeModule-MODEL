@@ -17,8 +17,8 @@
         <javaee.version>7.0</javaee.version>
         <joda-time.version>2.7</joda-time.version>
         <junit.version>4.10</junit.version>
-        <audit.model.version>2.0.0</audit.model.version>
         <jibx.version>1.1.4</jibx.version>
+        <sl4j.version>1.7.12</sl4j.version>
         <release.branch.name>uvms-2.0.6-kili</release.branch.name>
         <project.scm.id>github</project.scm.id>
         <maven-release-plugin>2.5.3</maven-release-plugin>
@@ -205,16 +205,15 @@
 
     <dependencies>
         <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>${sl4j.version}</version>
+        </dependency>
+        <dependency>
             <groupId>javax</groupId>
             <artifactId>javaee-api</artifactId>
             <version>${javaee.version}</version>
             <scope>provided</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>eu.europa.ec.fisheries.uvms.audit</groupId>
-            <artifactId>audit-model</artifactId>
-            <version>${audit.model.version}</version>
         </dependency>
         <dependency>
             <groupId>joda-time</groupId>
