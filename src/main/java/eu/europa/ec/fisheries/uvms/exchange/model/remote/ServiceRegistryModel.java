@@ -11,5 +11,28 @@ FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more d
 copy of the GNU General Public License along with the IFDM Suite. If not, see <http://www.gnu.org/licenses/>.
  */
 
+import eu.europa.ec.fisheries.schema.exchange.plugin.types.v1.PluginType;
+import eu.europa.ec.fisheries.schema.exchange.service.v1.*;
+import eu.europa.ec.fisheries.uvms.exchange.model.exception.ExchangeModelException;
+
+import javax.ejb.Remote;
+import java.util.List;
+
+@Remote
 public interface ServiceRegistryModel {
+    public ServiceResponseType registerService(ServiceType model, CapabilityListType capabilityList, SettingListType settingList, String username) throws ExchangeModelException;
+
+    public ServiceResponseType getPlugin(String pluginId) throws ExchangeModelException;
+
+    public ServiceResponseType unregisterService(ServiceType serviceType, String username) throws ExchangeModelException;
+
+    public List<ServiceResponseType> getPlugins(List<PluginType> pluginType) throws ExchangeModelException;
+
+    public ServiceResponseType updatePluginSettings(String serviceClassName, SettingListType settings, String username) throws ExchangeModelException;
+
+    public List<SettingType> getPluginSettings(String serviceClassName) throws ExchangeModelException;
+
+    public List<CapabilityType> getPluginCapabilities(String pluginId) throws ExchangeModelException;
+
+    public ServiceResponseType updatePluginStatus(String serviceName, StatusType status, String username) throws ExchangeModelException;
 }
