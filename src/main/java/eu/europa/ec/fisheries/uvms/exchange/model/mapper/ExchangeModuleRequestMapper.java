@@ -26,10 +26,6 @@ import eu.europa.ec.fisheries.schema.exchange.module.v1.GetServiceListRequest;
 import eu.europa.ec.fisheries.schema.exchange.module.v1.ProcessedMovementResponse;
 import eu.europa.ec.fisheries.schema.exchange.module.v1.SendMovementToPluginRequest;
 import eu.europa.ec.fisheries.schema.exchange.module.v1.SetCommandRequest;
-import eu.europa.ec.fisheries.schema.exchange.module.v1.SetFLUXFAReportMessageRequest;
-import eu.europa.ec.fisheries.schema.exchange.module.v1.SetFLUXFAResponseMessageRequest;
-import eu.europa.ec.fisheries.schema.exchange.module.v1.SetFLUXMDRSyncMessageRequest;
-import eu.europa.ec.fisheries.schema.exchange.module.v1.SetFLUXMDRSyncMessageResponse;
 import eu.europa.ec.fisheries.schema.exchange.module.v1.SetMovementReportRequest;
 import eu.europa.ec.fisheries.schema.exchange.module.v1.UpdatePluginSettingRequest;
 import eu.europa.ec.fisheries.schema.exchange.movement.v1.MovementRefType;
@@ -50,7 +46,6 @@ import eu.europa.ec.fisheries.schema.exchange.service.v1.SettingType;
 import eu.europa.ec.fisheries.uvms.exchange.model.exception.ExchangeModelMapperException;
 import eu.europa.ec.fisheries.uvms.exchange.model.exception.ExchangeModelMarshallException;
 import eu.europa.ec.fisheries.uvms.exchange.model.util.DateUtils;
-import un.unece.uncefact.data.standard.fluxresponsemessage._4.FLUXResponseMessageType;
 
 public class ExchangeModuleRequestMapper {
 
@@ -180,40 +175,6 @@ public class ExchangeModuleRequestMapper {
         response.setOrgRequest(orgRequest);
         response.setMovementRefType(movementRef);
         return JAXBMarshaller.marshallJaxBObjectToString(response);
-    }
-
-    
-    public static String createFluxMdrSyncEntityRequest(String reportType, String username) throws ExchangeModelMarshallException {
-        SetFLUXMDRSyncMessageRequest request = new SetFLUXMDRSyncMessageRequest();
-        request.setMethod(ExchangeModuleMethod.SET_MDR_SYNC_MESSAGE_REQUEST);
-        request.setUsername(username);
-        request.setRequest(reportType);
-        return JAXBMarshaller.marshallJaxBObjectToString(request);
-    }
-    
-    public static String createFluxMdrSyncEntityResponse(String reportType, String username) throws ExchangeModelMarshallException {
-        SetFLUXMDRSyncMessageResponse request = new SetFLUXMDRSyncMessageResponse();
-        request.setMethod(ExchangeModuleMethod.SET_MDR_SYNC_MESSAGE_RESPONSE);
-        request.setUsername(username);
-        request.setRequest(reportType);
-        return JAXBMarshaller.marshallJaxBObjectToString(request);
-    }
-
-
-    public static String createFluxFAReportRequest(String reportType, String username) throws ExchangeModelMarshallException {
-        SetFLUXFAReportMessageRequest request = new SetFLUXFAReportMessageRequest();
-        request.setMethod(ExchangeModuleMethod.SET_FLUX_FA_REPORT_MESSAGE);
-        request.setUsername(username);
-        request.setRequest(reportType);
-        return JAXBMarshaller.marshallJaxBObjectToString(request);
-    }
-
-    public static String createFluxFAResponseRequest(FLUXResponseMessageType response, String username) throws ExchangeModelMarshallException {
-        SetFLUXFAResponseMessageRequest request = new SetFLUXFAResponseMessageRequest();
-        request.setMethod(ExchangeModuleMethod.SET_FLUX_FA_RESPONSE_MESSAGE);
-        request.setUsername(username);
-        request.setRequest(response);
-        return JAXBMarshaller.marshallJaxBObjectToString(request);
     }
 
 }
