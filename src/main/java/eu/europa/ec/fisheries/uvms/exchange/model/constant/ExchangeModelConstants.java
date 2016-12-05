@@ -24,7 +24,6 @@ public class ExchangeModelConstants {
     public static final String EXCHANGE_MESSAGE_IN_QUEUE      = "jms/queue/UVMSExchangeEvent";
     public static final String EXCHANGE_MESSAGE_IN_QUEUE_NAME = "UVMSExchangeEvent";
     public static final String EXCHANGE_RESPONSE_QUEUE        = "jms/queue/UVMSExchange";
-    public static final String QUEUE_DATASOURCE_INTERNAL      = "jms/queue/UVMSExchangeModel";
 
     public static final String EXCHANGE_REGISTER_SERVICE = "EXCHANGE_REGISTRY";
     public static final String SERVICE_NAME = "ServiceName";
