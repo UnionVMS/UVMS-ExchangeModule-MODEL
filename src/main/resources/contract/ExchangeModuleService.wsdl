@@ -36,7 +36,7 @@
 
                     <!-- asynch processed movement response -->
                     <xsd:enumeration value="PROCESSED_MOVEMENT"/>
-					
+
 					<!-- FLUX FA Message from FLUX Activity Plugin -->
 					<xsd:enumeration value="SET_FLUX_FA_REPORT_MESSAGE"/>
                 </xsd:restriction>
@@ -60,7 +60,7 @@
                     </xsd:complexContent>
                 </xsd:complexType>
             </xsd:element>
-			
+
 			<xsd:element name="SetFLUXFAReportMessageRequest">
                 <xsd:complexType>
                     <xsd:complexContent>
