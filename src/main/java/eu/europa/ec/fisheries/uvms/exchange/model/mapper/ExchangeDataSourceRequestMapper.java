@@ -218,7 +218,7 @@ public class ExchangeDataSourceRequestMapper {
         return JAXBMarshaller.marshallJaxBObjectToString(request);
     }
 
-    public static String mapCreateUnsentMessage(XMLGregorianCalendar dateReceived, String senderReceiver, String recipient, String messageText, List<UnsentMessageTypeProperty> properties, String username) throws ExchangeModelMarshallException {
+    public static String mapCreateUnsentMessage(Date dateReceived, String senderReceiver, String recipient, String messageText, List<UnsentMessageTypeProperty> properties, String username) throws ExchangeModelMarshallException {
         CreateUnsentMessageRequest request = new CreateUnsentMessageRequest();
         request.setMethod(ExchangeDataSourceMethod.CREATE_UNSENT_MESSAGE);
         UnsentMessageType unsentMessage = new UnsentMessageType();
@@ -244,14 +244,8 @@ public class ExchangeDataSourceRequestMapper {
         GetLogStatusHistoryByQueryRequest request = new GetLogStatusHistoryByQueryRequest();
         request.setMethod(ExchangeDataSourceMethod.GET_LOG_STATUS_HISTORY_BY_QUERY);
         ExchangeHistoryListQuery query = new ExchangeHistoryListQuery();
-        if (fromDate != null) {
-            XMLGregorianCalendar typeRefDateFrom = DateUtils.dateToXmlGregorian(fromDate);
-            query.setTypeRefDateFrom(typeRefDateFrom);
-        }
-        if (toDate != null) {
-            XMLGregorianCalendar typeRefDateTo = DateUtils.dateToXmlGregorian(toDate);
-            query.setTypeRefDateTo(typeRefDateTo);
-        }
+        query.setTypeRefDateFrom(fromDate);
+        query.setTypeRefDateTo(toDate);
         query.getStatus().addAll(statusList);
         query.getType().addAll(typeList);
         request.setQuery(query);
