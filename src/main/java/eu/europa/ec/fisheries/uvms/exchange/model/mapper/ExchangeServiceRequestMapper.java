@@ -21,7 +21,7 @@ import eu.europa.ec.fisheries.uvms.exchange.model.exception.ExchangeModelMarshal
 
 public class ExchangeServiceRequestMapper {
 
-    final static Logger LOG = LoggerFactory.getLogger(ExchangeDataSourceRequestMapper.class);
+    final static Logger LOG = LoggerFactory.getLogger(ExchangeServiceRequestMapper.class);
 
     public static String mapCreatePollRequest(CommandType command) throws ExchangeModelMarshallException {
         SetCommandRequest request = new SetCommandRequest();

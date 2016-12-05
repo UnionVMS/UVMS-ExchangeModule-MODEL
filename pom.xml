@@ -2,7 +2,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>eu.europa.ec.fisheries.uvms.exchange</groupId>
-    <version>2.0.8-SNAPSHOT</version>
+    <version>2.1.2-SNAPSHOT</version>
     <artifactId>exchange-model</artifactId>
     <name>exchange-model</name>
     <packaging>ejb</packaging>
@@ -17,11 +17,13 @@
         <javaee.version>7.0</javaee.version>
         <joda-time.version>2.7</joda-time.version>
         <junit.version>4.10</junit.version>
-        <audit.model.version>2.0.0</audit.model.version>
         <jibx.version>1.1.4</jibx.version>
+        <sl4j.version>1.7.12</sl4j.version>
         <release.branch.name>uvms-2.0.6-kili</release.branch.name>
         <project.scm.id>github</project.scm.id>
         <maven-release-plugin>2.5.3</maven-release-plugin>
+        <binding.xml>binding-date.xml</binding.xml>
+        <envClassifier>date</envClassifier>
     </properties>
 
     <repositories>
@@ -51,6 +53,13 @@
   </scm>
 
     <profiles>
+        <profile>
+            <id>xmlgregoriancalendar</id>
+            <properties>
+                <binding.xml>binding.xml</binding.xml>
+                <envClassifier>xmlgregoriancalendar</envClassifier>
+            </properties>
+        </profile>
         <profile>
             <id>generate-from-wsdl</id>
             <build>
@@ -91,7 +100,7 @@
                                             
                                             <wsdl>${basedir}/src/main/resources/contract/${wsdl.contract.name}.wsdl</wsdl>
                                             <bindingFiles>
-                                                <bindingFile>${basedir}/src/main/resources/binding.xml</bindingFile>
+                                                <bindingFile>${basedir}/src/main/resources/${binding.xml}</bindingFile>
                                             </bindingFiles>
                                         </wsdlOption>
                                     </wsdlOptions>
@@ -110,7 +119,7 @@
                                             
                                             <wsdl>${basedir}/src/main/resources/contract/${wsdl.source.name}.wsdl</wsdl>
                                             <bindingFiles>
-                                                <bindingFile>${basedir}/src/main/resources/binding.xml</bindingFile>
+                                                <bindingFile>${basedir}/src/main/resources/${binding.xml}</bindingFile>
                                             </bindingFiles>
                                         </wsdlOption>
                                     </wsdlOptions>
@@ -129,7 +138,7 @@
                                             
                                             <wsdl>${basedir}/src/main/resources/contract/${wsdl.registry.name}.wsdl</wsdl>
                                             <bindingFiles>
-                                                <bindingFile>${basedir}/src/main/resources/binding.xml</bindingFile>
+                                                <bindingFile>${basedir}/src/main/resources/${binding.xml}</bindingFile>
                                             </bindingFiles>
                                         </wsdlOption>
                                     </wsdlOptions>
@@ -148,7 +157,7 @@
                                          
                                             <wsdl>${basedir}/src/main/resources/contract/${wsdl.plugin.name}.wsdl</wsdl>
                                             <bindingFiles>
-                                                <bindingFile>${basedir}/src/main/resources/binding.xml</bindingFile>
+                                                <bindingFile>${basedir}/src/main/resources/${binding.xml}</bindingFile>
                                             </bindingFiles>
                                         </wsdlOption>
                                     </wsdlOptions>
@@ -182,6 +191,7 @@
                 <version>2.3</version>
                 <configuration>
                     <ejbVersion>3.1</ejbVersion>
+                    <classifier>${envClassifier}</classifier>
                 </configuration>
             </plugin>
             <plugin>
@@ -205,16 +215,15 @@
 
     <dependencies>
         <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>${sl4j.version}</version>
+        </dependency>
+        <dependency>
             <groupId>javax</groupId>
             <artifactId>javaee-api</artifactId>
             <version>${javaee.version}</version>
             <scope>provided</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>eu.europa.ec.fisheries.uvms.audit</groupId>
-            <artifactId>audit-model</artifactId>
-            <version>${audit.model.version}</version>
         </dependency>
         <dependency>
             <groupId>joda-time</groupId>
