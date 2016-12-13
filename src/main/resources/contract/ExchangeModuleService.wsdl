@@ -7,7 +7,8 @@
              xmlns:exchange="urn:exchange.schema.fisheries.ec.europa.eu:v1"
              xmlns:movement="urn:movement.exchange.schema.fisheries.ec.europa.eu:v1"
              xmlns:plugin="urn:types.plugin.exchange.schema.fisheries.ec.europa.eu:v1"
-             xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+			 xmlns:rsn="urn:un:unece:uncefact:data:standard:FLUXResponseMessage:4"
+			 xmlns:xsd="http://www.w3.org/2001/XMLSchema"
              xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
              xmlns="http://schemas.xmlsoap.org/wsdl/">
 
@@ -37,8 +38,17 @@
                     <!-- asynch processed movement response -->
                     <xsd:enumeration value="PROCESSED_MOVEMENT"/>
 
+					<!-- Asynch MDR Synchronization Request -->
+					<xsd:enumeration value="SET_MDR_SYNC_MESSAGE_REQUEST"/>
+
+					<!-- Asynch MDR Synchronization Response -->
+					<xsd:enumeration value="SET_MDR_SYNC_MESSAGE_RESPONSE"/>
+
+					<xsd:enumeration value="SET_FLUX_FA_RESPONSE_MESSAGE"/>
+
 					<!-- FLUX FA Message from FLUX Activity Plugin -->
 					<xsd:enumeration value="SET_FLUX_FA_REPORT_MESSAGE"/>
+
                 </xsd:restriction>
             </xsd:simpleType>
             
@@ -46,6 +56,7 @@
                 <xsd:sequence>
                     <xsd:element name="method" type="module:ExchangeModuleMethod"/>
                     <xsd:element name="username" type="xsd:string"/>
+					<xsd:element name="pluginType" type="plugin:PluginType" default="OTHER" />
                 </xsd:sequence>
             </xsd:complexType>
             
@@ -61,6 +72,19 @@
                 </xsd:complexType>
             </xsd:element>
 
+
+			<xsd:element name="SetFLUXFAResponseMessageRequest">
+				<xsd:complexType>
+					<xsd:complexContent>
+						<xsd:extension base="module:ExchangeBaseRequest">
+							<xsd:sequence>
+								<xsd:element name="request" type="xsd:string"/>
+							</xsd:sequence>
+						</xsd:extension>
+					</xsd:complexContent>
+				</xsd:complexType>
+			</xsd:element>
+
 			<xsd:element name="SetFLUXFAReportMessageRequest">
                 <xsd:complexType>
                     <xsd:complexContent>
@@ -73,7 +97,32 @@
                 </xsd:complexType>
             </xsd:element>
 
-            <xsd:element name="SetCommandRequest">
+			<xsd:element name="SetFLUXMDRSyncMessageExchangeRequest">
+				<xsd:complexType>
+					<xsd:complexContent>
+						<xsd:extension base="module:ExchangeBaseRequest">
+							<xsd:sequence>
+								<xsd:element name="request" type="xsd:string"/>
+							</xsd:sequence>
+						</xsd:extension>
+					</xsd:complexContent>
+				</xsd:complexType>
+			</xsd:element>
+
+			<xsd:element name="SetFLUXMDRSyncMessageExchangeResponse">
+				<xsd:complexType>
+					<xsd:complexContent>
+						<xsd:extension base="module:ExchangeBaseRequest">
+							<xsd:sequence>
+								<xsd:element name="request" type="xsd:string"/>
+							</xsd:sequence>
+						</xsd:extension>
+					</xsd:complexContent>
+				</xsd:complexType>
+			</xsd:element>
+
+
+			<xsd:element name="SetCommandRequest">
                 <xsd:complexType>
                     <xsd:complexContent>
                         <xsd:extension base="module:ExchangeBaseRequest">
@@ -361,3 +410,4 @@
     </service>
 
 </definitions>
+
