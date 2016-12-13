@@ -109,7 +109,7 @@ public class ExchangeModuleRequestMapper {
         return report;
     }
 
-    private static void mapToMovementType(MovementType movementType, String ircs, String mmsi, String externalMarking, String flagState, String assetName){
+    private static void mapToMovementType(MovementType movementType, String ircs, String mmsi, String externalMarking, String flagState, String assetName) {
         movementType.setMmsi(mmsi);
         movementType.setExternalMarking(externalMarking);
         movementType.setIrcs(ircs);
@@ -148,16 +148,16 @@ public class ExchangeModuleRequestMapper {
         request.getType().addAll(pluginTypes);
         return JAXBMarshaller.marshallJaxBObjectToString(request);
     }
-    
+
     public static String createUpdatePluginSettingRequest(String serviceClassName, String settingKey, String settingValue) throws ExchangeModelMarshallException {
-    	UpdatePluginSettingRequest request = new UpdatePluginSettingRequest();
-    	request.setMethod(ExchangeModuleMethod.UPDATE_PLUGIN_SETTING);
-    	request.setServiceClassName(serviceClassName);
-    	SettingType setting = new SettingType();
-    	setting.setKey(settingKey);
-    	setting.setValue(settingValue);
-		request.setSetting(setting);
-    	return JAXBMarshaller.marshallJaxBObjectToString(request);
+        UpdatePluginSettingRequest request = new UpdatePluginSettingRequest();
+        request.setMethod(ExchangeModuleMethod.UPDATE_PLUGIN_SETTING);
+        request.setServiceClassName(serviceClassName);
+        SettingType setting = new SettingType();
+        setting.setKey(settingKey);
+        setting.setValue(settingValue);
+        request.setSetting(setting);
+        return JAXBMarshaller.marshallJaxBObjectToString(request);
     }
 
     // Asynch processed movement response
@@ -169,4 +169,45 @@ public class ExchangeModuleRequestMapper {
         return JAXBMarshaller.marshallJaxBObjectToString(response);
     }
 
+    public static String createFluxMdrSyncEntityRequest(String reportType, String username) throws ExchangeModelMarshallException {
+        SetFLUXMDRSyncMessageExchangeRequest request = new SetFLUXMDRSyncMessageExchangeRequest();
+        request.setMethod(ExchangeModuleMethod.SET_MDR_SYNC_MESSAGE_REQUEST);
+        request.setUsername(username);
+        request.setRequest(reportType);
+        return JAXBMarshaller.marshallJaxBObjectToString(request);
+    }
+
+    public static String createFluxMdrSyncEntityResponse(String reportType, String username) throws ExchangeModelMarshallException {
+        SetFLUXMDRSyncMessageExchangeResponse request = new SetFLUXMDRSyncMessageExchangeResponse();
+        request.setMethod(ExchangeModuleMethod.SET_MDR_SYNC_MESSAGE_RESPONSE);
+        request.setUsername(username);
+        request.setRequest(reportType);
+        return JAXBMarshaller.marshallJaxBObjectToString(request);
+    }
+
+
+    public static String createFluxFAReportRequest(String reportType, String username) throws ExchangeModelMarshallException {
+        SetFLUXFAReportMessageRequest request = new SetFLUXFAReportMessageRequest();
+        request.setMethod(ExchangeModuleMethod.SET_FLUX_FA_REPORT_MESSAGE);
+        request.setUsername(username);
+        request.setRequest(reportType);
+        return JAXBMarshaller.marshallJaxBObjectToString(request);
+    }
+
+    public static String createFluxFAResponseRequest(String response, String username) throws ExchangeModelMarshallException {
+        SetFLUXFAResponseMessageRequest request = new SetFLUXFAResponseMessageRequest();
+        request.setMethod(ExchangeModuleMethod.SET_FLUX_FA_RESPONSE_MESSAGE);
+        request.setUsername(username);
+        request.setRequest(response);
+        return JAXBMarshaller.marshallJaxBObjectToString(request);
+    }
+
+    public static String createFluxFAManualResponseRequest(String reportType, String username) throws ExchangeModelMarshallException {
+        SetFLUXFAReportMessageRequest request = new SetFLUXFAReportMessageRequest();
+        request.setMethod(ExchangeModuleMethod.SET_FLUX_FA_REPORT_MESSAGE);
+        request.setUsername(username);
+        request.setRequest(reportType);
+        request.setPluginType(PluginType.MANUAL);
+        return JAXBMarshaller.marshallJaxBObjectToString(request);
+    }
 }
