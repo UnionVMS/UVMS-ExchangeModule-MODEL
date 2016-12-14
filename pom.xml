@@ -2,7 +2,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>eu.europa.ec.fisheries.uvms.exchange</groupId>
-    <version>2.1.3-SNAPSHOT</version>
+    <version>3.0.0-SNAPSHOT</version>
     <artifactId>exchange-model</artifactId>
     <name>exchange-model</name>
     <packaging>ejb</packaging>
