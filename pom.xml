@@ -76,13 +76,6 @@
 		</profile>
 
         <profile>
-            <id>xmlgregoriancalendar</id>
-            <properties>
-                <binding.xml>binding.xml</binding.xml>
-                <envClassifier>xmlgregoriancalendar</envClassifier>
-            </properties>
-        </profile>
-        <profile>
             <id>generate-from-wsdl</id>
             <build>
                 <plugins>
