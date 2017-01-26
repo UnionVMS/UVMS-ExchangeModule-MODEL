@@ -2,7 +2,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>eu.europa.ec.fisheries.uvms.exchange</groupId>
-    <version>3.0.4-SNAPSHOT</version>
+    <version>3.0.4</version>
     <artifactId>exchange-model</artifactId>
     <name>exchange-model</name>
     <packaging>ejb</packaging>
@@ -51,7 +51,7 @@
 
     <scm>
         <connection>${scm.connection}</connection>
-      <tag>HEAD</tag>
+      <tag>exchange-model-3.0.4</tag>
   </scm>
 
     <profiles>
