@@ -34,6 +34,7 @@
                     <xsd:enumeration value="SET_SALES_REPORT"/>
                     <xsd:enumeration value="SET_SALES_QUERY"/>
                     <xsd:enumeration value="SEND_SALES_MESSAGE"/>
+                    <xsd:enumeration value="RECEIVE_SALES_RESPONSE"/>
 
                     <!-- admin/config wants to-->
                     <xsd:enumeration value="PING"/>
