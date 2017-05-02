@@ -83,6 +83,14 @@ public class ExchangeModuleRequestMapper {
         request.setPluginType(typeOfOriginatingPlugin);
         return JAXBMarshaller.marshallJaxBObjectToString(request);
     }
+    public static String createReceivedSalesMessage(String message, String username, PluginType typeOfOriginatingPlugin) throws ExchangeModelMarshallException {
+        ReceivedSalesMessage request = new ReceivedSalesMessage();
+        request.setMethod(ExchangeModuleMethod.RECEIVE_SALES_MESSAGE);
+        request.setUsername(username);
+        request.setMessage(message);
+        request.setPluginType(typeOfOriginatingPlugin);
+        return JAXBMarshaller.marshallJaxBObjectToString(request);
+    }
 
     public static String createSetSalesQueryRequest(String query, String username, PluginType typeOfOriginatingPlugin) throws ExchangeModelMarshallException {
         SetSalesQueryRequest request = new SetSalesQueryRequest();

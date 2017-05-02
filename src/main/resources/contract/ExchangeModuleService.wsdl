@@ -34,8 +34,7 @@
                     <xsd:enumeration value="SET_SALES_REPORT"/>
                     <xsd:enumeration value="SET_SALES_QUERY"/>
                     <xsd:enumeration value="SEND_SALES_MESSAGE"/>
-                    <xsd:enumeration value="RECEIVE_SALES_RESPONSE"/>
-
+                    <xsd:enumeration value="RECEIVE_SALES_MESSAGE"/>
                     <!-- admin/config wants to-->
                     <xsd:enumeration value="PING"/>
 
@@ -64,7 +63,7 @@
                     <xsd:element name="pluginName" minOccurs="0" type="xsd:string"/>
                 </xsd:sequence>
             </xsd:complexType>
-            
+
             <xsd:element name="SetMovementReportRequest">
                 <xsd:complexType>
                     <xsd:complexContent>
@@ -108,6 +107,19 @@
                             <xsd:sequence>
                                 <xsd:element name="message" type="xsd:string"/>
                                 <xsd:element name="recipient" type="xsd:string"/>
+                            </xsd:sequence>
+                        </xsd:extension>
+                    </xsd:complexContent>
+                </xsd:complexType>
+            </xsd:element>
+
+            <xsd:element name="ReceivedSalesMessage">
+                <xsd:complexType>
+                    <xsd:complexContent>
+                        <xsd:extension base="module:ExchangeBaseRequest">
+                            <xsd:sequence>
+                                <xsd:element name="message" type="xsd:string"/>
+                                <xsd:element name="sender" type="xsd:string"/>
                             </xsd:sequence>
                         </xsd:extension>
                     </xsd:complexContent>

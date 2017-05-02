@@ -27,6 +27,7 @@
 					<xsd:enumeration value="SET_MDR_REQUEST"/>
 					<xsd:enumeration value="SET_FLUX_RESPONSE"/>
 					<xsd:enumeration value="SALES_QUERY_RESPONSE"/>
+					<xsd:enumeration value="SALES_QUERY_INCOMING_RESPONSE"/>
                 </xsd:restriction>
             </xsd:simpleType>
             
@@ -130,7 +131,18 @@
                     </xsd:complexContent>
                 </xsd:complexType>
             </xsd:element>
-            
+            <xsd:element name="SalesQueryIncomingResponse">
+                <xsd:complexType>
+                    <xsd:complexContent>
+                        <xsd:extension base="plugin:PluginBaseRequest">
+                            <xsd:sequence>
+                                <xsd:element name="message" type="xsd:string"/>
+                            </xsd:sequence>
+                        </xsd:extension>
+                    </xsd:complexContent>
+                </xsd:complexType>
+            </xsd:element>
+
             <xsd:element name="StartRequest">
                 <xsd:complexType>
                     <xsd:complexContent>
