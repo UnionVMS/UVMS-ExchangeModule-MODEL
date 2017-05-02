@@ -26,6 +26,7 @@
                     <xsd:enumeration value="PING"/>
 					<xsd:enumeration value="SET_MDR_REQUEST"/>
 					<xsd:enumeration value="SET_FLUX_RESPONSE"/>
+					<xsd:enumeration value="SALES_QUERY_RESPONSE"/>
                 </xsd:restriction>
             </xsd:simpleType>
             
@@ -41,6 +42,18 @@
                 </xsd:sequence>
             </xsd:complexType>
 
+            <xsd:element name="SalesMessageResponse">
+                <xsd:complexType>
+                    <xsd:complexContent>
+                        <xsd:extension base="plugin:PluginBaseRequest">
+                            <xsd:sequence>
+                                <xsd:element name="message" type="xsd:string"/>
+                                <xsd:element name="recipient" type="xsd:string"/>
+                            </xsd:sequence>
+                        </xsd:extension>
+                    </xsd:complexContent>
+                </xsd:complexType>
+            </xsd:element>
 			<xsd:element name="SetMdrPluginRequest">
 				<xsd:complexType>
 					<xsd:complexContent>

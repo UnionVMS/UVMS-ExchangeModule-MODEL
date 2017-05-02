@@ -11,9 +11,6 @@ copy of the GNU General Public License along with the IFDM Suite. If not, see <h
  */
 package eu.europa.ec.fisheries.uvms.exchange.model.mapper;
 
-import javax.jms.JMSException;
-import javax.jms.TextMessage;
-
 import eu.europa.ec.fisheries.schema.exchange.common.v1.AcknowledgeType;
 import eu.europa.ec.fisheries.schema.exchange.common.v1.AcknowledgeTypeType;
 import eu.europa.ec.fisheries.schema.exchange.common.v1.PollStatusAcknowledgeType;
@@ -25,9 +22,11 @@ import eu.europa.ec.fisheries.schema.exchange.registry.v1.ExchangeRegistryMethod
 import eu.europa.ec.fisheries.schema.exchange.registry.v1.RegisterServiceResponse;
 import eu.europa.ec.fisheries.schema.exchange.service.v1.ServiceResponseType;
 import eu.europa.ec.fisheries.schema.exchange.v1.ExchangeLogStatusTypeType;
-import eu.europa.ec.fisheries.uvms.exchange.model.constant.FaultCode;
 import eu.europa.ec.fisheries.uvms.exchange.model.exception.ExchangeModelMapperException;
 import eu.europa.ec.fisheries.uvms.exchange.model.exception.ExchangeModelMarshallException;
+
+import javax.jms.JMSException;
+import javax.jms.TextMessage;
 
 /**
  **/
@@ -40,11 +39,11 @@ public class ExchangePluginResponseMapper {
         }
 
         if (response.getJMSCorrelationID() == null) {
-            throw new ExchangeModelMapperException("No corelationId in response (Null) . Expected was: " + correlationId);
+            throw new ExchangeModelMapperException("No correlationId in response (Null) . Expected was: " + correlationId);
         }
 
         if (!correlationId.equalsIgnoreCase(response.getJMSCorrelationID())) {
-            throw new ExchangeModelMapperException("Wrong corelationId in response. Expected was: " + correlationId + "But actual was: "
+            throw new ExchangeModelMapperException("Wrong correlationId in response. Expected was: " + correlationId + "But actual was: "
                     + response.getJMSCorrelationID());
         }
 
@@ -65,18 +64,18 @@ public class ExchangePluginResponseMapper {
     private static RegisterServiceResponse mapToRegisterServiceResponse(String messageId, AcknowledgeTypeType ackType) throws ExchangeModelMarshallException {
         RegisterServiceResponse response = new RegisterServiceResponse();
         response.setMethod(ExchangeRegistryMethod.REGISTER_SERVICE);
-        response.setAck(mapToAcknowlegeType(messageId, ackType));
+        response.setAck(mapToAcknowledgeType(messageId, ackType));
         return response;
     }
 
-    public static AcknowledgeType mapToAcknowlegeType(String messageId, AcknowledgeTypeType ackType) {
+    public static AcknowledgeType mapToAcknowledgeType(String messageId, AcknowledgeTypeType ackType) {
         AcknowledgeType type = new AcknowledgeType();
         type.setMessageId(messageId);
         type.setType(ackType);
         return type;
     }
 
-    public static AcknowledgeType mapToAcknowlegeType(String messageId, String unsentMessageGuid, AcknowledgeTypeType ackType) {
+    public static AcknowledgeType mapToAcknowledgeType(String messageId, String unsentMessageGuid, AcknowledgeTypeType ackType) {
         AcknowledgeType type = new AcknowledgeType();
         type.setMessageId(messageId);
         type.setUnsentMessageGuid(unsentMessageGuid);
@@ -84,8 +83,8 @@ public class ExchangePluginResponseMapper {
         return type;
     }
 
-    public static AcknowledgeType mapToAcknowlegeType(String messageId, AcknowledgeTypeType ackType, String message) {
-        AcknowledgeType type = mapToAcknowlegeType(messageId, ackType);
+    public static AcknowledgeType mapToAcknowledgeType(String messageId, AcknowledgeTypeType ackType, String message) {
+        AcknowledgeType type = mapToAcknowledgeType(messageId, ackType);
         type.setMessage(message);
         return type;
     }

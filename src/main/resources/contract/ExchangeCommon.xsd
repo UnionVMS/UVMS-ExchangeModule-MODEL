@@ -8,8 +8,8 @@
             xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
             xmlns="http://schemas.xmlsoap.org/wsdl/">
   
-  <xsd:import namespace="urn:movement.exchange.schema.fisheries.ec.europa.eu:v1" schemaLocation="Movement.xsd"/>
-  <xsd:import namespace="urn:types.plugin.exchange.schema.fisheries.ec.europa.eu:v1" schemaLocation="Plugin.xsd"/>
+    <xsd:import namespace="urn:movement.exchange.schema.fisheries.ec.europa.eu:v1" schemaLocation="Movement.xsd"/>
+    <xsd:import namespace="urn:types.plugin.exchange.schema.fisheries.ec.europa.eu:v1" schemaLocation="Plugin.xsd"/>
     <xsd:import namespace="urn:exchange.schema.fisheries.ec.europa.eu:v1" schemaLocation="Exchange.xsd"/>
   
     <xsd:element name="exchangeFault">
@@ -82,6 +82,7 @@
             <xsd:element name="timestamp" type="xsd:dateTime" minOccurs="1" maxOccurs="1"/>
             <xsd:choice>
                 <xsd:element name="movement" type="movement:MovementType"/>
+                <xsd:element name="salesReport" type="xsd:string"/>
                 <!-- <xsd:element name="elog" type="xsd:string"/> -->
             </xsd:choice>
             <xsd:element name="unsentMessageGuid" type="xsd:string" minOccurs="1" maxOccurs="1"/>
@@ -91,6 +92,7 @@
     <xsd:simpleType name="ReportTypeType">
         <xsd:restriction base="xsd:string">
             <xsd:enumeration value="MOVEMENT"/>
+            <xsd:enumeration value="SALES"/>
             <!-- <xsd:enumeration value="ELOG"/> -->
         </xsd:restriction>
     </xsd:simpleType>

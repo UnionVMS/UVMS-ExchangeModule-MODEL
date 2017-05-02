@@ -11,20 +11,10 @@ copy of the GNU General Public License along with the IFDM Suite. If not, see <h
  */
 package eu.europa.ec.fisheries.uvms.exchange.model.mapper;
 
-import java.util.Date;
-import java.util.List;
-
-import javax.jms.TextMessage;
-import javax.xml.datatype.XMLGregorianCalendar;
-
-import eu.europa.ec.fisheries.schema.exchange.module.v1.*;
-import eu.europa.ec.fisheries.schema.exchange.movement.asset.v1.AssetId;
-import eu.europa.ec.fisheries.schema.exchange.movement.v1.*;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import eu.europa.ec.fisheries.schema.exchange.common.v1.CommandType;
 import eu.europa.ec.fisheries.schema.exchange.common.v1.CommandTypeType;
+import eu.europa.ec.fisheries.schema.exchange.module.v1.*;
+import eu.europa.ec.fisheries.schema.exchange.movement.v1.*;
 import eu.europa.ec.fisheries.schema.exchange.plugin.types.v1.EmailType;
 import eu.europa.ec.fisheries.schema.exchange.plugin.types.v1.PluginType;
 import eu.europa.ec.fisheries.schema.exchange.plugin.types.v1.PollType;
@@ -38,6 +28,12 @@ import eu.europa.ec.fisheries.schema.exchange.service.v1.SettingType;
 import eu.europa.ec.fisheries.uvms.exchange.model.exception.ExchangeModelMapperException;
 import eu.europa.ec.fisheries.uvms.exchange.model.exception.ExchangeModelMarshallException;
 import eu.europa.ec.fisheries.uvms.exchange.model.util.DateUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import javax.jms.TextMessage;
+import java.util.Date;
+import java.util.List;
 
 public class ExchangeModuleRequestMapper {
 
@@ -76,6 +72,24 @@ public class ExchangeModuleRequestMapper {
         request.setMethod(ExchangeModuleMethod.SET_MOVEMENT_REPORT);
         request.setUsername(username);
         request.setRequest(reportType);
+        return JAXBMarshaller.marshallJaxBObjectToString(request);
+    }
+
+    public static String createSetSalesReportRequest(String report, String username, PluginType typeOfOriginatingPlugin) throws ExchangeModelMarshallException {
+        SetSalesReportRequest request = new SetSalesReportRequest();
+        request.setMethod(ExchangeModuleMethod.SET_SALES_REPORT);
+        request.setUsername(username);
+        request.setReport(report);
+        request.setPluginType(typeOfOriginatingPlugin);
+        return JAXBMarshaller.marshallJaxBObjectToString(request);
+    }
+
+    public static String createSetSalesQueryRequest(String query, String username, PluginType typeOfOriginatingPlugin) throws ExchangeModelMarshallException {
+        SetSalesQueryRequest request = new SetSalesQueryRequest();
+        request.setMethod(ExchangeModuleMethod.SET_SALES_QUERY);
+        request.setUsername(username);
+        request.setQuery(query);
+        request.setPluginType(typeOfOriginatingPlugin);
         return JAXBMarshaller.marshallJaxBObjectToString(request);
     }
 

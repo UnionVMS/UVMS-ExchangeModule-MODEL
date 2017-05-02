@@ -28,9 +28,12 @@
                     <xsd:enumeration value="UPDATE_PLUGIN_SETTING"/> <!-- mobileterminal - send dnidList -->
                     <xsd:enumeration value="SET_COMMAND"/> <!-- mobileterminal - pollRequest OR rules - sendEmail -->
                     <xsd:enumeration value="SEND_REPORT_TO_PLUGIN"/> <!-- rules - sendPositionToFLUX -->
-                    
+
                     <!-- plugin wants to -->
                     <xsd:enumeration value="SET_MOVEMENT_REPORT"/>
+                    <xsd:enumeration value="SET_SALES_REPORT"/>
+                    <xsd:enumeration value="SET_SALES_QUERY"/>
+                    <xsd:enumeration value="SEND_SALES_MESSAGE"/>
 
                     <!-- admin/config wants to-->
                     <xsd:enumeration value="PING"/>
@@ -57,6 +60,7 @@
                     <xsd:element name="method" type="module:ExchangeModuleMethod"/>
                     <xsd:element name="username" type="xsd:string"/>
 					<xsd:element name="pluginType" type="plugin:PluginType" default="OTHER" />
+                    <xsd:element name="pluginName" minOccurs="0" type="xsd:string"/>
                 </xsd:sequence>
             </xsd:complexType>
             
@@ -72,6 +76,42 @@
                 </xsd:complexType>
             </xsd:element>
 
+            <xsd:element name="SetSalesReportRequest">
+                <xsd:complexType>
+                    <xsd:complexContent>
+                        <xsd:extension base="module:ExchangeBaseRequest">
+                            <xsd:sequence>
+                                <xsd:element name="report" type="xsd:string"/>
+                            </xsd:sequence>
+                        </xsd:extension>
+                    </xsd:complexContent>
+                </xsd:complexType>
+            </xsd:element>
+
+            <xsd:element name="SetSalesQueryRequest">
+                <xsd:complexType>
+                    <xsd:complexContent>
+                        <xsd:extension base="module:ExchangeBaseRequest">
+                            <xsd:sequence>
+                                <xsd:element name="query" type="xsd:string"/>
+                            </xsd:sequence>
+                        </xsd:extension>
+                    </xsd:complexContent>
+                </xsd:complexType>
+            </xsd:element>
+
+            <xsd:element name="SendSalesMessage">
+                <xsd:complexType>
+                    <xsd:complexContent>
+                        <xsd:extension base="module:ExchangeBaseRequest">
+                            <xsd:sequence>
+                                <xsd:element name="message" type="xsd:string"/>
+                                <xsd:element name="recipient" type="xsd:string"/>
+                            </xsd:sequence>
+                        </xsd:extension>
+                    </xsd:complexContent>
+                </xsd:complexType>
+            </xsd:element>
 
 			<xsd:element name="SetFLUXFAResponseMessageRequest">
 				<xsd:complexType>
@@ -266,6 +306,10 @@
         <part name="body" element="module:SendMovementToPluginResponse"/>
     </message>
 
+    <message name="SetSalesReportRequest">
+        <part name="body" element="module:SetSalesReportRequest"/>
+    </message>
+
     <message name="UpdatePluginSettingRequest">
         <part name="body" element="module:UpdatePluginSettingRequest"/>
     </message>
@@ -308,7 +352,12 @@
             <output message="module:SendMovementToPluginResponse"/>
             <fault name="ExchangeFault" message="module:ExchangeFault"/>
         </operation>
-        
+
+        <operation name="SetSalesReport">
+            <input message="module:SetSalesReportRequest"/>
+            <fault name="ExchangeFault" message="module:ExchangeFault"/>
+        </operation>
+
         <operation name="UpdatePluginSetting">
             <input message="module:UpdatePluginSettingRequest"/>
             <output message="module:UpdatePluginSettingResponse"/>
@@ -372,7 +421,16 @@
             <fault name="ExchangeFault">
                 <soap:fault name="ExchangeFault" use="literal"/>
             </fault>
-        </operation> 
+        </operation>
+
+        <operation name="SetSalesReport">
+            <input>
+                <soap:body use="literal"/>
+            </input>
+            <fault name="ExchangeFault">
+                <soap:fault name="ExchangeFault" use="literal"/>
+            </fault>
+        </operation>
 
         <operation name="UpdatePluginSetting">
             <input>
