@@ -75,12 +75,15 @@ public class ExchangeModuleRequestMapper {
         return JAXBMarshaller.marshallJaxBObjectToString(request);
     }
 
-    public static String createSetSalesReportRequest(String report, String username, PluginType typeOfOriginatingPlugin) throws ExchangeModelMarshallException {
+    public static String createSetSalesReportRequest(String report, String reportGuid, String sender, String username, PluginType typeOfOriginatingPlugin, Date dateReceived) throws ExchangeModelMarshallException {
         SetSalesReportRequest request = new SetSalesReportRequest();
         request.setMethod(ExchangeModuleMethod.SET_SALES_REPORT);
         request.setUsername(username);
         request.setReport(report);
         request.setPluginType(typeOfOriginatingPlugin);
+        request.setSenderOrReceiver(sender);
+        request.setMessageGuid(reportGuid);
+        request.setDate(dateReceived);
         return JAXBMarshaller.marshallJaxBObjectToString(request);
     }
     public static String createReceivedSalesMessage(String message, String username, PluginType typeOfOriginatingPlugin) throws ExchangeModelMarshallException {

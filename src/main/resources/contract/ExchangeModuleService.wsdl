@@ -58,10 +58,24 @@
             <xsd:complexType name="ExchangeBaseRequest" abstract="true">
                 <xsd:sequence>
                     <xsd:element name="method" type="module:ExchangeModuleMethod"/>
-                    <xsd:element name="username" type="xsd:string"/>
-					<xsd:element name="pluginType" type="plugin:PluginType" default="OTHER" />
+                    <xsd:element name="username" minOccurs="0" type="xsd:string"/>
+					<xsd:element name="pluginType" minOccurs="0" type="plugin:PluginType" default="OTHER" />
                     <xsd:element name="pluginName" minOccurs="0" type="xsd:string"/>
+                    <xsd:element name="senderOrReceiver" minOccurs="0" type="xsd:string"/>
+                    <xsd:element name="messageGuid" minOccurs="1" maxOccurs="1" type="xsd:string"/>
+                    <xsd:element name="date" minOccurs="0" type="xsd:dateTime"/>
                 </xsd:sequence>
+            </xsd:complexType>
+
+            <xsd:complexType name="ExchangeWithFLUXBaseRequest" abstract="true">
+                <xsd:complexContent>
+                    <xsd:extension base="module:ExchangeBaseRequest">
+                        <xsd:sequence>
+                            <xsd:element name="dataFlow" type="xsd:string" />
+                            <xsd:element name="addressee" type="xsd:string" />
+                        </xsd:sequence>
+                    </xsd:extension>
+                </xsd:complexContent>
             </xsd:complexType>
 
             <xsd:element name="SetMovementReportRequest">
@@ -281,6 +295,19 @@
                             <xsd:sequence>
                                 <xsd:element name="orgRequest" type="movement:SetReportMovementType" minOccurs="1" maxOccurs="1"/>
                                 <xsd:element name="movementRefType" type="movement:MovementRefType" minOccurs="1" maxOccurs="1"/>
+                            </xsd:sequence>
+                        </xsd:extension>
+                    </xsd:complexContent>
+                </xsd:complexType>
+            </xsd:element>
+
+            <xsd:element name="UpdateLogStatus">
+                <xsd:complexType>
+                    <xsd:complexContent>
+                        <xsd:extension base="module:ExchangeBaseRequest">
+                            <xsd:sequence>
+                                <xsd:element name="logId" type="xsd:long" minOccurs="1" maxOccurs="1"/>
+                                <xsd:element name="status" type="exchange:ExchangeLogStatusTypeType" minOccurs="1" maxOccurs="1"/>
                             </xsd:sequence>
                         </xsd:extension>
                     </xsd:complexContent>

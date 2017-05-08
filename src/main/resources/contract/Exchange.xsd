@@ -6,7 +6,7 @@
             xmlns="http://schemas.xmlsoap.org/wsdl/">
     
     
-    <xsd:complexType name="ExchangeLogType" abstract="true">
+    <xsd:complexType name="ExchangeLogType">
         <xsd:sequence>
             <xsd:element name="guid" type="xsd:string"/>
             <xsd:element name="senderReceiver" type="xsd:string"/>
@@ -24,6 +24,12 @@
             <xsd:enumeration value="SEND_MOVEMENT"/>
             <xsd:enumeration value="SEND_EMAIL"/>
             <xsd:enumeration value="SEND_POLL"/>
+            <xsd:enumeration value="SEND_SALES_REPORT"/>
+            <xsd:enumeration value="RECEIVE_SALES_REPORT_RESPONSE"/>
+            <xsd:enumeration value="RECEIVE_SALES_REPORT"/>
+            <xsd:enumeration value="SEND_SALES_REPORT_RESPONSE"/>
+            <xsd:enumeration value="RECEIVE_SALES_QUERY"/>
+            <xsd:enumeration value="SEND_SALES_QUERY_RESPONSE"/>
         </xsd:restriction>
    </xsd:simpleType>
    
@@ -31,6 +37,7 @@
         <xsd:sequence>
             <xsd:element name="refGuid" type="xsd:string"/>
             <xsd:element name="type" type="exchange:TypeRefType"/>
+            <xsd:element name="message" type="xsd:string" />
         </xsd:sequence>
    </xsd:complexType>
    
@@ -40,6 +47,9 @@
             <xsd:enumeration value="POLL"/>
             <xsd:enumeration value="ALARM"/>
             <xsd:enumeration value="UNKNOWN"/>
+            <xsd:enumeration value="SALES_QUERY"/>
+            <xsd:enumeration value="SALES_REPORT"/>
+            <xsd:enumeration value="SALES_RESPONSE"/>
         </xsd:restriction>
    </xsd:simpleType>
    
@@ -109,14 +119,16 @@
     <xsd:simpleType name="ExchangeLogStatusTypeType">
         <xsd:restriction base="xsd:string">
             <xsd:enumeration value="ISSUED"/>
+
+            <!-- for validated messages -->
+            <xsd:enumeration value="FAILED"/>
+            <xsd:enumeration value="SUCCESSFUL_WITH_WARNINGS"/>
+            <xsd:enumeration value="SUCCESSFUL"/>
             
             <!-- For poll -->
             <xsd:enumeration value="PENDING"/>
             <xsd:enumeration value="PROBABLY_TRANSMITTED"/>
-            
-            <xsd:enumeration value="FAILED"/>
-            <xsd:enumeration value="SUCCESSFUL"/>
-            
+
             <xsd:enumeration value="UNKNOWN"/>
         </xsd:restriction>
     </xsd:simpleType>
