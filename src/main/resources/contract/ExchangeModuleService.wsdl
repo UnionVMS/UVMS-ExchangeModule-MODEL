@@ -52,6 +52,9 @@
 					<!-- FLUX FA Message from FLUX Activity Plugin -->
 					<xsd:enumeration value="SET_FLUX_FA_REPORT_MESSAGE"/>
 
+                    <!-- report back to exchange what the validation status of a received message was, to update the log -->
+                    <xsd:enumeration value="UPDATE_LOG_STATUS" />
+
                 </xsd:restriction>
             </xsd:simpleType>
             
@@ -62,7 +65,7 @@
 					<xsd:element name="pluginType" minOccurs="0" type="plugin:PluginType" default="OTHER" />
                     <xsd:element name="pluginName" minOccurs="0" type="xsd:string"/>
                     <xsd:element name="senderOrReceiver" minOccurs="0" type="xsd:string"/>
-                    <xsd:element name="messageGuid" minOccurs="1" maxOccurs="1" type="xsd:string"/>
+                    <xsd:element name="messageGuid" minOccurs="0" type="xsd:string"/>
                     <xsd:element name="date" minOccurs="0" type="xsd:dateTime"/>
                 </xsd:sequence>
             </xsd:complexType>
@@ -301,13 +304,13 @@
                 </xsd:complexType>
             </xsd:element>
 
-            <xsd:element name="UpdateLogStatus">
+            <xsd:element name="UpdateLogStatusRequest">
                 <xsd:complexType>
                     <xsd:complexContent>
                         <xsd:extension base="module:ExchangeBaseRequest">
                             <xsd:sequence>
-                                <xsd:element name="logId" type="xsd:long" minOccurs="1" maxOccurs="1"/>
-                                <xsd:element name="status" type="exchange:ExchangeLogStatusTypeType" minOccurs="1" maxOccurs="1"/>
+                                <xsd:element name="logGuid" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                                <xsd:element name="newStatus" type="exchange:ExchangeLogStatusTypeType" minOccurs="1" maxOccurs="1"/>
                             </xsd:sequence>
                         </xsd:extension>
                     </xsd:complexContent>
@@ -348,6 +351,10 @@
 
     <message name="SetSalesReportRequest">
         <part name="body" element="module:SetSalesReportRequest"/>
+    </message>
+
+    <message name="UpdateLogStatusRequest">
+        <part name="body" element="module:UpdateLogStatusRequest"/>
     </message>
 
     <message name="UpdatePluginSettingRequest">
@@ -395,6 +402,11 @@
 
         <operation name="SetSalesReport">
             <input message="module:SetSalesReportRequest"/>
+            <fault name="ExchangeFault" message="module:ExchangeFault"/>
+        </operation>
+
+        <operation name="UpdateLogStatus">
+            <input message="module:UpdateLogStatusRequest"/>
             <fault name="ExchangeFault" message="module:ExchangeFault"/>
         </operation>
 
@@ -497,6 +509,15 @@
             <input>
                 <soap:body use="literal"/>
             </input>
+        </operation>
+
+        <operation name="UpdateLogStatus">
+            <input>
+                <soap:body use="literal"/>
+            </input>
+            <fault name="ExchangeFault">
+                <soap:fault name="ExchangeFault" use="literal"/>
+            </fault>
         </operation>
 
     </binding>
