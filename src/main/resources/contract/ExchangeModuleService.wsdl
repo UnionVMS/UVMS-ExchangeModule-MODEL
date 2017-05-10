@@ -1,14 +1,12 @@
 <definitions name="ExchangeModuleService"
              targetNamespace="urn:module.exchange.schema.fisheries.ec.europa.eu:v1"
              xmlns:module="urn:module.exchange.schema.fisheries.ec.europa.eu:v1"
-             xmlns:search="urn:search.exchange.schema.fisheries.ec.europa.eu:v1"
              xmlns:common="urn:common.exchange.schema.fisheries.ec.europa.eu:v1"
              xmlns:service="urn:service.exchange.schema.fisheries.ec.europa.eu:v1"
              xmlns:exchange="urn:exchange.schema.fisheries.ec.europa.eu:v1"
              xmlns:movement="urn:movement.exchange.schema.fisheries.ec.europa.eu:v1"
              xmlns:plugin="urn:types.plugin.exchange.schema.fisheries.ec.europa.eu:v1"
-			 xmlns:rsn="urn:un:unece:uncefact:data:standard:FLUXResponseMessage:4"
-			 xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+             xmlns:xsd="http://www.w3.org/2001/XMLSchema"
              xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
              xmlns="http://schemas.xmlsoap.org/wsdl/">
 
@@ -63,19 +61,18 @@
                     <xsd:element name="method" type="module:ExchangeModuleMethod"/>
                     <xsd:element name="username" minOccurs="0" type="xsd:string"/>
 					<xsd:element name="pluginType" minOccurs="0" type="plugin:PluginType" default="OTHER" />
-                    <xsd:element name="pluginName" minOccurs="0" type="xsd:string"/>
                     <xsd:element name="senderOrReceiver" minOccurs="0" type="xsd:string"/>
                     <xsd:element name="messageGuid" minOccurs="0" type="xsd:string"/>
                     <xsd:element name="date" minOccurs="0" type="xsd:dateTime"/>
+                    <xsd:element name="fluxDataFlow" minOccurs="0" type="xsd:string" />
                 </xsd:sequence>
             </xsd:complexType>
 
-            <xsd:complexType name="ExchangeWithFLUXBaseRequest" abstract="true">
+            <xsd:complexType name="ExchangeOutgoingBaseRequest" abstract="true">
                 <xsd:complexContent>
                     <xsd:extension base="module:ExchangeBaseRequest">
                         <xsd:sequence>
-                            <xsd:element name="dataFlow" type="xsd:string" />
-                            <xsd:element name="addressee" type="xsd:string" />
+                            <xsd:element name="validationStatus" type="exchange:ExchangeLogStatusTypeType"/>
                         </xsd:sequence>
                     </xsd:extension>
                 </xsd:complexContent>
