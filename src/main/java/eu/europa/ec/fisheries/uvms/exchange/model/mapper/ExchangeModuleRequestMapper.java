@@ -25,6 +25,7 @@ import eu.europa.ec.fisheries.schema.exchange.service.v1.CapabilityListType;
 import eu.europa.ec.fisheries.schema.exchange.service.v1.ServiceType;
 import eu.europa.ec.fisheries.schema.exchange.service.v1.SettingListType;
 import eu.europa.ec.fisheries.schema.exchange.service.v1.SettingType;
+import eu.europa.ec.fisheries.schema.exchange.v1.ExchangeLogStatusTypeType;
 import eu.europa.ec.fisheries.uvms.exchange.model.exception.ExchangeModelMapperException;
 import eu.europa.ec.fisheries.uvms.exchange.model.exception.ExchangeModelMarshallException;
 import eu.europa.ec.fisheries.uvms.exchange.model.util.DateUtils;
@@ -233,6 +234,14 @@ public class ExchangeModuleRequestMapper {
         request.setUsername(username);
         request.setRequest(reportType);
         request.setPluginType(PluginType.MANUAL);
+        return JAXBMarshaller.marshallJaxBObjectToString(request);
+    }
+
+    public static String createUpdateLogStatusRequest(String logGuid, ExchangeLogStatusTypeType newStatus) throws ExchangeModelMarshallException {
+        UpdateLogStatusRequest request = new UpdateLogStatusRequest();
+        request.setMethod(ExchangeModuleMethod.UPDATE_LOG_STATUS);
+        request.setLogGuid(logGuid);
+        request.setNewStatus(newStatus);
         return JAXBMarshaller.marshallJaxBObjectToString(request);
     }
 }
