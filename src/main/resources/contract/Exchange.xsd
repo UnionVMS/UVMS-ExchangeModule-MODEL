@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsd:schema xmlns:exchange="urn:exchange.schema.fisheries.ec.europa.eu:v1"
-            targetNamespace="urn:exchange.schema.fisheries.ec.europa.eu:v1"          
+            targetNamespace="urn:exchange.schema.fisheries.ec.europa.eu:v1"
             xmlns:xsd="http://www.w3.org/2001/XMLSchema"
-            xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
             xmlns="http://schemas.xmlsoap.org/wsdl/">
     
     
@@ -24,12 +23,11 @@
             <xsd:enumeration value="SEND_MOVEMENT"/>
             <xsd:enumeration value="SEND_EMAIL"/>
             <xsd:enumeration value="SEND_POLL"/>
-            <xsd:enumeration value="SEND_SALES_REPORT"/>
-            <xsd:enumeration value="RECEIVE_SALES_REPORT_RESPONSE"/>
             <xsd:enumeration value="RECEIVE_SALES_REPORT"/>
-            <xsd:enumeration value="SEND_SALES_REPORT_RESPONSE"/>
             <xsd:enumeration value="RECEIVE_SALES_QUERY"/>
-            <xsd:enumeration value="SEND_SALES_QUERY_RESPONSE"/>
+            <xsd:enumeration value="RECEIVE_SALES_RESPONSE"/>
+            <xsd:enumeration value="SEND_SALES_RESPONSE"/>
+            <xsd:enumeration value="SEND_SALES_REPORT"/>
         </xsd:restriction>
    </xsd:simpleType>
    

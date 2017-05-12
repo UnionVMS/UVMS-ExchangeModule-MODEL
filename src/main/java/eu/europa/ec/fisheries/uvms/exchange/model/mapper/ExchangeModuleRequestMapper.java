@@ -11,41 +11,26 @@ copy of the GNU General Public License along with the IFDM Suite. If not, see <h
  */
 package eu.europa.ec.fisheries.uvms.exchange.model.mapper;
 
-import eu.europa.ec.fisheries.schema.exchange.common.v1.CommandType;
-import eu.europa.ec.fisheries.schema.exchange.common.v1.CommandTypeType;
-import eu.europa.ec.fisheries.schema.exchange.module.v1.*;
-import eu.europa.ec.fisheries.schema.exchange.movement.v1.*;
-import eu.europa.ec.fisheries.schema.exchange.plugin.types.v1.EmailType;
+import eu.europa.ec.fisheries.schema.exchange.module.v1.ExchangeModuleMethod;
+import eu.europa.ec.fisheries.schema.exchange.module.v1.ReceiveSalesQueryRequest;
+import eu.europa.ec.fisheries.schema.exchange.module.v1.ReceiveSalesReportRequest;
+import eu.europa.ec.fisheries.schema.exchange.module.v1.ReceiveSalesResponseRequest;
 import eu.europa.ec.fisheries.schema.exchange.plugin.types.v1.PluginType;
-import eu.europa.ec.fisheries.schema.exchange.plugin.types.v1.PollType;
 import eu.europa.ec.fisheries.schema.exchange.registry.v1.ExchangeRegistryMethod;
 import eu.europa.ec.fisheries.schema.exchange.registry.v1.RegisterServiceRequest;
 import eu.europa.ec.fisheries.schema.exchange.registry.v1.UnregisterServiceRequest;
 import eu.europa.ec.fisheries.schema.exchange.service.v1.CapabilityListType;
 import eu.europa.ec.fisheries.schema.exchange.service.v1.ServiceType;
 import eu.europa.ec.fisheries.schema.exchange.service.v1.SettingListType;
-import eu.europa.ec.fisheries.schema.exchange.service.v1.SettingType;
-import eu.europa.ec.fisheries.schema.exchange.v1.ExchangeLogStatusTypeType;
-import eu.europa.ec.fisheries.uvms.exchange.model.exception.ExchangeModelMapperException;
 import eu.europa.ec.fisheries.uvms.exchange.model.exception.ExchangeModelMarshallException;
-import eu.europa.ec.fisheries.uvms.exchange.model.util.DateUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.jms.TextMessage;
 import java.util.Date;
-import java.util.List;
 
 public class ExchangeModuleRequestMapper {
 
     final static Logger LOG = LoggerFactory.getLogger(ExchangeModuleRequestMapper.class);
-
-    public static String mapCreatePollRequest(CommandType command) throws ExchangeModelMarshallException {
-        SetCommandRequest request = new SetCommandRequest();
-        request.setMethod(ExchangeModuleMethod.SET_COMMAND);
-        request.setCommand(command);
-        return JAXBMarshaller.marshallJaxBObjectToString(request);
-    }
 
     public static String createRegisterServiceRequest(ServiceType serviceType, CapabilityListType capabilityList, SettingListType settingList) throws ExchangeModelMarshallException {
         RegisterServiceRequest request = new RegisterServiceRequest();
@@ -63,22 +48,9 @@ public class ExchangeModuleRequestMapper {
         return JAXBMarshaller.marshallJaxBObjectToString(request);
     }
 
-    public static ServiceType mapToServiceTypeFromRequest(TextMessage textMessage) throws ExchangeModelMarshallException {
-        RegisterServiceRequest request = JAXBMarshaller.unmarshallTextMessage(textMessage, RegisterServiceRequest.class);
-        return request.getService();
-    }
-
-    public static String createSetMovementReportRequest(SetReportMovementType reportType, String username) throws ExchangeModelMarshallException {
-        SetMovementReportRequest request = new SetMovementReportRequest();
-        request.setMethod(ExchangeModuleMethod.SET_MOVEMENT_REPORT);
-        request.setUsername(username);
-        request.setRequest(reportType);
-        return JAXBMarshaller.marshallJaxBObjectToString(request);
-    }
-
-    public static String createSetSalesReportRequest(String report, String reportGuid, String sender, String username, PluginType typeOfOriginatingPlugin, Date dateReceived) throws ExchangeModelMarshallException {
-        SetSalesReportRequest request = new SetSalesReportRequest();
-        request.setMethod(ExchangeModuleMethod.SET_SALES_REPORT);
+    public static String createReceiveSalesReportRequest(String report, String reportGuid, String sender, String username, PluginType typeOfOriginatingPlugin, Date dateReceived) throws ExchangeModelMarshallException {
+        ReceiveSalesReportRequest request = new ReceiveSalesReportRequest();
+        request.setMethod(ExchangeModuleMethod.RECEIVE_SALES_REPORT);
         request.setUsername(username);
         request.setReport(report);
         request.setPluginType(typeOfOriginatingPlugin);
@@ -87,161 +59,22 @@ public class ExchangeModuleRequestMapper {
         request.setDate(dateReceived);
         return JAXBMarshaller.marshallJaxBObjectToString(request);
     }
-    public static String createReceivedSalesMessage(String message, String username, PluginType typeOfOriginatingPlugin) throws ExchangeModelMarshallException {
-        ReceivedSalesMessage request = new ReceivedSalesMessage();
-        request.setMethod(ExchangeModuleMethod.RECEIVE_SALES_MESSAGE);
+    public static String createReceiveSalesResponseRequest(String response, String username, PluginType typeOfOriginatingPlugin) throws ExchangeModelMarshallException {
+        ReceiveSalesResponseRequest request = new ReceiveSalesResponseRequest();
+        request.setMethod(ExchangeModuleMethod.RECEIVE_SALES_RESPONSE);
         request.setUsername(username);
-        request.setMessage(message);
+        request.setResponse(response);
         request.setPluginType(typeOfOriginatingPlugin);
         return JAXBMarshaller.marshallJaxBObjectToString(request);
     }
 
-    public static String createSetSalesQueryRequest(String query, String username, PluginType typeOfOriginatingPlugin) throws ExchangeModelMarshallException {
-        SetSalesQueryRequest request = new SetSalesQueryRequest();
-        request.setMethod(ExchangeModuleMethod.SET_SALES_QUERY);
+    public static String createReceiveSalesQueryRequest(String query, String username, PluginType typeOfOriginatingPlugin) throws ExchangeModelMarshallException {
+        ReceiveSalesQueryRequest request = new ReceiveSalesQueryRequest();
+        request.setMethod(ExchangeModuleMethod.RECEIVE_SALES_QUERY);
         request.setUsername(username);
         request.setQuery(query);
         request.setPluginType(typeOfOriginatingPlugin);
         return JAXBMarshaller.marshallJaxBObjectToString(request);
     }
 
-    public static String createSendReportToPlugin(String pluginName, PluginType type, Date fwdDate, String fwdRule, String recipient, MovementType payload, List<RecipientInfoType> recipientInfoList, String assetName, String ircs, String mmsi, String externalMarking, String flagState) throws ExchangeModelMapperException {
-        SendMovementToPluginRequest request = createSendReportToPluginRequest(pluginName, type, fwdDate, fwdRule, recipient, payload, recipientInfoList, assetName, ircs, mmsi, externalMarking, flagState);
-        return JAXBMarshaller.marshallJaxBObjectToString(request);
-    }
-
-    private static SendMovementToPluginRequest createSendReportToPluginRequest(String pluginName, PluginType type, Date fwdDate, String fwdRule, String recipient, MovementType payload, List<RecipientInfoType> recipientInfoList, String assetName, String ircs, String mmsi, String externalMarking, String flagState) throws ExchangeModelMapperException {
-        SendMovementToPluginRequest request = new SendMovementToPluginRequest();
-        request.setMethod(ExchangeModuleMethod.SEND_REPORT_TO_PLUGIN);
-        SendMovementToPluginType sendMovementToPluginType = createSendMovementToPluginType(pluginName, type, fwdDate, fwdRule, recipient, payload, recipientInfoList, assetName, ircs, mmsi, externalMarking, flagState);
-        request.setReport(sendMovementToPluginType);
-        request.setUsername("UVMS");
-        return request;
-    }
-
-    public static SendMovementToPluginType createSendMovementToPluginType(String pluginName, PluginType type, Date fwdDate, String fwdRule, String recipient, MovementType payload, List<RecipientInfoType> recipientInfoList, String assetName, String ircs, String mmsi, String externalMarking, String flagState) throws ExchangeModelMapperException {
-        SendMovementToPluginType report = new SendMovementToPluginType();
-        mapToMovementType(payload, ircs, mmsi, externalMarking, flagState, assetName);
-        report.setTimestamp(DateUtils.nowUTC().toDate());
-        report.setFwdDate(fwdDate);
-        report.setFwdRule(fwdRule);
-        report.setRecipient(recipient);
-        report.getRecipientInfo().addAll(recipientInfoList);
-        report.setAssetName(assetName);
-        report.setMovement(payload);
-        report.setPluginType(type);
-        report.setPluginName(pluginName);
-        report.setIrcs(payload.getIrcs());
-        return report;
-    }
-
-    private static void mapToMovementType(MovementType movementType, String ircs, String mmsi, String externalMarking, String flagState, String assetName) {
-        movementType.setMmsi(mmsi);
-        movementType.setExternalMarking(externalMarking);
-        movementType.setIrcs(ircs);
-        movementType.setFlagState(flagState);
-        movementType.setAssetName(assetName);
-    }
-
-    public static String createSetCommandSendPollRequest(String pluginName, PollType poll, String username, String fwdRule) throws ExchangeModelMapperException {
-        SetCommandRequest request = createSetCommandRequest(pluginName, CommandTypeType.POLL, username, fwdRule);
-        request.getCommand().setPoll(poll);
-        return JAXBMarshaller.marshallJaxBObjectToString(request);
-    }
-
-    public static String createSetCommandSendEmailRequest(String pluginName, EmailType email, String fwdRule) throws ExchangeModelMapperException {
-        SetCommandRequest request = createSetCommandRequest(pluginName, CommandTypeType.EMAIL, "UVMS", fwdRule);
-        request.getCommand().setEmail(email);
-        return JAXBMarshaller.marshallJaxBObjectToString(request);
-    }
-
-    private static SetCommandRequest createSetCommandRequest(String pluginName, CommandTypeType type, String username, String fwdRule) throws ExchangeModelMapperException {
-        SetCommandRequest request = new SetCommandRequest();
-        request.setMethod(ExchangeModuleMethod.SET_COMMAND);
-        CommandType commandType = new CommandType();
-        commandType.setTimestamp(DateUtils.nowUTC().toDate());
-        commandType.setCommand(type);
-        commandType.setPluginName(pluginName);
-        commandType.setFwdRule(fwdRule);
-        request.setUsername(username);
-        request.setCommand(commandType);
-        return request;
-    }
-
-    public static String createGetServiceListRequest(List<PluginType> pluginTypes) throws ExchangeModelMapperException {
-        GetServiceListRequest request = new GetServiceListRequest();
-        request.setMethod(ExchangeModuleMethod.LIST_SERVICES);
-        request.getType().addAll(pluginTypes);
-        return JAXBMarshaller.marshallJaxBObjectToString(request);
-    }
-
-    public static String createUpdatePluginSettingRequest(String serviceClassName, String settingKey, String settingValue) throws ExchangeModelMarshallException {
-        UpdatePluginSettingRequest request = new UpdatePluginSettingRequest();
-        request.setMethod(ExchangeModuleMethod.UPDATE_PLUGIN_SETTING);
-        request.setServiceClassName(serviceClassName);
-        SettingType setting = new SettingType();
-        setting.setKey(settingKey);
-        setting.setValue(settingValue);
-        request.setSetting(setting);
-        return JAXBMarshaller.marshallJaxBObjectToString(request);
-    }
-
-    // Asynch processed movement response
-    public static String mapToProcessedMovementResponse(SetReportMovementType orgRequest, MovementRefType movementRef) throws ExchangeModelMapperException {
-        ProcessedMovementResponse response = new ProcessedMovementResponse();
-        response.setMethod(ExchangeModuleMethod.PROCESSED_MOVEMENT);
-        response.setOrgRequest(orgRequest);
-        response.setMovementRefType(movementRef);
-        return JAXBMarshaller.marshallJaxBObjectToString(response);
-    }
-
-    public static String createFluxMdrSyncEntityRequest(String reportType, String username) throws ExchangeModelMarshallException {
-        SetFLUXMDRSyncMessageExchangeRequest request = new SetFLUXMDRSyncMessageExchangeRequest();
-        request.setMethod(ExchangeModuleMethod.SET_MDR_SYNC_MESSAGE_REQUEST);
-        request.setUsername(username);
-        request.setRequest(reportType);
-        return JAXBMarshaller.marshallJaxBObjectToString(request);
-    }
-
-    public static String createFluxMdrSyncEntityResponse(String reportType, String username) throws ExchangeModelMarshallException {
-        SetFLUXMDRSyncMessageExchangeResponse request = new SetFLUXMDRSyncMessageExchangeResponse();
-        request.setMethod(ExchangeModuleMethod.SET_MDR_SYNC_MESSAGE_RESPONSE);
-        request.setUsername(username);
-        request.setRequest(reportType);
-        return JAXBMarshaller.marshallJaxBObjectToString(request);
-    }
-
-
-    public static String createFluxFAReportRequest(String reportType, String username) throws ExchangeModelMarshallException {
-        SetFLUXFAReportMessageRequest request = new SetFLUXFAReportMessageRequest();
-        request.setMethod(ExchangeModuleMethod.SET_FLUX_FA_REPORT_MESSAGE);
-        request.setUsername(username);
-        request.setRequest(reportType);
-        return JAXBMarshaller.marshallJaxBObjectToString(request);
-    }
-
-    public static String createFluxFAResponseRequest(String response, String username) throws ExchangeModelMarshallException {
-        SetFLUXFAResponseMessageRequest request = new SetFLUXFAResponseMessageRequest();
-        request.setMethod(ExchangeModuleMethod.SET_FLUX_FA_RESPONSE_MESSAGE);
-        request.setUsername(username);
-        request.setRequest(response);
-        return JAXBMarshaller.marshallJaxBObjectToString(request);
-    }
-
-    public static String createFluxFAManualResponseRequest(String reportType, String username) throws ExchangeModelMarshallException {
-        SetFLUXFAReportMessageRequest request = new SetFLUXFAReportMessageRequest();
-        request.setMethod(ExchangeModuleMethod.SET_FLUX_FA_REPORT_MESSAGE);
-        request.setUsername(username);
-        request.setRequest(reportType);
-        request.setPluginType(PluginType.MANUAL);
-        return JAXBMarshaller.marshallJaxBObjectToString(request);
-    }
-
-    public static String createUpdateLogStatusRequest(String logGuid, ExchangeLogStatusTypeType newStatus) throws ExchangeModelMarshallException {
-        UpdateLogStatusRequest request = new UpdateLogStatusRequest();
-        request.setMethod(ExchangeModuleMethod.UPDATE_LOG_STATUS);
-        request.setLogGuid(logGuid);
-        request.setNewStatus(newStatus);
-        return JAXBMarshaller.marshallJaxBObjectToString(request);
-    }
 }

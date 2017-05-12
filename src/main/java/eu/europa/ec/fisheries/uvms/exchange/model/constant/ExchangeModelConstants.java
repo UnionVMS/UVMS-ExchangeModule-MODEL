@@ -34,8 +34,6 @@ public class ExchangeModelConstants {
     public static final String QUEUE_INTEGRATION_ASSET = "jms/queue/UVMSAssetEvent";
     public static final String QUEUE_INTEGRATION_AUDIT = "jms/queue/UVMSAuditEvent";
 
-    public static final String FLUX_SERVICE_NAME = "eu.europa.ec.fisheries.uvms.plugins.flux";
-
     // For ack
     public static final String MOVEMENT_RESPONSE_QUEUE = "jms/queue/UVMSMovement";
 	public static final String ACTIVITY_EVENT_QUEUE = "jms/queue/UVMSActivityEvent";
