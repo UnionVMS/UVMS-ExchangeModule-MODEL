@@ -14,6 +14,7 @@
             <xsd:element name="incoming" type="xsd:boolean"/>
             <xsd:element name="typeRef" type="exchange:LogRefType"/>
             <xsd:element name="status" type="exchange:ExchangeLogStatusTypeType" />
+            <xsd:element name="destination" type="xsd:string" />
         </xsd:sequence>
     </xsd:complexType>
    
