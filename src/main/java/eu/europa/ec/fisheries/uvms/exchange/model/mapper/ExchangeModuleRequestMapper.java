@@ -192,11 +192,16 @@ public class ExchangeModuleRequestMapper {
     }
 
 
-    public static String createFluxFAReportRequest(String reportType, String username) throws ExchangeModelMarshallException {
+    public static String createFluxFAReportRequest(String message, String username, String fluxDFValue,Date date, String messageGuid,PluginType pluginType,String senderReceiver) throws ExchangeModelMarshallException {
         SetFLUXFAReportMessageRequest request = new SetFLUXFAReportMessageRequest();
         request.setMethod(ExchangeModuleMethod.SET_FLUX_FA_REPORT_MESSAGE);
         request.setUsername(username);
-        request.setRequest(reportType);
+        request.setRequest(message);
+        request.setFluxDataFlow(fluxDFValue);
+        request.setDate(date);
+        request.setMessageGuid(messageGuid);
+        request.setPluginType(pluginType);
+        request.setSenderOrReceiver(senderReceiver);
         return JAXBMarshaller.marshallJaxBObjectToString(request);
     }
 
