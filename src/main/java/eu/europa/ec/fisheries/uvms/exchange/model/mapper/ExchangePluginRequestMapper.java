@@ -86,10 +86,13 @@ public class ExchangePluginRequestMapper {
     }
 
 
-    public static String createSetFLUXFAResponseRequest(String  fluxFAResponse) throws ExchangeModelMarshallException {
+    public static String createSetFLUXFAResponseRequest(String  fluxFAResponse, String destination, String df, String fr) throws ExchangeModelMarshallException {
         SetFLUXFAResponseRequest request = new SetFLUXFAResponseRequest();
         request.setMethod(ExchangePluginMethod.SET_FLUX_RESPONSE);
         request.setResponse(fluxFAResponse);
+        request.setDestination(destination);
+        request.setFluxDataFlow(df);
+        request.setSenderOrReceiver(fr);
         return JAXBMarshaller.marshallJaxBObjectToString(request);
     }
 }
