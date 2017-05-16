@@ -158,6 +158,7 @@
 						<xsd:extension base="module:ExchangeBaseRequest">
 							<xsd:sequence>
 								<xsd:element name="request" type="xsd:string"/>
+                                <xsd:element name="status" type="exchange:ExchangeLogStatusTypeType" minOccurs="1" maxOccurs="1"/>
 							</xsd:sequence>
 						</xsd:extension>
 					</xsd:complexContent>
