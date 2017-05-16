@@ -35,6 +35,8 @@ import org.slf4j.LoggerFactory;
 import java.util.Date;
 import java.util.List;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
 public class ExchangeModuleRequestMapper {
 
     final static Logger LOG = LoggerFactory.getLogger(ExchangeModuleRequestMapper.class);
@@ -82,6 +84,36 @@ public class ExchangeModuleRequestMapper {
         request.setQuery(query);
         request.setPluginType(typeOfOriginatingPlugin);
         return JAXBMarshaller.marshallJaxBObjectToString(request);
+    }
+
+    public static String createSendSalesResponseRequest(String response, ExchangeModuleMethod method,
+                                                 String guid, String dataFlow,
+                                                 String senderOrReceiver, Date date) throws ExchangeModelMarshallException {
+        SendSalesResponseRequest sendSalesResponseRequest = new SendSalesResponseRequest();
+        sendSalesResponseRequest.setResponse(checkNotNull(response));
+
+        enrichBaseRequest(sendSalesResponseRequest, method, guid, dataFlow, senderOrReceiver, date);
+       return JAXBMarshaller.marshallJaxBObjectToString(sendSalesResponseRequest);
+    }
+
+    public static String createSendSalesReportRequest(String report, ExchangeModuleMethod method,
+                                               String guid, String dataFlow,
+                                               String senderOrReceiver, Date date) throws ExchangeModelMarshallException {
+        SendSalesReportRequest sendSalesReportRequest = new SendSalesReportRequest();
+        sendSalesReportRequest.setReport(checkNotNull(report));
+
+        enrichBaseRequest(sendSalesReportRequest, method, guid, dataFlow, senderOrReceiver, date);
+        return JAXBMarshaller.marshallJaxBObjectToString(sendSalesReportRequest);
+    }
+
+    public static String createReceiveSalesResponseRequest(String response, ExchangeModuleMethod method,
+                                                           String guid, String dataFlow,
+                                                           String senderOrReceiver, Date date) throws ExchangeModelMarshallException {
+        ReceiveSalesResponseRequest receiveSalesResponseRequest = new ReceiveSalesResponseRequest();
+        receiveSalesResponseRequest.setResponse(response);
+
+        enrichBaseRequest(receiveSalesResponseRequest, method, guid, dataFlow, senderOrReceiver, date);
+        return JAXBMarshaller.marshallJaxBObjectToString(receiveSalesResponseRequest);
     }
 
 
@@ -223,6 +255,14 @@ public class ExchangeModuleRequestMapper {
         request.setLogGuid(logGuid);
         request.setNewStatus(newStatus);
         return JAXBMarshaller.marshallJaxBObjectToString(request);
+    }
+
+    private static void enrichBaseRequest(ExchangeBaseRequest exchangeBaseRequest, ExchangeModuleMethod method, String guid, String dataFlow, String senderOrReceiver, Date date) {
+        exchangeBaseRequest.setMethod(checkNotNull(method));
+        exchangeBaseRequest.setDate(checkNotNull(date));
+        exchangeBaseRequest.setMessageGuid(checkNotNull(guid));
+        exchangeBaseRequest.setFluxDataFlow(checkNotNull(dataFlow));
+        exchangeBaseRequest.setSenderOrReceiver(checkNotNull(senderOrReceiver));
     }
 
 }

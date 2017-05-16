@@ -24,6 +24,7 @@
         <maven-release-plugin>2.5.3</maven-release-plugin>
         <binding.xml>binding-date.xml</binding.xml>
         <envClassifier>date</envClassifier>
+        <guava.version>21.0</guava.version>
 
 		<scm.connection>scm:git:https://github.com/UnionVMS/UVMS-ExchangeModule-MODEL.git</scm.connection>
     </properties>
@@ -255,6 +256,11 @@
             <groupId>org.jibx.schema.org.apache.maven</groupId>
             <artifactId>org.jibx.schema.org.apache.maven.maven_v4_0_0</artifactId>
             <version>${jibx.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>${guava.version}</version>
         </dependency>
     </dependencies>
 
