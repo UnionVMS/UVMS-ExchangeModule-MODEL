@@ -68,22 +68,20 @@ public class ExchangeModuleRequestMapper {
         request.setDate(dateReceived);
         return JAXBMarshaller.marshallJaxBObjectToString(request);
     }
-    public static String createReceiveSalesResponseRequest(String response, String username, PluginType typeOfOriginatingPlugin) throws ExchangeModelMarshallException {
-        ReceiveSalesResponseRequest request = new ReceiveSalesResponseRequest();
-        request.setMethod(ExchangeModuleMethod.RECEIVE_SALES_RESPONSE);
-        request.setUsername(username);
-        request.setResponse(response);
-        request.setPluginType(typeOfOriginatingPlugin);
+
+    public static String createReceiveSalesQueryRequest(String query, String queryGuid, String sender, Date receiveDate, String username, PluginType typeOfOriginatingPlugin) throws ExchangeModelMarshallException {
+        ReceiveSalesQueryRequest request = new ReceiveSalesQueryRequest();
+        request.setQuery(query);
+        enrichBaseRequest(request, ExchangeModuleMethod.RECEIVE_SALES_QUERY, queryGuid, null, sender, receiveDate, username, typeOfOriginatingPlugin);
         return JAXBMarshaller.marshallJaxBObjectToString(request);
     }
 
-    public static String createReceiveSalesQueryRequest(String query, String username, PluginType typeOfOriginatingPlugin) throws ExchangeModelMarshallException {
-        ReceiveSalesQueryRequest request = new ReceiveSalesQueryRequest();
-        request.setMethod(ExchangeModuleMethod.RECEIVE_SALES_QUERY);
-        request.setUsername(username);
-        request.setQuery(query);
-        request.setPluginType(typeOfOriginatingPlugin);
-        return JAXBMarshaller.marshallJaxBObjectToString(request);
+    public static String createReceiveSalesResponseRequest(String response, String guid, String sender, Date date, String username, PluginType pluginType) throws ExchangeModelMarshallException {
+        ReceiveSalesResponseRequest receiveSalesResponseRequest = new ReceiveSalesResponseRequest();
+        receiveSalesResponseRequest.setResponse(response);
+
+        enrichBaseRequest(receiveSalesResponseRequest, ExchangeModuleMethod.RECEIVE_SALES_RESPONSE, guid, null, sender, date, username, pluginType);
+        return JAXBMarshaller.marshallJaxBObjectToString(receiveSalesResponseRequest);
     }
 
     public static String createSendSalesResponseRequest(String response, ExchangeModuleMethod method,
@@ -92,7 +90,7 @@ public class ExchangeModuleRequestMapper {
         SendSalesResponseRequest sendSalesResponseRequest = new SendSalesResponseRequest();
         sendSalesResponseRequest.setResponse(checkNotNull(response));
 
-        enrichBaseRequest(sendSalesResponseRequest, method, guid, dataFlow, senderOrReceiver, date);
+        enrichBaseRequest(sendSalesResponseRequest, method, guid, dataFlow, senderOrReceiver, date, null, null);
        return JAXBMarshaller.marshallJaxBObjectToString(sendSalesResponseRequest);
     }
 
@@ -102,18 +100,8 @@ public class ExchangeModuleRequestMapper {
         SendSalesReportRequest sendSalesReportRequest = new SendSalesReportRequest();
         sendSalesReportRequest.setReport(checkNotNull(report));
 
-        enrichBaseRequest(sendSalesReportRequest, method, guid, dataFlow, senderOrReceiver, date);
+        enrichBaseRequest(sendSalesReportRequest, method, guid, dataFlow, senderOrReceiver, date, null, null);
         return JAXBMarshaller.marshallJaxBObjectToString(sendSalesReportRequest);
-    }
-
-    public static String createReceiveSalesResponseRequest(String response, ExchangeModuleMethod method,
-                                                           String guid, String dataFlow,
-                                                           String senderOrReceiver, Date date) throws ExchangeModelMarshallException {
-        ReceiveSalesResponseRequest receiveSalesResponseRequest = new ReceiveSalesResponseRequest();
-        receiveSalesResponseRequest.setResponse(response);
-
-        enrichBaseRequest(receiveSalesResponseRequest, method, guid, dataFlow, senderOrReceiver, date);
-        return JAXBMarshaller.marshallJaxBObjectToString(receiveSalesResponseRequest);
     }
 
 
@@ -257,12 +245,14 @@ public class ExchangeModuleRequestMapper {
         return JAXBMarshaller.marshallJaxBObjectToString(request);
     }
 
-    private static void enrichBaseRequest(ExchangeBaseRequest exchangeBaseRequest, ExchangeModuleMethod method, String guid, String dataFlow, String senderOrReceiver, Date date) {
+    private static void enrichBaseRequest(ExchangeBaseRequest exchangeBaseRequest, ExchangeModuleMethod method, String guid, String dataFlow, String senderOrReceiver, Date date, String username, PluginType pluginType) {
         exchangeBaseRequest.setMethod(checkNotNull(method));
         exchangeBaseRequest.setDate(checkNotNull(date));
         exchangeBaseRequest.setMessageGuid(checkNotNull(guid));
-        exchangeBaseRequest.setFluxDataFlow(checkNotNull(dataFlow));
+        exchangeBaseRequest.setFluxDataFlow(dataFlow);
         exchangeBaseRequest.setSenderOrReceiver(checkNotNull(senderOrReceiver));
+        exchangeBaseRequest.setUsername(username);
+        exchangeBaseRequest.setPluginType(pluginType);
     }
 
 }
