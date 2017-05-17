@@ -205,11 +205,17 @@ public class ExchangeModuleRequestMapper {
         return JAXBMarshaller.marshallJaxBObjectToString(request);
     }
 
-    public static String createFluxFAResponseRequest(String response, String username) throws ExchangeModelMarshallException {
+    public static String createFluxFAResponseRequest(String response, String username, String df, String messageGuid, String fr, ExchangeLogStatusTypeType status, String destination) throws ExchangeModelMarshallException {
         SetFLUXFAResponseMessageRequest request = new SetFLUXFAResponseMessageRequest();
         request.setMethod(ExchangeModuleMethod.SET_FLUX_FA_RESPONSE_MESSAGE);
         request.setUsername(username);
         request.setRequest(response);
+        request.setFluxDataFlow(df);
+        request.setMessageGuid(messageGuid);
+        request.setDate(DateUtils.nowUTC().toDate());
+        request.setSenderOrReceiver(fr);
+        request.setStatus(status);
+        request.setDestination(destination);
         return JAXBMarshaller.marshallJaxBObjectToString(request);
     }
 
