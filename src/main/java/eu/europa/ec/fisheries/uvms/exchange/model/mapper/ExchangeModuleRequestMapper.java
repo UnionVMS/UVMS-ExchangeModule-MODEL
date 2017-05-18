@@ -84,23 +84,23 @@ public class ExchangeModuleRequestMapper {
         return JAXBMarshaller.marshallJaxBObjectToString(receiveSalesResponseRequest);
     }
 
-    public static String createSendSalesResponseRequest(String response, ExchangeModuleMethod method,
+    public static String createSendSalesResponseRequest(String response,
                                                  String guid, String dataFlow,
                                                  String senderOrReceiver, Date date) throws ExchangeModelMarshallException {
         SendSalesResponseRequest sendSalesResponseRequest = new SendSalesResponseRequest();
         sendSalesResponseRequest.setResponse(checkNotNull(response));
 
-        enrichBaseRequest(sendSalesResponseRequest, method, guid, dataFlow, senderOrReceiver, date, null, null);
+        enrichBaseRequest(sendSalesResponseRequest, ExchangeModuleMethod.SEND_SALES_RESPONSE, guid, dataFlow, senderOrReceiver, date, null, null);
        return JAXBMarshaller.marshallJaxBObjectToString(sendSalesResponseRequest);
     }
 
-    public static String createSendSalesReportRequest(String report, ExchangeModuleMethod method,
+    public static String createSendSalesReportRequest(String report,
                                                String guid, String dataFlow,
                                                String senderOrReceiver, Date date) throws ExchangeModelMarshallException {
         SendSalesReportRequest sendSalesReportRequest = new SendSalesReportRequest();
         sendSalesReportRequest.setReport(checkNotNull(report));
 
-        enrichBaseRequest(sendSalesReportRequest, method, guid, dataFlow, senderOrReceiver, date, null, null);
+        enrichBaseRequest(sendSalesReportRequest, ExchangeModuleMethod.SEND_SALES_REPORT, guid, dataFlow, senderOrReceiver, date, null, null);
         return JAXBMarshaller.marshallJaxBObjectToString(sendSalesReportRequest);
     }
 
