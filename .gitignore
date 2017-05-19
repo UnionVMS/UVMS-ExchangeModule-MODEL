@@ -1,5 +1,7 @@
-/src/main/java/eu/europa/ec/fisheries/schema
-/src/main/java/un
-/src/main/java/org/w3
-target
 *.iml
+target
+target/*
+scripts
+scripts/*
+logging.properties
+/.idea
