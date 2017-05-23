@@ -86,9 +86,11 @@ public class ExchangeModuleRequestMapper {
 
     public static String createSendSalesResponseRequest(String response,
                                                  String guid, String dataFlow,
-                                                 String senderOrReceiver, Date date) throws ExchangeModelMarshallException {
+                                                 String senderOrReceiver, Date date,
+                                                 ExchangeLogStatusTypeType validationStatus) throws ExchangeModelMarshallException {
         SendSalesResponseRequest sendSalesResponseRequest = new SendSalesResponseRequest();
         sendSalesResponseRequest.setResponse(checkNotNull(response));
+        sendSalesResponseRequest.setValidationStatus(validationStatus);
 
         enrichBaseRequest(sendSalesResponseRequest, ExchangeModuleMethod.SEND_SALES_RESPONSE, guid, dataFlow, senderOrReceiver, date, null, null);
        return JAXBMarshaller.marshallJaxBObjectToString(sendSalesResponseRequest);
@@ -96,9 +98,11 @@ public class ExchangeModuleRequestMapper {
 
     public static String createSendSalesReportRequest(String report,
                                                String guid, String dataFlow,
-                                               String senderOrReceiver, Date date) throws ExchangeModelMarshallException {
+                                               String senderOrReceiver, Date date,
+                                               ExchangeLogStatusTypeType validationStatus) throws ExchangeModelMarshallException {
         SendSalesReportRequest sendSalesReportRequest = new SendSalesReportRequest();
         sendSalesReportRequest.setReport(checkNotNull(report));
+        sendSalesReportRequest.setValidationStatus(validationStatus);
 
         enrichBaseRequest(sendSalesReportRequest, ExchangeModuleMethod.SEND_SALES_REPORT, guid, dataFlow, senderOrReceiver, date, null, null);
         return JAXBMarshaller.marshallJaxBObjectToString(sendSalesReportRequest);
