@@ -24,7 +24,7 @@
         <maven-release-plugin>2.5.3</maven-release-plugin>
         <binding.xml>binding-date.xml</binding.xml>
         <envClassifier>date</envClassifier>
-        <guava.version>21.0</guava.version>
+        <guava.version>20.0</guava.version>
 
 		<scm.connection>scm:git:https://github.com/UnionVMS/UVMS-ExchangeModule-MODEL.git</scm.connection>
     </properties>
