@@ -30,7 +30,7 @@
             <xsd:enumeration value="SEND_SALES_RESPONSE"/>
             <xsd:enumeration value="SEND_SALES_REPORT"/>
             <xsd:enumeration value="SEND_FLUX_FA_REPORT_MSG"/>
-            <xsd:enumeration value="RECEIVE_FLUX_FA_REPORT_MSG"/>
+            <xsd:enumeration value="RCV_FLUX_FA_REPORT_MSG"/>
             <xsd:enumeration value="RECEIVE_FLUX_RESPONSE_MSG"/>
             <xsd:enumeration value="SEND_FLUX_RESPONSE_MSG"/>
             <xsd:enumeration value="SEND_FLUX_RESPONSE_MSG"/>
