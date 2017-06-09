@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsd:schema xmlns:exchange="urn:exchange.schema.fisheries.ec.europa.eu:v1"
-            targetNamespace="urn:exchange.schema.fisheries.ec.europa.eu:v1"          
+            targetNamespace="urn:exchange.schema.fisheries.ec.europa.eu:v1"
             xmlns:xsd="http://www.w3.org/2001/XMLSchema"
-            xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
             xmlns="http://schemas.xmlsoap.org/wsdl/">
     
     
-    <xsd:complexType name="ExchangeLogType" abstract="true">
+    <xsd:complexType name="ExchangeLogType">
         <xsd:sequence>
             <xsd:element name="guid" type="xsd:string"/>
             <xsd:element name="senderReceiver" type="xsd:string"/>
@@ -15,6 +14,7 @@
             <xsd:element name="incoming" type="xsd:boolean"/>
             <xsd:element name="typeRef" type="exchange:LogRefType"/>
             <xsd:element name="status" type="exchange:ExchangeLogStatusTypeType" />
+            <xsd:element name="destination" type="xsd:string" />
         </xsd:sequence>
     </xsd:complexType>
    
@@ -24,6 +24,18 @@
             <xsd:enumeration value="SEND_MOVEMENT"/>
             <xsd:enumeration value="SEND_EMAIL"/>
             <xsd:enumeration value="SEND_POLL"/>
+            <xsd:enumeration value="RECEIVE_SALES_REPORT"/>
+            <xsd:enumeration value="RECEIVE_SALES_QUERY"/>
+            <xsd:enumeration value="RECEIVE_SALES_RESPONSE"/>
+            <xsd:enumeration value="SEND_SALES_RESPONSE"/>
+            <xsd:enumeration value="SEND_SALES_REPORT"/>
+            <xsd:enumeration value="SEND_FLUX_FA_REPORT_MSG"/>
+            <xsd:enumeration value="RECEIVE_FLUX_FA_REPORT_MSG"/>
+            <xsd:enumeration value="RECEIVE_FLUX_RESPONSE_MSG"/>
+            <xsd:enumeration value="SEND_FLUX_RESPONSE_MSG"/>
+            <xsd:enumeration value="SEND_FLUX_RESPONSE_MSG"/>
+            <xsd:enumeration value="SEND_FA_QUERY_MSG"/>
+            <xsd:enumeration value="RECEIVE_FA_QUERY_MSG"/>
         </xsd:restriction>
    </xsd:simpleType>
    
@@ -31,6 +43,7 @@
         <xsd:sequence>
             <xsd:element name="refGuid" type="xsd:string"/>
             <xsd:element name="type" type="exchange:TypeRefType"/>
+            <xsd:element name="message" type="xsd:string" />
         </xsd:sequence>
    </xsd:complexType>
    
@@ -40,6 +53,12 @@
             <xsd:enumeration value="POLL"/>
             <xsd:enumeration value="ALARM"/>
             <xsd:enumeration value="UNKNOWN"/>
+            <xsd:enumeration value="SALES_QUERY"/>
+            <xsd:enumeration value="SALES_REPORT"/>
+            <xsd:enumeration value="SALES_RESPONSE"/>
+            <xsd:enumeration value="FA_QUERY"/>
+            <xsd:enumeration value="FA_REPORT"/>
+            <xsd:enumeration value="FA_RESPONSE"/>
         </xsd:restriction>
    </xsd:simpleType>
    
@@ -109,14 +128,16 @@
     <xsd:simpleType name="ExchangeLogStatusTypeType">
         <xsd:restriction base="xsd:string">
             <xsd:enumeration value="ISSUED"/>
+
+            <!-- for validated messages -->
+            <xsd:enumeration value="FAILED"/>
+            <xsd:enumeration value="SUCCESSFUL_WITH_WARNINGS"/>
+            <xsd:enumeration value="SUCCESSFUL"/>
             
             <!-- For poll -->
             <xsd:enumeration value="PENDING"/>
             <xsd:enumeration value="PROBABLY_TRANSMITTED"/>
-            
-            <xsd:enumeration value="FAILED"/>
-            <xsd:enumeration value="SUCCESSFUL"/>
-            
+
             <xsd:enumeration value="UNKNOWN"/>
         </xsd:restriction>
     </xsd:simpleType>

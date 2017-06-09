@@ -11,10 +11,7 @@ copy of the GNU General Public License along with the IFDM Suite. If not, see <h
  */
 package eu.europa.ec.fisheries.uvms.exchange.model.mapper;
 
-import java.io.StringReader;
-import java.io.StringWriter;
-import java.util.HashMap;
-import java.util.Map;
+import eu.europa.ec.fisheries.uvms.exchange.model.exception.ExchangeModelMarshallException;
 
 import javax.jms.JMSException;
 import javax.jms.TextMessage;
@@ -23,15 +20,12 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.transform.stream.StreamSource;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import eu.europa.ec.fisheries.uvms.exchange.model.exception.ExchangeModelMarshallException;
+import java.io.StringReader;
+import java.io.StringWriter;
+import java.util.HashMap;
+import java.util.Map;
 
 public class JAXBMarshaller {
-
-    final static Logger LOG = LoggerFactory.getLogger(JAXBMarshaller.class);
 
     private static Map<String, JAXBContext> contexts = new HashMap<>();
 
@@ -48,11 +42,8 @@ public class JAXBMarshaller {
         try {
             JAXBContext jaxbContext = contexts.get(data.getClass().getName());
             if (jaxbContext == null) {
-                long before = System.currentTimeMillis();
                 jaxbContext = JAXBContext.newInstance(data.getClass());
                 contexts.put(data.getClass().getName(), jaxbContext);
-                LOG.debug("Stored contexts: {}", contexts.size());
-                LOG.debug("JAXBContext creation time: {}", (System.currentTimeMillis() - before));
             }
             Marshaller marshaller = jaxbContext.createMarshaller();
             marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
@@ -80,22 +71,43 @@ public class JAXBMarshaller {
         try {
             JAXBContext jc = contexts.get(clazz.getName());
             if (jc == null) {
-                long before = System.currentTimeMillis();
                 jc = JAXBContext.newInstance(clazz);
                 contexts.put(clazz.getName(), jc);
-                LOG.debug("Stored contexts: {}", contexts.size());
-                LOG.debug("JAXBContext creation time: {}", (System.currentTimeMillis() - before));
             }
             Unmarshaller unmarshaller = jc.createUnmarshaller();
             StringReader sr = new StringReader(textMessage.getText());
             StreamSource source = new StreamSource(sr);
-            long before = System.currentTimeMillis();
             R object = (R) unmarshaller.unmarshal(source);
-            LOG.debug("Unmarshalling time: {}", (System.currentTimeMillis() - before));
             return object;
         } catch (JMSException | JAXBException ex) {
             throw new ExchangeModelMarshallException("[Error when unmarshalling response in ResponseMapper ]");
         }
     }
 
+
+    /**
+     * Unmarshalls a string to the desired class.
+     *
+     * @param text
+     * @param clazz class to marshall to. The class must be the
+     * root object of the unmarchalled message!
+     * @return
+     * @throws ExchangeModelMarshallException
+     */
+    public static <R> R unmarshallString(String text, Class clazz) throws ExchangeModelMarshallException {
+        try {
+            JAXBContext jc = contexts.get(clazz.getName());
+            if (jc == null) {
+                jc = JAXBContext.newInstance(clazz);
+                contexts.put(clazz.getName(), jc);
+            }
+            Unmarshaller unmarshaller = jc.createUnmarshaller();
+            StringReader sr = new StringReader(text);
+            StreamSource source = new StreamSource(sr);
+            R object = (R) unmarshaller.unmarshal(source);
+            return object;
+        } catch (JAXBException ex) {
+            throw new ExchangeModelMarshallException("Error when unmarshalling text", ex);
+        }
+    }
 }

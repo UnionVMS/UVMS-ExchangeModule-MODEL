@@ -18,4 +18,8 @@ public class ExchangeModelMapperException extends ExchangeModelException {
     public ExchangeModelMapperException(String message) {
         super(message);
     }
+
+    public ExchangeModelMapperException(String message, Throwable root) {
+        super(message, root);
+    }
 }

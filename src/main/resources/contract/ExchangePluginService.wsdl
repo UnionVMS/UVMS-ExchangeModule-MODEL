@@ -26,12 +26,17 @@
                     <xsd:enumeration value="PING"/>
 					<xsd:enumeration value="SET_MDR_REQUEST"/>
 					<xsd:enumeration value="SET_FLUX_RESPONSE"/>
+					<xsd:enumeration value="SEND_SALES_REPORT"/>
+					<xsd:enumeration value="SEND_SALES_RESPONSE"/>
                 </xsd:restriction>
             </xsd:simpleType>
             
             <xsd:complexType name="PluginBaseRequest" abstract="true">
                 <xsd:sequence>
                     <xsd:element name="method" type="plugin:ExchangePluginMethod"/>
+                    <xsd:element name="senderOrReceiver" minOccurs="0" type="xsd:string"/>
+                    <xsd:element name="fluxDataFlow" minOccurs="0" type="xsd:string" />
+                    <xsd:element name="destination" minOccurs="0" type="xsd:string" />
                 </xsd:sequence>
             </xsd:complexType>
             
@@ -40,6 +45,32 @@
                     <xsd:element name="method" type="plugin:ExchangePluginMethod"/>
                 </xsd:sequence>
             </xsd:complexType>
+
+            <xsd:element name="SendSalesReportRequest">
+                <xsd:complexType>
+                    <xsd:complexContent>
+                        <xsd:extension base="plugin:PluginBaseRequest">
+                            <xsd:sequence>
+                                <xsd:element name="report" type="xsd:string"/>
+                                <xsd:element name="recipient" type="xsd:string"/>
+                            </xsd:sequence>
+                        </xsd:extension>
+                    </xsd:complexContent>
+                </xsd:complexType>
+            </xsd:element>
+
+            <xsd:element name="SendSalesResponseRequest">
+                <xsd:complexType>
+                    <xsd:complexContent>
+                        <xsd:extension base="plugin:PluginBaseRequest">
+                            <xsd:sequence>
+                                <xsd:element name="response" type="xsd:string"/>
+                                <xsd:element name="recipient" type="xsd:string"/>
+                            </xsd:sequence>
+                        </xsd:extension>
+                    </xsd:complexContent>
+                </xsd:complexType>
+            </xsd:element>
 
 			<xsd:element name="SetMdrPluginRequest">
 				<xsd:complexType>
@@ -117,7 +148,18 @@
                     </xsd:complexContent>
                 </xsd:complexType>
             </xsd:element>
-            
+            <xsd:element name="SalesQueryIncomingResponse">
+                <xsd:complexType>
+                    <xsd:complexContent>
+                        <xsd:extension base="plugin:PluginBaseRequest">
+                            <xsd:sequence>
+                                <xsd:element name="message" type="xsd:string"/>
+                            </xsd:sequence>
+                        </xsd:extension>
+                    </xsd:complexContent>
+                </xsd:complexType>
+            </xsd:element>
+
             <xsd:element name="StartRequest">
                 <xsd:complexType>
                     <xsd:complexContent>

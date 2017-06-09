@@ -11,12 +11,9 @@ copy of the GNU General Public License along with the IFDM Suite. If not, see <h
  */
 package eu.europa.ec.fisheries.uvms.exchange.model.mapper;
 
-import javax.xml.datatype.XMLGregorianCalendar;
-
 import eu.europa.ec.fisheries.schema.exchange.common.v1.CommandType;
 import eu.europa.ec.fisheries.schema.exchange.common.v1.ReportType;
 import eu.europa.ec.fisheries.schema.exchange.common.v1.ReportTypeType;
-import eu.europa.ec.fisheries.schema.exchange.movement.v1.MovementType;
 import eu.europa.ec.fisheries.schema.exchange.movement.v1.SendMovementToPluginType;
 import eu.europa.ec.fisheries.schema.exchange.plugin.v1.*;
 import eu.europa.ec.fisheries.schema.exchange.service.v1.SettingListType;
@@ -89,10 +86,13 @@ public class ExchangePluginRequestMapper {
     }
 
 
-    public static String createSetFLUXFAResponseRequest(String  fluxFAResponse) throws ExchangeModelMarshallException {
+    public static String createSetFLUXFAResponseRequest(String  fluxFAResponse, String destination, String df, String fr) throws ExchangeModelMarshallException {
         SetFLUXFAResponseRequest request = new SetFLUXFAResponseRequest();
         request.setMethod(ExchangePluginMethod.SET_FLUX_RESPONSE);
         request.setResponse(fluxFAResponse);
+        request.setDestination(destination);
+        request.setFluxDataFlow(df);
+        request.setSenderOrReceiver(fr);
         return JAXBMarshaller.marshallJaxBObjectToString(request);
     }
 }

@@ -18,4 +18,9 @@ public class ExchangeModelException extends ExchangeException {
     public ExchangeModelException(String message) {
         super(message);
     }
+
+    public ExchangeModelException(String message, Throwable root) {
+        super(message, root);
+    }
+
 }

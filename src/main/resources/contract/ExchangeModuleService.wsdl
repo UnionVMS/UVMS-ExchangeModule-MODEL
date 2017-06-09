@@ -1,14 +1,12 @@
 <definitions name="ExchangeModuleService"
              targetNamespace="urn:module.exchange.schema.fisheries.ec.europa.eu:v1"
              xmlns:module="urn:module.exchange.schema.fisheries.ec.europa.eu:v1"
-             xmlns:search="urn:search.exchange.schema.fisheries.ec.europa.eu:v1"
              xmlns:common="urn:common.exchange.schema.fisheries.ec.europa.eu:v1"
              xmlns:service="urn:service.exchange.schema.fisheries.ec.europa.eu:v1"
              xmlns:exchange="urn:exchange.schema.fisheries.ec.europa.eu:v1"
              xmlns:movement="urn:movement.exchange.schema.fisheries.ec.europa.eu:v1"
              xmlns:plugin="urn:types.plugin.exchange.schema.fisheries.ec.europa.eu:v1"
-			 xmlns:rsn="urn:un:unece:uncefact:data:standard:FLUXResponseMessage:4"
-			 xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+             xmlns:xsd="http://www.w3.org/2001/XMLSchema"
              xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
              xmlns="http://schemas.xmlsoap.org/wsdl/">
 
@@ -28,9 +26,14 @@
                     <xsd:enumeration value="UPDATE_PLUGIN_SETTING"/> <!-- mobileterminal - send dnidList -->
                     <xsd:enumeration value="SET_COMMAND"/> <!-- mobileterminal - pollRequest OR rules - sendEmail -->
                     <xsd:enumeration value="SEND_REPORT_TO_PLUGIN"/> <!-- rules - sendPositionToFLUX -->
-                    
+                    <xsd:enumeration value="SEND_SALES_REPORT"/>
+                    <xsd:enumeration value="SEND_SALES_RESPONSE"/>
+
                     <!-- plugin wants to -->
                     <xsd:enumeration value="SET_MOVEMENT_REPORT"/>
+                    <xsd:enumeration value="RECEIVE_SALES_REPORT"/>
+                    <xsd:enumeration value="RECEIVE_SALES_QUERY"/>
+                    <xsd:enumeration value="RECEIVE_SALES_RESPONSE"/>
 
                     <!-- admin/config wants to-->
                     <xsd:enumeration value="PING"/>
@@ -49,17 +52,35 @@
 					<!-- FLUX FA Message from FLUX Activity Plugin -->
 					<xsd:enumeration value="SET_FLUX_FA_REPORT_MESSAGE"/>
 
+                    <!-- report back to exchange what the validation status of a received message was, to update the log -->
+                    <xsd:enumeration value="UPDATE_LOG_STATUS" />
+
                 </xsd:restriction>
             </xsd:simpleType>
             
             <xsd:complexType name="ExchangeBaseRequest" abstract="true">
                 <xsd:sequence>
                     <xsd:element name="method" type="module:ExchangeModuleMethod"/>
-                    <xsd:element name="username" type="xsd:string"/>
-					<xsd:element name="pluginType" type="plugin:PluginType" default="OTHER" />
+                    <xsd:element name="username" minOccurs="0" type="xsd:string"/>
+					<xsd:element name="pluginType" minOccurs="0" type="plugin:PluginType" default="OTHER" />
+                    <xsd:element name="senderOrReceiver" minOccurs="0" type="xsd:string"/>
+                    <xsd:element name="messageGuid" minOccurs="0" type="xsd:string"/>
+                    <xsd:element name="date" minOccurs="0" type="xsd:dateTime"/>
+                    <xsd:element name="fluxDataFlow" minOccurs="0" type="xsd:string" />
+                    <xsd:element name="destination" minOccurs="0" type="xsd:string" />
                 </xsd:sequence>
             </xsd:complexType>
-            
+
+            <xsd:complexType name="ExchangeOutgoingBaseRequest" abstract="true">
+                <xsd:complexContent>
+                    <xsd:extension base="module:ExchangeBaseRequest">
+                        <xsd:sequence>
+                            <xsd:element name="validationStatus" type="exchange:ExchangeLogStatusTypeType"/>
+                        </xsd:sequence>
+                    </xsd:extension>
+                </xsd:complexContent>
+            </xsd:complexType>
+
             <xsd:element name="SetMovementReportRequest">
                 <xsd:complexType>
                     <xsd:complexContent>
@@ -72,6 +93,65 @@
                 </xsd:complexType>
             </xsd:element>
 
+            <xsd:element name="ReceiveSalesReportRequest">
+                <xsd:complexType>
+                    <xsd:complexContent>
+                        <xsd:extension base="module:ExchangeBaseRequest">
+                            <xsd:sequence>
+                                <xsd:element name="report" type="xsd:string"/>
+                            </xsd:sequence>
+                        </xsd:extension>
+                    </xsd:complexContent>
+                </xsd:complexType>
+            </xsd:element>
+
+            <xsd:element name="ReceiveSalesQueryRequest">
+                <xsd:complexType>
+                    <xsd:complexContent>
+                        <xsd:extension base="module:ExchangeBaseRequest">
+                            <xsd:sequence>
+                                <xsd:element name="query" type="xsd:string"/>
+                            </xsd:sequence>
+                        </xsd:extension>
+                    </xsd:complexContent>
+                </xsd:complexType>
+            </xsd:element>
+
+            <xsd:element name="ReceiveSalesResponseRequest">
+                <xsd:complexType>
+                    <xsd:complexContent>
+                        <xsd:extension base="module:ExchangeBaseRequest">
+                            <xsd:sequence>
+                                <xsd:element name="response" type="xsd:string"/>
+                            </xsd:sequence>
+                        </xsd:extension>
+                    </xsd:complexContent>
+                </xsd:complexType>
+            </xsd:element>
+
+            <xsd:element name="SendSalesReportRequest">
+                <xsd:complexType>
+                    <xsd:complexContent>
+                        <xsd:extension base="module:ExchangeOutgoingBaseRequest">
+                            <xsd:sequence>
+                                <xsd:element name="report" type="xsd:string"/>
+                            </xsd:sequence>
+                        </xsd:extension>
+                    </xsd:complexContent>
+                </xsd:complexType>
+            </xsd:element>
+
+            <xsd:element name="SendSalesResponseRequest">
+                <xsd:complexType>
+                    <xsd:complexContent>
+                        <xsd:extension base="module:ExchangeOutgoingBaseRequest">
+                            <xsd:sequence>
+                                <xsd:element name="response" type="xsd:string"/>
+                            </xsd:sequence>
+                        </xsd:extension>
+                    </xsd:complexContent>
+                </xsd:complexType>
+            </xsd:element>
 
 			<xsd:element name="SetFLUXFAResponseMessageRequest">
 				<xsd:complexType>
@@ -79,6 +159,7 @@
 						<xsd:extension base="module:ExchangeBaseRequest">
 							<xsd:sequence>
 								<xsd:element name="request" type="xsd:string"/>
+                                <xsd:element name="status" type="exchange:ExchangeLogStatusTypeType" minOccurs="1" maxOccurs="1"/>
 							</xsd:sequence>
 						</xsd:extension>
 					</xsd:complexContent>
@@ -234,6 +315,19 @@
                 </xsd:complexType>
             </xsd:element>
 
+            <xsd:element name="UpdateLogStatusRequest">
+                <xsd:complexType>
+                    <xsd:complexContent>
+                        <xsd:extension base="module:ExchangeBaseRequest">
+                            <xsd:sequence>
+                                <xsd:element name="logGuid" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                                <xsd:element name="newStatus" type="exchange:ExchangeLogStatusTypeType" minOccurs="1" maxOccurs="1"/>
+                            </xsd:sequence>
+                        </xsd:extension>
+                    </xsd:complexContent>
+                </xsd:complexType>
+            </xsd:element>
+
         </xsd:schema>
     </types>
     
@@ -264,6 +358,30 @@
     </message>
     <message name="SendMovementToPluginResponse">
         <part name="body" element="module:SendMovementToPluginResponse"/>
+    </message>
+
+    <message name="ReceiveSalesReportRequest">
+        <part name="body" element="module:ReceiveSalesReportRequest"/>
+    </message>
+
+    <message name="ReceiveSalesQueryRequest">
+        <part name="body" element="module:ReceiveSalesQueryRequest"/>
+    </message>
+
+    <message name="ReceiveSalesResponseRequest">
+        <part name="body" element="module:ReceiveSalesResponseRequest"/>
+    </message>
+
+    <message name="SendSalesReportRequest">
+        <part name="body" element="module:SendSalesReportRequest"/>
+    </message>
+
+    <message name="SendSalesResponseRequest">
+        <part name="body" element="module:SendSalesResponseRequest"/>
+    </message>
+
+    <message name="UpdateLogStatusRequest">
+        <part name="body" element="module:UpdateLogStatusRequest"/>
     </message>
 
     <message name="UpdatePluginSettingRequest">
@@ -308,7 +426,37 @@
             <output message="module:SendMovementToPluginResponse"/>
             <fault name="ExchangeFault" message="module:ExchangeFault"/>
         </operation>
-        
+
+        <operation name="ReceiveSalesReport">
+            <input message="module:ReceiveSalesReportRequest"/>
+            <fault name="ExchangeFault" message="module:ExchangeFault"/>
+        </operation>
+
+        <operation name="ReceiveSalesQuery">
+            <input message="module:ReceiveSalesQueryRequest"/>
+            <fault name="ExchangeFault" message="module:ExchangeFault"/>
+        </operation>
+
+        <operation name="ReceiveSalesResponse">
+            <input message="module:ReceiveSalesResponseRequest"/>
+            <fault name="ExchangeFault" message="module:ExchangeFault"/>
+        </operation>
+
+        <operation name="SendSalesReport">
+            <input message="module:SendSalesReportRequest"/>
+            <fault name="ExchangeFault" message="module:ExchangeFault"/>
+        </operation>
+
+        <operation name="SendSalesResponse">
+            <input message="module:SendSalesResponseRequest"/>
+            <fault name="ExchangeFault" message="module:ExchangeFault"/>
+        </operation>
+
+        <operation name="UpdateLogStatus">
+            <input message="module:UpdateLogStatusRequest"/>
+            <fault name="ExchangeFault" message="module:ExchangeFault"/>
+        </operation>
+
         <operation name="UpdatePluginSetting">
             <input message="module:UpdatePluginSettingRequest"/>
             <output message="module:UpdatePluginSettingResponse"/>
@@ -372,7 +520,52 @@
             <fault name="ExchangeFault">
                 <soap:fault name="ExchangeFault" use="literal"/>
             </fault>
-        </operation> 
+        </operation>
+
+        <operation name="ReceiveSalesReport">
+            <input>
+                <soap:body use="literal"/>
+            </input>
+            <fault name="ExchangeFault">
+                <soap:fault name="ExchangeFault" use="literal"/>
+            </fault>
+        </operation>
+
+        <operation name="ReceiveSalesQuery">
+            <input>
+                <soap:body use="literal"/>
+            </input>
+            <fault name="ExchangeFault">
+                <soap:fault name="ExchangeFault" use="literal"/>
+            </fault>
+        </operation>
+
+        <operation name="ReceiveSalesResponse">
+            <input>
+                <soap:body use="literal"/>
+            </input>
+            <fault name="ExchangeFault">
+                <soap:fault name="ExchangeFault" use="literal"/>
+            </fault>
+        </operation>
+
+        <operation name="SendSalesReport">
+            <input>
+                <soap:body use="literal"/>
+            </input>
+            <fault name="ExchangeFault">
+                <soap:fault name="ExchangeFault" use="literal"/>
+            </fault>
+        </operation>
+
+        <operation name="SendSalesResponse">
+            <input>
+                <soap:body use="literal"/>
+            </input>
+            <fault name="ExchangeFault">
+                <soap:fault name="ExchangeFault" use="literal"/>
+            </fault>
+        </operation>
 
         <operation name="UpdatePluginSetting">
             <input>
@@ -399,6 +592,15 @@
             <input>
                 <soap:body use="literal"/>
             </input>
+        </operation>
+
+        <operation name="UpdateLogStatus">
+            <input>
+                <soap:body use="literal"/>
+            </input>
+            <fault name="ExchangeFault">
+                <soap:fault name="ExchangeFault" use="literal"/>
+            </fault>
         </operation>
 
     </binding>
