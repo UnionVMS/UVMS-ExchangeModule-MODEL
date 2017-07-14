@@ -3,8 +3,8 @@
             targetNamespace="urn:exchange.schema.fisheries.ec.europa.eu:v1"
             xmlns:xsd="http://www.w3.org/2001/XMLSchema"
             xmlns="http://schemas.xmlsoap.org/wsdl/">
-    
-    
+
+
     <xsd:complexType name="ExchangeLogType">
         <xsd:sequence>
             <xsd:element name="guid" type="xsd:string"/>
@@ -17,8 +17,8 @@
             <xsd:element name="destination" type="xsd:string" />
         </xsd:sequence>
     </xsd:complexType>
-   
-   <xsd:simpleType name="LogType">
+
+    <xsd:simpleType name="LogType">
         <xsd:restriction base="xsd:string">
             <xsd:enumeration value="RECEIVE_MOVEMENT"/>
             <xsd:enumeration value="SEND_MOVEMENT"/>
@@ -37,17 +37,17 @@
             <xsd:enumeration value="SEND_FA_QUERY_MSG"/>
             <xsd:enumeration value="RECEIVE_FA_QUERY_MSG"/>
         </xsd:restriction>
-   </xsd:simpleType>
-   
-   <xsd:complexType name="LogRefType">
+    </xsd:simpleType>
+
+    <xsd:complexType name="LogRefType">
         <xsd:sequence>
             <xsd:element name="refGuid" type="xsd:string"/>
             <xsd:element name="type" type="exchange:TypeRefType"/>
             <xsd:element name="message" type="xsd:string" />
         </xsd:sequence>
-   </xsd:complexType>
-   
-   <xsd:simpleType name="TypeRefType">
+    </xsd:complexType>
+
+    <xsd:simpleType name="TypeRefType">
         <xsd:restriction base="xsd:string">
             <xsd:enumeration value="MOVEMENT"/>
             <xsd:enumeration value="POLL"/>
@@ -60,9 +60,9 @@
             <xsd:enumeration value="FA_REPORT"/>
             <xsd:enumeration value="FA_RESPONSE"/>
         </xsd:restriction>
-   </xsd:simpleType>
-   
-   <xsd:complexType name="ReceiveMovementType">
+    </xsd:simpleType>
+
+    <xsd:complexType name="ReceiveMovementType">
         <xsd:complexContent>
             <xsd:extension base="exchange:ExchangeLogType">
                 <xsd:sequence>
@@ -71,9 +71,9 @@
                 </xsd:sequence>
             </xsd:extension>
         </xsd:complexContent>
-   </xsd:complexType>
-   
-   <xsd:complexType name="SendMovementType">
+    </xsd:complexType>
+
+    <xsd:complexType name="SendMovementType">
         <xsd:complexContent>
             <xsd:extension base="exchange:ExchangeLogType">
                 <xsd:sequence>
@@ -83,9 +83,9 @@
                 </xsd:sequence>
             </xsd:extension>
         </xsd:complexContent>
-   </xsd:complexType>
-   
-   <xsd:complexType name="SendEmailType">
+    </xsd:complexType>
+
+    <xsd:complexType name="SendEmailType">
         <xsd:complexContent>
             <xsd:extension base="exchange:ExchangeLogType">
                 <xsd:sequence>
@@ -95,9 +95,9 @@
                 </xsd:sequence>
             </xsd:extension>
         </xsd:complexContent>
-   </xsd:complexType>
-   
-   <xsd:complexType name="SendPollType">
+    </xsd:complexType>
+
+    <xsd:complexType name="SendPollType">
         <xsd:complexContent>
             <xsd:extension base="exchange:ExchangeLogType">
                 <xsd:sequence>
@@ -107,24 +107,24 @@
                 </xsd:sequence>
             </xsd:extension>
         </xsd:complexContent>
-   </xsd:complexType>
-   
-   <xsd:complexType name="ExchangeLogStatusType">
+    </xsd:complexType>
+
+    <xsd:complexType name="ExchangeLogStatusType">
         <xsd:sequence>
             <xsd:element name="guid" type="xsd:string"/>
             <xsd:element name="typeRef" type="exchange:LogRefType"/>
             <xsd:element name="history" type="exchange:ExchangeLogStatusHistoryType" minOccurs="1" maxOccurs="unbounded"/>
             <xsd:element name="identifier" type="xsd:string"/>
         </xsd:sequence>
-   </xsd:complexType>
-   
-   <xsd:complexType name="ExchangeLogStatusHistoryType">
+    </xsd:complexType>
+
+    <xsd:complexType name="ExchangeLogStatusHistoryType">
         <xsd:sequence>
             <xsd:element name="timestamp" type="xsd:dateTime"/>
             <xsd:element name="status" type="exchange:ExchangeLogStatusTypeType"/>
         </xsd:sequence>
-   </xsd:complexType>
-   
+    </xsd:complexType>
+
     <xsd:simpleType name="ExchangeLogStatusTypeType">
         <xsd:restriction base="xsd:string">
             <xsd:enumeration value="ISSUED"/>
@@ -133,15 +133,17 @@
             <xsd:enumeration value="FAILED"/>
             <xsd:enumeration value="SUCCESSFUL_WITH_WARNINGS"/>
             <xsd:enumeration value="SUCCESSFUL"/>
-            
+
             <!-- For poll -->
             <xsd:enumeration value="PENDING"/>
             <xsd:enumeration value="PROBABLY_TRANSMITTED"/>
 
+            <xsd:enumeration value="UNPROCESSED"/>
+
             <xsd:enumeration value="UNKNOWN"/>
         </xsd:restriction>
     </xsd:simpleType>
-    
+
     <xsd:simpleType name="SearchField">
         <xsd:restriction base="xsd:string">
             <xsd:enumeration value="TRANSFER_INCOMING"/>
@@ -165,7 +167,7 @@
             <xsd:enumeration value="POSITION_TIME"/>
         </xsd:restriction>
     </xsd:simpleType>
-    
+
     <xsd:complexType name="ExchangeHistoryListQuery">
         <xsd:sequence>
             <xsd:element name="type" type="exchange:TypeRefType" minOccurs="0" maxOccurs="unbounded"/>
@@ -174,35 +176,35 @@
             <xsd:element name="typeRefDateTo" type="xsd:dateTime" minOccurs="0" maxOccurs="1"/>
         </xsd:sequence>
     </xsd:complexType>
-    
+
     <xsd:complexType name="ExchangeListQuery">
         <xsd:sequence>
             <xsd:element name="pagination" type="exchange:ExchangeListPagination" minOccurs="1" maxOccurs="1"/>
             <xsd:element name="exchangeSearchCriteria" type="exchange:ExchangeListCriteria" minOccurs="1" maxOccurs="1"/>
         </xsd:sequence>
     </xsd:complexType>
-    
+
     <xsd:complexType name="ExchangeListCriteria">
         <xsd:sequence>
             <xsd:element name="isDynamic" type="xsd:boolean" minOccurs="0" maxOccurs="1"/>
             <xsd:element name="criterias" type="exchange:ExchangeListCriteriaPair" minOccurs="0" maxOccurs="unbounded" />
         </xsd:sequence>
     </xsd:complexType>
-    
+
     <xsd:complexType name="ExchangeListPagination">
         <xsd:sequence>
             <xsd:element name="page" type="xsd:int" minOccurs="1" maxOccurs="1"/>
             <xsd:element name="listSize" type="xsd:int" minOccurs="1" maxOccurs="1"/>
         </xsd:sequence>
     </xsd:complexType>
-    
+
     <xsd:complexType name="ExchangeListCriteriaPair">
         <xsd:sequence>
             <xsd:element name="key" type="exchange:SearchField" />
             <xsd:element name="value" type="xsd:string" />
         </xsd:sequence>
     </xsd:complexType>
-    
+
     <xsd:complexType name="UnsentMessageType">
         <xsd:sequence>
             <xsd:element name="messageId" type="xsd:string"/>
