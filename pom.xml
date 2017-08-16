@@ -37,7 +37,7 @@
         </repository>
     </repositories>
 
-    <distributionManagement> 
+    <distributionManagement>
         <repository>
             <id>focus-releases</id>
             <name>UnionVms Repository</name>
@@ -56,6 +56,15 @@
   </scm>
 
     <profiles>
+        <profile>
+            <id>belgium-local</id>
+            <distributionManagement>
+                <snapshotRepository>
+                    <id>lv-snapshots</id>
+                    <url>https://apjenp01.dg3.be/nexus/repository/maven-snapshots/</url>
+                </snapshotRepository>
+            </distributionManagement>
+        </profile>
 		<profile>
 			<id>dg-mare</id>
 			<distributionManagement>
