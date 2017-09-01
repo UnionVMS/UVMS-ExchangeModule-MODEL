@@ -1,6 +1,13 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
+    <parent>
+        <groupId>fish.focus.maven</groupId>
+	    <artifactId>focus-pom</artifactId>
+	    <version>1.9</version>
+        <relativePath />
+    </parent>
+    
     <groupId>eu.europa.ec.fisheries.uvms.exchange</groupId>
     <version>3.0.6-SNAPSHOT</version>
     <artifactId>exchange-model</artifactId>
@@ -16,12 +23,11 @@
         <wsdl.registry.name>ExchangeRegistryService</wsdl.registry.name>
         <javaee.version>7.0</javaee.version>
         <joda-time.version>2.7</joda-time.version>
-        <junit.version>4.10</junit.version>
+        <junit.version>4.12</junit.version>
         <jibx.version>1.1.4</jibx.version>
-        <sl4j.version>1.7.12</sl4j.version>
+        <sl4j.version>1.7.25</sl4j.version>
         <release.branch.name>uvms-2.0.6-kili</release.branch.name>
         <project.scm.id>github</project.scm.id>
-        <maven-release-plugin>2.5.3</maven-release-plugin>
         <binding.xml>binding-date.xml</binding.xml>
         <envClassifier>date</envClassifier>
         <guava.version>20.0</guava.version>
@@ -33,7 +39,7 @@
         <repository>
             <id>focus-repo</id>
             <name>Focus nexus repository</name>
-            <url>http://nexus.focus.fish/</url>
+            <url>http://nexus.focus.fish/nexus/</url>
         </repository>
     </repositories>
 
@@ -118,6 +124,11 @@
                                             <bindingFiles>
                                                 <bindingFile>${basedir}/src/main/resources/${binding.xml}</bindingFile>
                                             </bindingFiles>
+                                            <extraargs>
+                                                <extraarg>-xjc-XhashCode</extraarg>
+                                                <extraarg>-xjc-Xequals</extraarg>
+                                                <extraarg>-xjc-XtoString</extraarg>                                                                                                
+                                            </extraargs>
                                         </wsdlOption>
                                     </wsdlOptions>
                                 </configuration>
@@ -137,6 +148,11 @@
                                             <bindingFiles>
                                                 <bindingFile>${basedir}/src/main/resources/${binding.xml}</bindingFile>
                                             </bindingFiles>
+                                            <extraargs>
+                                                <extraarg>-xjc-XhashCode</extraarg>
+                                                <extraarg>-xjc-Xequals</extraarg>
+                                                <extraarg>-xjc-XtoString</extraarg>                                                                                                
+                                           </extraargs>
                                         </wsdlOption>
                                     </wsdlOptions>
                                 </configuration>
@@ -156,6 +172,11 @@
                                             <bindingFiles>
                                                 <bindingFile>${basedir}/src/main/resources/${binding.xml}</bindingFile>
                                             </bindingFiles>
+                                            <extraargs>
+                                                <extraarg>-xjc-XhashCode</extraarg>
+                                                <extraarg>-xjc-Xequals</extraarg>
+                                                <extraarg>-xjc-XtoString</extraarg>                                                
+                                            </extraargs>
                                         </wsdlOption>
                                     </wsdlOptions>
                                 </configuration>
@@ -175,6 +196,11 @@
                                             <bindingFiles>
                                                 <bindingFile>${basedir}/src/main/resources/${binding.xml}</bindingFile>
                                             </bindingFiles>
+                                            <extraargs>
+                                                <extraarg>-xjc-XhashCode</extraarg>
+                                                <extraarg>-xjc-Xequals</extraarg>
+                                                <extraarg>-xjc-XtoString</extraarg>
+                                            </extraargs>
                                         </wsdlOption>
                                     </wsdlOptions>
                                 </configuration>
@@ -183,6 +209,13 @@
                                 </goals>
                             </execution>
                         </executions>
+                        <dependencies>
+                            <dependency>
+                                <groupId>org.jvnet.jaxb2_commons</groupId>
+                                <artifactId>jaxb2-basics</artifactId>
+                                <version>0.9.5</version>
+                            </dependency>
+                        </dependencies>
                     </plugin>                   
                 </plugins>
             </build>
@@ -194,17 +227,7 @@
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.1</version>
-                <configuration>
-                    <source>1.7</source>
-                    <target>1.7</target>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-ejb-plugin</artifactId>
-                <version>2.3</version>
                 <configuration>
                     <ejbVersion>3.1</ejbVersion>
                     <classifier>${envClassifier}</classifier>
@@ -212,14 +235,6 @@
             </plugin>
             <plugin>
                 <artifactId>maven-release-plugin</artifactId>
-                <version>${maven-release-plugin}</version>
-                <dependencies>
-                    <dependency>
-                        <groupId>org.apache.maven.scm</groupId>
-                        <artifactId>maven-scm-provider-gitexe</artifactId>
-                        <version>1.8.1</version>
-                    </dependency>
-                </dependencies>
                 <configuration>
                     <checkModificationExcludes>
                         <checkModificationExclude>src/main/java/eu/europa/ec/fisheries/schema</checkModificationExclude>
@@ -261,6 +276,11 @@
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
             <version>${guava.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.jvnet.jaxb2_commons</groupId>
+            <artifactId>jaxb2-basics</artifactId>
+            <version>0.9.5</version>
         </dependency>
     </dependencies>
 

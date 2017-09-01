@@ -57,6 +57,14 @@ public class ExchangeModuleRequestMapper {
         return JAXBMarshaller.marshallJaxBObjectToString(request);
     }
 
+    public static String createSetMovementReportRequest(SetReportMovementType reportType, String username) throws ExchangeModelMarshallException {
+        SetMovementReportRequest request = new SetMovementReportRequest();
+        request.setMethod(ExchangeModuleMethod.SET_MOVEMENT_REPORT);
+        request.setUsername(username);
+        request.setRequest(reportType);
+        return JAXBMarshaller.marshallJaxBObjectToString(request);
+    }
+
     public static String createReceiveSalesReportRequest(String report, String reportGuid, String sender, String username, PluginType typeOfOriginatingPlugin, Date dateReceived) throws ExchangeModelMarshallException {
         ReceiveSalesReportRequest request = new ReceiveSalesReportRequest();
         request.setMethod(ExchangeModuleMethod.RECEIVE_SALES_REPORT);
