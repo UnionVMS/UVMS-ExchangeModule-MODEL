@@ -9,7 +9,7 @@
     </parent>
     
     <groupId>eu.europa.ec.fisheries.uvms.exchange</groupId>
-    <version>3.0.7-SNAPSHOT</version>
+    <version>3.0.7</version>
     <artifactId>exchange-model</artifactId>
     <name>exchange-model</name>
     <packaging>ejb</packaging>
@@ -58,7 +58,7 @@
 
     <scm>
         <connection>${scm.connection}</connection>
-      <tag>HEAD</tag>
+      <tag>exchange-model-3.0.7</tag>
   </scm>
 
     <profiles>
