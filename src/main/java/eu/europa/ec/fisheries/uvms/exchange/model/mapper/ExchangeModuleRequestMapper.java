@@ -237,7 +237,7 @@ public class ExchangeModuleRequestMapper {
         return JAXBMarshaller.marshallJaxBObjectToString(request);
     }
 
-    public static String createFluxFAResponseRequest(String response, String username, String df, String messageGuid, String fr, ExchangeLogStatusTypeType status, String destination) throws ExchangeModelMarshallException {
+    public static String createFluxFAResponseRequest(String response, String username, String df, String messageGuid, PluginType pluginType, String fr, ExchangeLogStatusTypeType status, String destination) throws ExchangeModelMarshallException {
         SetFLUXFAResponseMessageRequest request = new SetFLUXFAResponseMessageRequest();
         request.setMethod(ExchangeModuleMethod.SET_FLUX_FA_RESPONSE_MESSAGE);
         request.setUsername(username);
@@ -245,6 +245,7 @@ public class ExchangeModuleRequestMapper {
         request.setFluxDataFlow(df);
         request.setMessageGuid(messageGuid);
         request.setDate(DateUtils.nowUTC().toDate());
+        request.setPluginType(pluginType);
         request.setSenderOrReceiver(fr);
         request.setStatus(status);
         request.setDestination(destination);
