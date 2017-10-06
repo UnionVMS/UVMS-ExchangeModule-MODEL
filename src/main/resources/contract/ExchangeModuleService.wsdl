@@ -68,6 +68,7 @@
                     <xsd:element name="date" minOccurs="0" type="xsd:dateTime"/>
                     <xsd:element name="fluxDataFlow" minOccurs="0" type="xsd:string" />
                     <xsd:element name="destination" minOccurs="0" type="xsd:string" />
+                    <xsd:element name="onValue" minOccurs="0" type="xsd:string" />
                 </xsd:sequence>
             </xsd:complexType>
 
