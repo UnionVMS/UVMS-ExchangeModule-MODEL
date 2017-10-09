@@ -185,7 +185,7 @@
 					</dependency>
 				</dependencies>
 			</plugin>
-<!--			<plugin>
+			<plugin>
 				<groupId>com.github.siom79.japicmp</groupId>
 				<artifactId>japicmp-maven-plugin</artifactId>
 				<configuration>
@@ -214,7 +214,7 @@
 						</goals>
 					</execution>
 				</executions>
-			</plugin>-->
+			</plugin>
 		</plugins>
 	</build>
 	<dependencies>
