@@ -10,7 +10,7 @@
 
 	<groupId>eu.europa.ec.fisheries.uvms.exchange</groupId>
 	<artifactId>exchange-model</artifactId>
-	<version>4.0.8-SNAPSHOT</version>
+	<version>4.0.3-SNAPSHOT</version>
 	<name>exchange-model</name>
 	<packaging>ejb</packaging>
 	<description>This module shall have interfaces, XSD, and DTOs</description>
