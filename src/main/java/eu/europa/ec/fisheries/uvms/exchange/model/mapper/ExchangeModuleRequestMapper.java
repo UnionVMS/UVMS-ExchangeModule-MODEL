@@ -11,33 +11,10 @@ copy of the GNU General Public License along with the IFDM Suite. If not, see <h
  */
 package eu.europa.ec.fisheries.uvms.exchange.model.mapper;
 
-import static com.google.common.base.Preconditions.checkNotNull;
-
 import eu.europa.ec.fisheries.schema.exchange.common.v1.CommandType;
 import eu.europa.ec.fisheries.schema.exchange.common.v1.CommandTypeType;
-import eu.europa.ec.fisheries.schema.exchange.module.v1.ExchangeBaseRequest;
-import eu.europa.ec.fisheries.schema.exchange.module.v1.ExchangeModuleMethod;
-import eu.europa.ec.fisheries.schema.exchange.module.v1.GetServiceListRequest;
-import eu.europa.ec.fisheries.schema.exchange.module.v1.ProcessedMovementResponse;
-import eu.europa.ec.fisheries.schema.exchange.module.v1.ReceiveSalesQueryRequest;
-import eu.europa.ec.fisheries.schema.exchange.module.v1.ReceiveSalesReportRequest;
-import eu.europa.ec.fisheries.schema.exchange.module.v1.ReceiveSalesResponseRequest;
-import eu.europa.ec.fisheries.schema.exchange.module.v1.SendMovementToPluginRequest;
-import eu.europa.ec.fisheries.schema.exchange.module.v1.SendSalesReportRequest;
-import eu.europa.ec.fisheries.schema.exchange.module.v1.SendSalesResponseRequest;
-import eu.europa.ec.fisheries.schema.exchange.module.v1.SetCommandRequest;
-import eu.europa.ec.fisheries.schema.exchange.module.v1.SetFLUXFAReportMessageRequest;
-import eu.europa.ec.fisheries.schema.exchange.module.v1.SetFLUXFAResponseMessageRequest;
-import eu.europa.ec.fisheries.schema.exchange.module.v1.SetFLUXMDRSyncMessageExchangeRequest;
-import eu.europa.ec.fisheries.schema.exchange.module.v1.SetFLUXMDRSyncMessageExchangeResponse;
-import eu.europa.ec.fisheries.schema.exchange.module.v1.SetMovementReportRequest;
-import eu.europa.ec.fisheries.schema.exchange.module.v1.UpdateLogStatusRequest;
-import eu.europa.ec.fisheries.schema.exchange.module.v1.UpdatePluginSettingRequest;
-import eu.europa.ec.fisheries.schema.exchange.movement.v1.MovementRefType;
-import eu.europa.ec.fisheries.schema.exchange.movement.v1.MovementType;
-import eu.europa.ec.fisheries.schema.exchange.movement.v1.RecipientInfoType;
-import eu.europa.ec.fisheries.schema.exchange.movement.v1.SendMovementToPluginType;
-import eu.europa.ec.fisheries.schema.exchange.movement.v1.SetReportMovementType;
+import eu.europa.ec.fisheries.schema.exchange.module.v1.*;
+import eu.europa.ec.fisheries.schema.exchange.movement.v1.*;
 import eu.europa.ec.fisheries.schema.exchange.plugin.types.v1.EmailType;
 import eu.europa.ec.fisheries.schema.exchange.plugin.types.v1.PluginType;
 import eu.europa.ec.fisheries.schema.exchange.plugin.types.v1.PollType;
@@ -52,10 +29,13 @@ import eu.europa.ec.fisheries.schema.exchange.v1.ExchangeLogStatusTypeType;
 import eu.europa.ec.fisheries.uvms.exchange.model.exception.ExchangeModelMapperException;
 import eu.europa.ec.fisheries.uvms.exchange.model.exception.ExchangeModelMarshallException;
 import eu.europa.ec.fisheries.uvms.exchange.model.util.DateUtils;
-import java.util.Date;
-import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.util.Date;
+import java.util.List;
+
+import static com.google.common.base.Preconditions.checkNotNull;
 
 public class ExchangeModuleRequestMapper {
 
@@ -110,6 +90,15 @@ public class ExchangeModuleRequestMapper {
 
         enrichBaseRequest(receiveSalesResponseRequest, ExchangeModuleMethod.RECEIVE_SALES_RESPONSE, guid, null, sender, date, username, pluginType);
         return JAXBMarshaller.marshallJaxBObjectToString(receiveSalesResponseRequest);
+    }
+
+    public static String createReceiveInvalidSalesMessage(String respondToInvalidMessageRequest, String userName) throws ExchangeModelMarshallException {
+        ReceiveInvalidSalesMessage receiveInvalidSalesMessage = new ReceiveInvalidSalesMessage();
+        receiveInvalidSalesMessage.setRespondToInvalidMessageRequest(respondToInvalidMessageRequest);
+        receiveInvalidSalesMessage.setUsername(userName);
+        receiveInvalidSalesMessage.setMethod(ExchangeModuleMethod.RECEIVE_INVALID_SALES_MESSAGE);
+
+        return JAXBMarshaller.marshallJaxBObjectToString(receiveInvalidSalesMessage);
     }
 
     public static String createSendSalesResponseRequest(String response,
