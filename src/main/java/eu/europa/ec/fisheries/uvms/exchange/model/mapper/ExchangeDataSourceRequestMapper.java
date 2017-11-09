@@ -18,8 +18,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import javax.xml.datatype.XMLGregorianCalendar;
-
 import eu.europa.ec.fisheries.schema.exchange.source.v1.*;
 import eu.europa.ec.fisheries.schema.exchange.v1.*;
 import org.slf4j.Logger;
@@ -32,7 +30,6 @@ import eu.europa.ec.fisheries.schema.exchange.service.v1.SettingListType;
 import eu.europa.ec.fisheries.schema.exchange.service.v1.StatusType;
 import eu.europa.ec.fisheries.uvms.exchange.model.exception.ExchangeModelMapperException;
 import eu.europa.ec.fisheries.uvms.exchange.model.exception.ExchangeModelMarshallException;
-import eu.europa.ec.fisheries.uvms.exchange.model.util.DateUtils;
 
 public class ExchangeDataSourceRequestMapper {
 

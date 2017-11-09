@@ -253,11 +253,6 @@
 			<scope>test</scope>
 		</dependency>
 		<dependency>
-			<groupId>org.jibx.schema.org.apache.maven</groupId>
-			<artifactId>org.jibx.schema.org.apache.maven.maven_v4_0_0</artifactId>
-			<version>${jibx.version}</version>
-		</dependency>
-		<dependency>
 			<groupId>com.google.guava</groupId>
 			<artifactId>guava</artifactId>
 			<version>${guava.version}</version>
@@ -270,7 +265,7 @@
 		<dependency>
 		    <groupId>org.apache.commons</groupId>
 		    <artifactId>commons-lang3</artifactId>
-		    <version>3.6</version>
+		    <version>3.7</version>
 		</dependency>		
 	</dependencies>
 </project>

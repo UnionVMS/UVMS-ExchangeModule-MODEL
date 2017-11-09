@@ -15,7 +15,6 @@ import eu.europa.ec.fisheries.schema.exchange.v1.*;
 import eu.europa.ec.fisheries.uvms.exchange.model.dto.ListResponseDto;
 import eu.europa.ec.fisheries.uvms.exchange.model.exception.ExchangeModelException;
 
-import javax.ejb.Local;
 import javax.ejb.Remote;
 import java.util.List;
 

@@ -21,14 +21,10 @@ import eu.europa.ec.fisheries.schema.exchange.module.v1.UpdatePluginSettingRespo
 import eu.europa.ec.fisheries.schema.exchange.service.v1.ServiceResponseType;
 import eu.europa.ec.fisheries.uvms.exchange.model.constant.FaultCode;
 import eu.europa.ec.fisheries.uvms.exchange.model.exception.ExchangeModelMarshallException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.util.List;
 
 public class ExchangeModuleResponseMapper {
-
-	private static Logger LOG = LoggerFactory.getLogger(ExchangeModuleResponseMapper.class);
 
     public static AcknowledgeType mapAcknowledgeTypeOK() {
     	AcknowledgeType ackType = new AcknowledgeType();
