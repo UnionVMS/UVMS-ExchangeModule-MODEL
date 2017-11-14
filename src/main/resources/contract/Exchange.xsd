@@ -62,6 +62,16 @@
         </xsd:restriction>
     </xsd:simpleType>
 
+    <xsd:simpleType name="SourceType">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="INMARSAT-C"/>
+            <xsd:enumeration value="FLUX"/>
+            <xsd:enumeration value="AIS"/>
+            <xsd:enumeration value="IRIDIUM"/>
+            <xsd:enumeration value="OTHER"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+
     <xsd:complexType name="ReceiveMovementType">
         <xsd:complexContent>
             <xsd:extension base="exchange:ExchangeLogType">
