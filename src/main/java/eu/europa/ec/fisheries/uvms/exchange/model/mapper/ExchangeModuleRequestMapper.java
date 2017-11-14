@@ -35,8 +35,6 @@ import org.slf4j.LoggerFactory;
 import java.util.Date;
 import java.util.List;
 
-import static com.google.common.base.Preconditions.checkNotNull;
-
 public class ExchangeModuleRequestMapper {
 
     final static Logger LOG = LoggerFactory.getLogger(ExchangeModuleRequestMapper.class);
@@ -311,4 +309,17 @@ public class ExchangeModuleRequestMapper {
         exchangeBaseRequest.setPluginType(pluginType);
     }
 
+    /**
+     * Ensures that an object reference is not null.
+     *
+     * @param reference an object reference
+     * @return the non-null reference that was validated
+     * @throws NullPointerException if {@code reference} is null
+     */
+    private static <T> T checkNotNull(T reference) {
+        if (reference == null) {
+            throw new NullPointerException();
+        }
+        return reference;
+    }
 }
