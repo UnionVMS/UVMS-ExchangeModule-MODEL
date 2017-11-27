@@ -15,6 +15,7 @@
             <xsd:element name="typeRef" type="exchange:LogRefType"/>
             <xsd:element name="status" type="exchange:ExchangeLogStatusTypeType" />
             <xsd:element name="destination" type="xsd:string" />
+            <xsd:element name="source" type="xsd:string" />
         </xsd:sequence>
     </xsd:complexType>
 
@@ -66,7 +67,6 @@
         <xsd:complexContent>
             <xsd:extension base="exchange:ExchangeLogType">
                 <xsd:sequence>
-                    <xsd:element name="source" type="xsd:string"/>
                     <xsd:element name="recipient" type="xsd:string"/>
                 </xsd:sequence>
             </xsd:extension>
@@ -141,6 +141,11 @@
             <xsd:enumeration value="UNPROCESSED"/>
 
             <xsd:enumeration value="UNKNOWN"/>
+
+            <xsd:enumeration value="OK"/>
+            <xsd:enumeration value="WARN"/>
+            <xsd:enumeration value="ERROR"/>
+            <xsd:enumeration value="SENT"/>
         </xsd:restriction>
     </xsd:simpleType>
 
@@ -153,6 +158,7 @@
             <xsd:enumeration value="RECIPIENT"/>
             <xsd:enumeration value="TYPE"/>
             <xsd:enumeration value="STATUS"/>
+            <xsd:enumeration value="SOURCE"/>
         </xsd:restriction>
     </xsd:simpleType>
 
