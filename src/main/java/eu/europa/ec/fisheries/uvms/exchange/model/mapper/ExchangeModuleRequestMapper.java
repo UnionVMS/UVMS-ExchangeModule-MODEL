@@ -267,6 +267,27 @@ public class ExchangeModuleRequestMapper {
         return createFluxFAResponseRequest(response, username, df, messageGuid, fr, status, destination, PluginType.FLUX);
     }
 
+    public static String createFluxFAResponseRequestWithOnValue(String response, String username, String df, String messageGuid, String fr, String onVal, ExchangeLogStatusTypeType status, String destination, PluginType pluginType) throws ExchangeModelMarshallException {
+        SetFLUXFAResponseMessageRequest request = new SetFLUXFAResponseMessageRequest();
+        request.setMethod(ExchangeModuleMethod.SET_FLUX_FA_RESPONSE_MESSAGE);
+        request.setUsername(username);
+        request.setRequest(response);
+        request.setFluxDataFlow(df);
+        request.setMessageGuid(messageGuid);
+        request.setDate(DateUtils.nowUTC().toDate());
+        request.setPluginType(pluginType);
+        request.setSenderOrReceiver(fr);
+        request.setStatus(status);
+        request.setDestination(destination);
+        request.setOnValue(onVal);
+        return JAXBMarshaller.marshallJaxBObjectToString(request);
+    }
+
+    /**
+     *
+     *@Deprecated Use the createFluxFAResponseRequestWithOnValue(...){} method instead
+     */
+    @Deprecated
     public static String createFluxFAResponseRequest(String response, String username, String df, String messageGuid, String fr, ExchangeLogStatusTypeType status, String destination, PluginType pluginType) throws ExchangeModelMarshallException {
         SetFLUXFAResponseMessageRequest request = new SetFLUXFAResponseMessageRequest();
         request.setMethod(ExchangeModuleMethod.SET_FLUX_FA_RESPONSE_MESSAGE);
