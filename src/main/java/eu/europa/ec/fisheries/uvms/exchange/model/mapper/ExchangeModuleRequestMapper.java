@@ -26,16 +26,14 @@ import eu.europa.ec.fisheries.schema.exchange.service.v1.ServiceType;
 import eu.europa.ec.fisheries.schema.exchange.service.v1.SettingListType;
 import eu.europa.ec.fisheries.schema.exchange.service.v1.SettingType;
 import eu.europa.ec.fisheries.schema.exchange.v1.ExchangeLogStatusTypeType;
+import eu.europa.ec.fisheries.uvms.commons.date.DateUtils;
 import eu.europa.ec.fisheries.uvms.exchange.model.exception.ExchangeModelMapperException;
 import eu.europa.ec.fisheries.uvms.exchange.model.exception.ExchangeModelMarshallException;
-import eu.europa.ec.fisheries.uvms.exchange.model.util.DateUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.Date;
 import java.util.List;
-
-import static com.google.common.base.Preconditions.checkNotNull;
 
 public class ExchangeModuleRequestMapper {
 
@@ -311,4 +309,17 @@ public class ExchangeModuleRequestMapper {
         exchangeBaseRequest.setPluginType(pluginType);
     }
 
+    /**
+     * Ensures that an object reference is not null.
+     *
+     * @param reference an object reference
+     * @return the non-null reference that was validated
+     * @throws NullPointerException if {@code reference} is null
+     */
+    private static <T> T checkNotNull(T reference) {
+        if (reference == null) {
+            throw new NullPointerException();
+        }
+        return reference;
+    }
 }

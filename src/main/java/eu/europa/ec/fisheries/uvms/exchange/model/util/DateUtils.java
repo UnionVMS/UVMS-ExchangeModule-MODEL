@@ -22,7 +22,11 @@ import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
-
+/**
+ *
+* @deprecated As of release 4.0.5 replaced by uvms-commons-date#DateUtils
+ */
+@Deprecated
 public class DateUtils {
     final static String DATE_TIME_FORMAT = "yyyy-MM-dd HH:mm:ss Z";
     final static String DATE_FORMAT = "yyyy-MM-dd";
