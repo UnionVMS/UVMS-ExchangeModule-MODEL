@@ -85,7 +85,22 @@ public class ExchangePluginRequestMapper {
         return JAXBMarshaller.marshallJaxBObjectToString(pluginRequest);
     }
 
+    public static String createSetFLUXFAResponseRequestWithOn(String  fluxFAResponse, String destination, String df, String fr, String onValue) throws ExchangeModelMarshallException {
+        SetFLUXFAResponseRequest request = new SetFLUXFAResponseRequest();
+        request.setMethod(ExchangePluginMethod.SET_FLUX_RESPONSE);
+        request.setResponse(fluxFAResponse);
+        request.setDestination(destination);
+        request.setFluxDataFlow(df);
+        request.setSenderOrReceiver(fr);
+        request.setOnValue(onValue);
+        return JAXBMarshaller.marshallJaxBObjectToString(request);
+    }
 
+    /**
+     *
+     *  @Deprecated Use createSetFLUXFAResponseRequestWithOn(..){} instead.
+     */
+    @Deprecated
     public static String createSetFLUXFAResponseRequest(String  fluxFAResponse, String destination, String df, String fr) throws ExchangeModelMarshallException {
         SetFLUXFAResponseRequest request = new SetFLUXFAResponseRequest();
         request.setMethod(ExchangePluginMethod.SET_FLUX_RESPONSE);
