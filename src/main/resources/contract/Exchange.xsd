@@ -170,6 +170,15 @@
             <xsd:enumeration value="TYPE"/>
             <xsd:enumeration value="STATUS"/>
             <xsd:enumeration value="SOURCE"/>
+            <xsd:enumeration value="MESSAGE_DIRECTION"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:simpleType name="MessageDirection">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="ALL"/>
+            <xsd:enumeration value="INCOMING"/>
+            <xsd:enumeration value="OUTGOING"/>
         </xsd:restriction>
     </xsd:simpleType>
 
