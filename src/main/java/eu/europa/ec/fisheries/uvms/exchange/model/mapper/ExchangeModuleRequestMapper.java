@@ -99,27 +99,69 @@ public class ExchangeModuleRequestMapper {
         return JAXBMarshaller.marshallJaxBObjectToString(receiveInvalidSalesMessage);
     }
 
+    /**
+     @deprecated use createSendSalesResponseRequest(String response,
+     String guid, String dataFlow,
+     String senderOrReceiver, Date date,
+     ExchangeLogStatusTypeType validationStatus,
+     PluginType typeOfOriginatingPlugin) throws ExchangeModelMarshallException instead
+     **/
+    @Deprecated
     public static String createSendSalesResponseRequest(String response,
-                                                 String guid, String dataFlow,
-                                                 String senderOrReceiver, Date date,
-                                                 ExchangeLogStatusTypeType validationStatus) throws ExchangeModelMarshallException {
+                                                        String guid, String dataFlow,
+                                                        String receiver, Date date,
+                                                        ExchangeLogStatusTypeType validationStatus) throws ExchangeModelMarshallException {
+        return createSendSalesResponseRequest(response, guid, dataFlow, receiver, date, validationStatus, PluginType.FLUX);
+    }
+
+    public static String createSendSalesResponseRequest(String response,
+                                                        String guid, String dataFlow,
+                                                        String receiver, Date date,
+                                                        ExchangeLogStatusTypeType validationStatus,
+                                                        String typeOfOriginatingPlugin) throws ExchangeModelMarshallException {
+        return createSendSalesResponseRequest(response, guid, dataFlow, receiver, date, validationStatus, PluginType.valueOf(typeOfOriginatingPlugin));
+    }
+
+    public static String createSendSalesResponseRequest(String response,
+                                                        String guid, String dataFlow,
+                                                        String receiver, Date date,
+                                                        ExchangeLogStatusTypeType validationStatus,
+                                                        PluginType typeOfOriginatingPlugin) throws ExchangeModelMarshallException {
         SendSalesResponseRequest sendSalesResponseRequest = new SendSalesResponseRequest();
         sendSalesResponseRequest.setResponse(checkNotNull(response));
         sendSalesResponseRequest.setValidationStatus(validationStatus);
 
-        enrichBaseRequest(sendSalesResponseRequest, ExchangeModuleMethod.SEND_SALES_RESPONSE, guid, dataFlow, senderOrReceiver, date, null, null);
+        enrichBaseRequest(sendSalesResponseRequest, ExchangeModuleMethod.SEND_SALES_RESPONSE, guid, dataFlow, receiver, date, null, typeOfOriginatingPlugin);
        return JAXBMarshaller.marshallJaxBObjectToString(sendSalesResponseRequest);
     }
 
-    public static String createSendSalesReportRequest(String report,
-                                               String guid, String dataFlow,
-                                               String senderOrReceiver, Date date,
-                                               ExchangeLogStatusTypeType validationStatus) throws ExchangeModelMarshallException {
+    /**
+     @deprecated use createSendSalesReportRequest(String report,
+     String guid, String dataFlow,
+     String receiver, Date date,
+     ExchangeLogStatusTypeType validationStatus,
+     PluginType typeOfOriginatingPlugin) throws ExchangeModelMarshallException instead
+     **/
+    @Deprecated
+    public static String createSendSalesReportRequest(String report, String guid, String dataFlow, String receiver,
+                                                      Date date, ExchangeLogStatusTypeType validationStatus) throws ExchangeModelMarshallException {
+        return createSendSalesReportRequest(report, guid, dataFlow, receiver, date, validationStatus, PluginType.FLUX);
+    }
+
+    public static String createSendSalesReportRequest(String report, String guid, String dataFlow, String receiver,
+                                                      Date date, ExchangeLogStatusTypeType validationStatus,
+                                                      String typeOfOriginatingPlugin) throws ExchangeModelMarshallException {
+        return createSendSalesReportRequest(report, guid, dataFlow, receiver, date, validationStatus, PluginType.valueOf(typeOfOriginatingPlugin));
+    }
+
+    public static String createSendSalesReportRequest(String report, String guid, String dataFlow, String receiver,
+                                                      Date date, ExchangeLogStatusTypeType validationStatus,
+                                                      PluginType typeOfOriginatingPlugin) throws ExchangeModelMarshallException {
         SendSalesReportRequest sendSalesReportRequest = new SendSalesReportRequest();
         sendSalesReportRequest.setReport(checkNotNull(report));
         sendSalesReportRequest.setValidationStatus(validationStatus);
 
-        enrichBaseRequest(sendSalesReportRequest, ExchangeModuleMethod.SEND_SALES_REPORT, guid, dataFlow, senderOrReceiver, date, null, null);
+        enrichBaseRequest(sendSalesReportRequest, ExchangeModuleMethod.SEND_SALES_REPORT, guid, dataFlow, receiver, date, null, typeOfOriginatingPlugin);
         return JAXBMarshaller.marshallJaxBObjectToString(sendSalesReportRequest);
     }
 
