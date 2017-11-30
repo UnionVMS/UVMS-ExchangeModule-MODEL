@@ -129,6 +129,13 @@
         </xsd:sequence>
     </xsd:complexType>
 
+    <xsd:complexType name="Sorting">
+        <xsd:sequence>
+            <xsd:element name="sortBy" type="exchange:SearchField"/>
+            <xsd:element name="reversed" type="xsd:boolean"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
     <xsd:complexType name="ExchangeLogStatusHistoryType">
         <xsd:sequence>
             <xsd:element name="timestamp" type="xsd:dateTime"/>
@@ -207,6 +214,7 @@
         <xsd:sequence>
             <xsd:element name="pagination" type="exchange:ExchangeListPagination" minOccurs="1" maxOccurs="1"/>
             <xsd:element name="exchangeSearchCriteria" type="exchange:ExchangeListCriteria" minOccurs="1" maxOccurs="1"/>
+            <xsd:element name="sorting" type="exchange:Sorting" minOccurs="1" maxOccurs="1"/>
         </xsd:sequence>
     </xsd:complexType>
 
