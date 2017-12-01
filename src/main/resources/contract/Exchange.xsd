@@ -131,7 +131,7 @@
 
     <xsd:complexType name="Sorting">
         <xsd:sequence>
-            <xsd:element name="sortBy" type="exchange:SearchField"/>
+            <xsd:element name="sortBy" type="exchange:SortField"/>
             <xsd:element name="reversed" type="xsd:boolean"/>
         </xsd:sequence>
     </xsd:complexType>
@@ -178,6 +178,20 @@
             <xsd:enumeration value="STATUS"/>
             <xsd:enumeration value="SOURCE"/>
             <xsd:enumeration value="MESSAGE_DIRECTION"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:simpleType name="SortField">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="DATE_RECEIVED"/>
+            <xsd:enumeration value="SOURCE"/>
+            <xsd:enumeration value="TYPE"/>
+            <xsd:enumeration value="SENDER_RECEIVER"/>
+            <xsd:enumeration value="RULE"/>
+            <xsd:enumeration value="RECEPIENT"/>
+            <xsd:enumeration value="STATUS"/>
+            <xsd:enumeration value="DATE_FORWARDED"/>
+
         </xsd:restriction>
     </xsd:simpleType>
 
