@@ -17,6 +17,14 @@
             <xsd:element name="destination" type="xsd:string" />
             <xsd:element name="source" type="xsd:string" />
             <xsd:element name="typeRefType" type="exchange:TypeRefType" />
+            <xsd:element name="relatedLogData" minOccurs="0" maxOccurs="unbounded" type="exchange:RelatedLogInfo" />
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="RelatedLogInfo">
+        <xsd:sequence>
+            <xsd:element name="guid" type="xsd:string"/>
+            <xsd:element name="type" type="xsd:string" />
         </xsd:sequence>
     </xsd:complexType>
 
@@ -191,7 +199,8 @@
             <xsd:enumeration value="RECEPIENT"/>
             <xsd:enumeration value="STATUS"/>
             <xsd:enumeration value="DATE_FORWARDED"/>
-
+            <xsd:enumeration value="GUID"/>
+            <xsd:enumeration value="REF_GUID"/>
         </xsd:restriction>
     </xsd:simpleType>
 
@@ -229,7 +238,7 @@
             <xsd:element name="pagination" type="exchange:ExchangeListPagination" minOccurs="1" maxOccurs="1"/>
             <xsd:element name="exchangeSearchCriteria" type="exchange:ExchangeListCriteria" minOccurs="1" maxOccurs="1"/>
             <xsd:element name="sorting" type="exchange:Sorting" minOccurs="1" maxOccurs="1"/>
-        </xsd:sequence>
+          </xsd:sequence>
     </xsd:complexType>
 
     <xsd:complexType name="ExchangeListCriteria">
