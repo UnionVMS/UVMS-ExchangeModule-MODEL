@@ -23,17 +23,17 @@ import java.util.List;
 @Remote
 public interface ExchangeLogModel {
 
-    public ListResponseDto getExchangeLogListByQuery(ExchangeListQuery query) throws ExchangeModelException;
+    ListResponseDto getExchangeLogListByQuery(ExchangeListQuery query) throws ExchangeModelException;
 
-    public ExchangeLogType createExchangeLog(ExchangeLogType log, String username) throws ExchangeModelException;
+    ExchangeLogType createExchangeLog(ExchangeLogType log, String username) throws ExchangeModelException;
     
-    public ExchangeLogType updateExchangeLogStatus(ExchangeLogStatusType status, String username) throws ExchangeModelException;
+    ExchangeLogType updateExchangeLogStatus(ExchangeLogStatusType status, String username) throws ExchangeModelException;
     
-    public ExchangeLogStatusType getExchangeLogStatusHistory(String guid, TypeRefType typeRefType) throws ExchangeModelException;
+    ExchangeLogStatusType getExchangeLogStatusHistory(String guid, TypeRefType typeRefType) throws ExchangeModelException;
     
-	public List<ExchangeLogStatusType> getExchangeLogStatusHistoryByQuery(ExchangeHistoryListQuery query) throws ExchangeModelException;
+	List<ExchangeLogStatusType> getExchangeLogStatusHistoryByQuery(ExchangeHistoryListQuery query) throws ExchangeModelException;
 
-	public ExchangeLogType getExchangeLogByGuid(String guid) throws ExchangeModelException;
+	ExchangeLogType getExchangeLogByGuid(String guid) throws ExchangeModelException;
 
-    public ExchangeLogType setPollStatus(PollStatus pollStatus, String username) throws ExchangeModelException;
+    ExchangeLogType setPollStatus(PollStatus pollStatus, String username) throws ExchangeModelException;
 }
