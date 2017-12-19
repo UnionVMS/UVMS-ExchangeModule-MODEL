@@ -17,8 +17,48 @@
             <xsd:element name="destination" type="xsd:string" />
             <xsd:element name="source" type="xsd:string" />
             <xsd:element name="typeRefType" type="exchange:TypeRefType" />
+            <xsd:element name="relatedLogData" minOccurs="0" maxOccurs="unbounded" type="exchange:RelatedLogInfo" />
         </xsd:sequence>
     </xsd:complexType>
+
+    <xsd:complexType name="RelatedLogInfo">
+        <xsd:sequence>
+            <xsd:element name="guid" type="xsd:string"/>
+            <xsd:element name="type" type="xsd:string" />
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="ExchangeLogWithValidationResults">
+        <xsd:sequence>
+            <xsd:element name="msg" type="xsd:string"/>
+            <xsd:element name="validationList" type="exchange:LogValidationResult" minOccurs="0" maxOccurs="unbounded"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="LogValidationResult">
+        <xsd:sequence>
+            <xsd:element name="id" type="xsd:string"/>
+            <xsd:element name="level" type="exchange:RuleValidationLevel"/>
+            <xsd:element name="status" type="exchange:RuleValidationStatus"/>
+            <xsd:element name="xpaths" type="xsd:string"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:simpleType name="RuleValidationStatus">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="WARNING"/>
+            <xsd:enumeration value="ERROR"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:simpleType name="RuleValidationLevel">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration id="L00" value="L00"/>
+            <xsd:enumeration id="L01" value="L01"/>
+            <xsd:enumeration id="L02" value="L02"/>
+            <xsd:enumeration id="L03" value="L03"/>
+        </xsd:restriction>
+    </xsd:simpleType>
 
     <xsd:simpleType name="LogType">
         <xsd:restriction base="xsd:string">
@@ -191,7 +231,8 @@
             <xsd:enumeration value="RECEPIENT"/>
             <xsd:enumeration value="STATUS"/>
             <xsd:enumeration value="DATE_FORWARDED"/>
-
+            <xsd:enumeration value="GUID"/>
+            <xsd:enumeration value="REF_GUID"/>
         </xsd:restriction>
     </xsd:simpleType>
 
@@ -229,7 +270,7 @@
             <xsd:element name="pagination" type="exchange:ExchangeListPagination" minOccurs="1" maxOccurs="1"/>
             <xsd:element name="exchangeSearchCriteria" type="exchange:ExchangeListCriteria" minOccurs="1" maxOccurs="1"/>
             <xsd:element name="sorting" type="exchange:Sorting" minOccurs="1" maxOccurs="1"/>
-        </xsd:sequence>
+          </xsd:sequence>
     </xsd:complexType>
 
     <xsd:complexType name="ExchangeListCriteria">
