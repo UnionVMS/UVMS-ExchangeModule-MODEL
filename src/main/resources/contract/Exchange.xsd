@@ -21,6 +21,13 @@
         </xsd:sequence>
     </xsd:complexType>
 
+    <xsd:complexType name="LogWithRawMsgAndType">
+        <xsd:sequence>
+            <xsd:element name="rawMsg" type="xsd:string"/>
+            <xsd:element name="type" type="exchange:TypeRefType" />
+        </xsd:sequence>
+    </xsd:complexType>
+
     <xsd:complexType name="RelatedLogInfo">
         <xsd:sequence>
             <xsd:element name="guid" type="xsd:string"/>
@@ -57,6 +64,7 @@
             <xsd:enumeration id="L01" value="L01"/>
             <xsd:enumeration id="L02" value="L02"/>
             <xsd:enumeration id="L03" value="L03"/>
+            <xsd:enumeration id="L099" value="L099"/>
         </xsd:restriction>
     </xsd:simpleType>
 
