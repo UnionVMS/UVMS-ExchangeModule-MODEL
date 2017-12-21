@@ -37,5 +37,5 @@ public interface ExchangeLogModel {
 
     ExchangeLogType setPollStatus(PollStatus pollStatus, String username) throws ExchangeModelException;
 
-    String getExchangeLogRawXmlByGuid(String guid);
+    LogWithRawMsgAndType getExchangeLogRawXmlByGuid(String guid);
 }
