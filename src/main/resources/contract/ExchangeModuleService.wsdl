@@ -53,6 +53,9 @@
 					<!-- FLUX FA Message from FLUX Activity Plugin -->
 					<xsd:enumeration value="SET_FLUX_FA_REPORT_MESSAGE"/>
 
+                    <!-- FLUX FA Message from FLUX Activity Plugin -->
+                    <xsd:enumeration value="SET_FA_QUERY_MESSAGE"/>
+
                     <!-- report back to exchange what the validation status of a received message was, to update the log -->
                     <xsd:enumeration value="UPDATE_LOG_STATUS" />
 
@@ -181,6 +184,18 @@
 			</xsd:element>
 
 			<xsd:element name="SetFLUXFAReportMessageRequest">
+                <xsd:complexType>
+                    <xsd:complexContent>
+                        <xsd:extension base="module:ExchangeBaseRequest">
+                            <xsd:sequence>
+                                <xsd:element name="request" type="xsd:string"/>
+                            </xsd:sequence>
+                        </xsd:extension>
+                    </xsd:complexContent>
+                </xsd:complexType>
+            </xsd:element>
+
+            <xsd:element name="SetFAQueryMessageRequest">
                 <xsd:complexType>
                     <xsd:complexContent>
                         <xsd:extension base="module:ExchangeBaseRequest">
