@@ -59,7 +59,7 @@
                     <!-- report back to exchange what the validation status of a received message was, to update the log -->
                     <xsd:enumeration value="UPDATE_LOG_STATUS" />
 
-                    <xsd:enumeration value="CHECK_LOG_REF_ID_BY_TYPE" />
+                    <xsd:enumeration value="LOG_REF_ID_BY_TYPE_EXISTS" />
 
                 </xsd:restriction>
             </xsd:simpleType>
