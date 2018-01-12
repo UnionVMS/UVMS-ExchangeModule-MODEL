@@ -59,6 +59,10 @@
                     <!-- report back to exchange what the validation status of a received message was, to update the log -->
                     <xsd:enumeration value="UPDATE_LOG_STATUS" />
 
+                    <xsd:enumeration value="LOG_REF_ID_BY_TYPE_EXISTS" />
+
+                    <xsd:enumeration value="LOG_ID_BY_TYPE_EXISTS" />
+
                 </xsd:restriction>
             </xsd:simpleType>
             
@@ -69,10 +73,12 @@
 					<xsd:element name="pluginType" minOccurs="0" type="plugin:PluginType" default="OTHER" />
                     <xsd:element name="senderOrReceiver" minOccurs="0" type="xsd:string"/>
                     <xsd:element name="messageGuid" minOccurs="0" type="xsd:string"/>
+                    <xsd:element name="refGuid" minOccurs="0" type="xsd:string"/>
                     <xsd:element name="date" minOccurs="0" type="xsd:dateTime"/>
                     <xsd:element name="fluxDataFlow" minOccurs="0" type="xsd:string" />
                     <xsd:element name="destination" minOccurs="0" type="xsd:string" />
                     <xsd:element name="onValue" minOccurs="0" type="xsd:string" />
+                    <xsd:element name="refType" type="exchange:TypeRefType" />
                 </xsd:sequence>
             </xsd:complexType>
 
@@ -357,6 +363,47 @@
                 </xsd:complexType>
             </xsd:element>
 
+            <xsd:element name="LogRefIdByTypeExistsRequest">
+                <xsd:complexType>
+                    <xsd:complexContent>
+                        <xsd:extension base="module:ExchangeBaseRequest">
+                            <xsd:sequence>
+                                <xsd:element name="refTypes" type="exchange:TypeRefType" minOccurs="0" maxOccurs="unbounded"/>
+                            </xsd:sequence>
+                        </xsd:extension>
+                    </xsd:complexContent>
+                </xsd:complexType>
+            </xsd:element>
+
+            <xsd:element name="LogRefIdByTypeExistsResponse">
+                <xsd:complexType>
+                    <xsd:complexContent>
+                        <xsd:extension base="module:ExchangeBaseRequest">
+                        </xsd:extension>
+                    </xsd:complexContent>
+                </xsd:complexType>
+            </xsd:element>
+
+            <xsd:element name="LogIdByTypeExistsRequest">
+                <xsd:complexType>
+                    <xsd:complexContent>
+                        <xsd:extension base="module:ExchangeBaseRequest">
+                            <xsd:sequence>
+                                <xsd:element name="refTypes" type="exchange:TypeRefType" minOccurs="0" maxOccurs="unbounded"/>
+                            </xsd:sequence>
+                        </xsd:extension>
+                    </xsd:complexContent>
+                </xsd:complexType>
+            </xsd:element>
+
+            <xsd:element name="LogIdByTypeExistsResponse">
+                <xsd:complexType>
+                    <xsd:complexContent>
+                        <xsd:extension base="module:ExchangeBaseRequest">
+                        </xsd:extension>
+                    </xsd:complexContent>
+                </xsd:complexType>
+            </xsd:element>
         </xsd:schema>
     </types>
     
@@ -416,6 +463,7 @@
     <message name="UpdatePluginSettingRequest">
         <part name="body" element="module:UpdatePluginSettingRequest"/>
     </message>
+
     <message name="UpdatePluginSettingResponse">
         <part name="body" element="module:UpdatePluginSettingResponse"/>
     </message>
@@ -429,6 +477,22 @@
 
     <message name="ProcessedMovementResponse">
         <part name="body" element="module:ProcessedMovementResponse"/>
+    </message>
+
+    <message name="LogRefIdByTypeExistsRequest">
+        <part name="body" element="module:LogRefIdByTypeExistsRequest"/>
+    </message>
+
+    <message name="LogRefIdByTypeExistsResponse">
+        <part name="body" element="module:LogRefIdByTypeExistsResponse"/>
+    </message>
+
+    <message name="LogIdByTypeExistsRequest">
+        <part name="body" element="module:LogIdByTypeExistsRequest"/>
+    </message>
+
+    <message name="LogIdByTypeExistsResponse">
+        <part name="body" element="module:LogIdByTypeExistsResponse"/>
     </message>
 
     <portType name="ExchangeModulePortType">
@@ -499,6 +563,18 @@
 
         <operation name="ProcessedMovement">
             <input message="module:ProcessedMovementResponse"/>
+        </operation>
+
+        <operation name="LogRefIdByTypeExistsService">
+            <input message="module:LogRefIdByTypeExistsRequest"/>
+            <output message="module:LogRefIdByTypeExistsResponse"/>
+            <fault name="ExchangeFault" message="module:ExchangeFault"/>
+        </operation>
+
+        <operation name="LogIdByTypeExistsService">
+            <input message="module:LogIdByTypeExistsRequest"/>
+            <output message="module:LogIdByTypeExistsResponse"/>
+            <fault name="ExchangeFault" message="module:ExchangeFault"/>
         </operation>
 
     </portType>
