@@ -11,12 +11,18 @@ copy of the GNU General Public License along with the IFDM Suite. If not, see <h
  */
 package eu.europa.ec.fisheries.uvms.exchange.model.remote;
 
-import eu.europa.ec.fisheries.schema.exchange.v1.*;
-import eu.europa.ec.fisheries.uvms.exchange.model.dto.ListResponseDto;
-import eu.europa.ec.fisheries.uvms.exchange.model.exception.ExchangeModelException;
-
 import javax.ejb.Remote;
 import java.util.List;
+
+import eu.europa.ec.fisheries.schema.exchange.v1.ExchangeHistoryListQuery;
+import eu.europa.ec.fisheries.schema.exchange.v1.ExchangeListQuery;
+import eu.europa.ec.fisheries.schema.exchange.v1.ExchangeLogStatusType;
+import eu.europa.ec.fisheries.schema.exchange.v1.ExchangeLogType;
+import eu.europa.ec.fisheries.schema.exchange.v1.LogWithRawMsgAndType;
+import eu.europa.ec.fisheries.schema.exchange.v1.PollStatus;
+import eu.europa.ec.fisheries.schema.exchange.v1.TypeRefType;
+import eu.europa.ec.fisheries.uvms.exchange.model.dto.ListResponseDto;
+import eu.europa.ec.fisheries.uvms.exchange.model.exception.ExchangeModelException;
 
 /**
  **/
@@ -30,10 +36,14 @@ public interface ExchangeLogModel {
     ExchangeLogType updateExchangeLogStatus(ExchangeLogStatusType status, String username) throws ExchangeModelException;
     
     ExchangeLogStatusType getExchangeLogStatusHistory(String guid, TypeRefType typeRefType) throws ExchangeModelException;
-    
-	List<ExchangeLogStatusType> getExchangeLogStatusHistoryByQuery(ExchangeHistoryListQuery query) throws ExchangeModelException;
+
+    List<ExchangeLogStatusType> getExchangeLogsStatusHistories(String guid, List<TypeRefType> typeRefType) throws ExchangeModelException;
+
+    List<ExchangeLogStatusType> getExchangeLogStatusHistoryByQuery(ExchangeHistoryListQuery query) throws ExchangeModelException;
 
 	ExchangeLogType getExchangeLogByGuid(String guid) throws ExchangeModelException;
+
+    ExchangeLogType getExchangeLogByGuidAndType(String guid, TypeRefType typeRefType) throws ExchangeModelException;
 
     ExchangeLogType setPollStatus(PollStatus pollStatus, String username) throws ExchangeModelException;
 
