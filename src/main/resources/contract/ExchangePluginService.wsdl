@@ -25,6 +25,8 @@
                     <xsd:enumeration value="STOP"/>
                     <xsd:enumeration value="PING"/>
 					<xsd:enumeration value="SET_MDR_REQUEST"/>
+                    <xsd:enumeration value="SEND_FA_REPORT"/>
+                    <xsd:enumeration value="SEND_FA_QUERY"/>
 					<xsd:enumeration value="SET_FLUX_RESPONSE"/>
 					<xsd:enumeration value="SEND_SALES_REPORT"/>
 					<xsd:enumeration value="SEND_SALES_RESPONSE"/>
@@ -125,6 +127,34 @@
 					</xsd:complexContent>
 				</xsd:complexType>
 			</xsd:element>
+
+            <xsd:element name="SetFLUXFAQueryRequest">
+                <xsd:complexType>
+                    <xsd:complexContent>
+                        <xsd:extension base="plugin:PluginBaseRequest">
+                            <xsd:sequence>
+                                <xsd:sequence>
+                                    <xsd:element name="response" type="xsd:string"/>
+                                </xsd:sequence>
+                            </xsd:sequence>
+                        </xsd:extension>
+                    </xsd:complexContent>
+                </xsd:complexType>
+            </xsd:element>
+
+            <xsd:element name="SetFLUXFAReportRequest">
+                <xsd:complexType>
+                    <xsd:complexContent>
+                        <xsd:extension base="plugin:PluginBaseRequest">
+                            <xsd:sequence>
+                                <xsd:sequence>
+                                    <xsd:element name="response" type="xsd:string"/>
+                                </xsd:sequence>
+                            </xsd:sequence>
+                        </xsd:extension>
+                    </xsd:complexContent>
+                </xsd:complexType>
+            </xsd:element>
 
 			<xsd:element name="SetCommandRequest">
                 <xsd:complexType>
