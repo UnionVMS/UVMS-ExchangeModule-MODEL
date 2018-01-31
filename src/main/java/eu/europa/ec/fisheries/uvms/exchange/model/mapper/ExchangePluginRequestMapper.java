@@ -110,4 +110,24 @@ public class ExchangePluginRequestMapper {
         request.setSenderOrReceiver(fr);
         return JAXBMarshaller.marshallJaxBObjectToString(request);
     }
+
+    public static String createSendFLUXFAQueryRequest(String request, String destination, String df, String fr) throws ExchangeModelMarshallException {
+        SetFLUXFAQueryRequest faqReq = new SetFLUXFAQueryRequest();
+        faqReq.setMethod(ExchangePluginMethod.SEND_FA_QUERY);
+        faqReq.setResponse(request);
+        faqReq.setDestination(destination);
+        faqReq.setFluxDataFlow(df);
+        faqReq.setSenderOrReceiver(fr);
+        return JAXBMarshaller.marshallJaxBObjectToString(faqReq);
+    }
+
+    public static String createSendFLUXFAReportRequest(String request, String destination, String df, String fr) throws ExchangeModelMarshallException {
+        SetFLUXFAReportRequest faqReq = new SetFLUXFAReportRequest();
+        faqReq.setMethod(ExchangePluginMethod.SEND_FA_REPORT);
+        faqReq.setResponse(request);
+        faqReq.setDestination(destination);
+        faqReq.setFluxDataFlow(df);
+        faqReq.setSenderOrReceiver(fr);
+        return JAXBMarshaller.marshallJaxBObjectToString(faqReq);
+    }
 }
