@@ -320,6 +320,15 @@ public class ExchangeModuleRequestMapper {
         return JAXBMarshaller.marshallJaxBObjectToString(request);
     }
 
+    public static String createFluxResponseRequest(String message, String username, String dfValue, Date date,
+                                                   String messageGuid, PluginType pluginType, String senderReceiver, String onValue) throws ExchangeModelMarshallException {
+        RcvFLUXFaResponseMessageRequest request = new RcvFLUXFaResponseMessageRequest();
+        request.setMethod(ExchangeModuleMethod.RCV_FLUX_FA_RESPONSE_MESSAGE);
+        request.setRequest(message);
+        populateBaseProperties(request, dfValue, date, messageGuid, pluginType, senderReceiver, onValue, username);
+        return JAXBMarshaller.marshallJaxBObjectToString(request);
+    }
+
     public static String createSendFaQueryMessageRequest(String faQueryMessageStr, String username, String logId, String fluxDataFlow,
                                                          String senderOrReceiver) throws ExchangeModelMarshallException {
         SetFAQueryMessageRequest request = new SetFAQueryMessageRequest();
