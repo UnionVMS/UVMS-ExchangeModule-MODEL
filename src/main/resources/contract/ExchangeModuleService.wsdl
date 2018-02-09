@@ -12,13 +12,13 @@
 
     <types>
         <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"  targetNamespace="urn:module.exchange.schema.fisheries.ec.europa.eu:v1">
-            
+
             <xsd:import namespace="urn:common.exchange.schema.fisheries.ec.europa.eu:v1" schemaLocation="ExchangeCommon.xsd"/>
             <xsd:import namespace="urn:exchange.schema.fisheries.ec.europa.eu:v1" schemaLocation="Exchange.xsd"/>
             <xsd:import namespace="urn:service.exchange.schema.fisheries.ec.europa.eu:v1" schemaLocation="Service.xsd"/>
             <xsd:import namespace="urn:movement.exchange.schema.fisheries.ec.europa.eu:v1" schemaLocation="Movement.xsd"/>
             <xsd:import namespace="urn:types.plugin.exchange.schema.fisheries.ec.europa.eu:v1" schemaLocation="Plugin.xsd"/>
-            
+
             <xsd:simpleType name="ExchangeModuleMethod">
                 <xsd:restriction base="xsd:string">
                     <!-- unionvms wants to -->
@@ -48,7 +48,11 @@
 					<!-- Asynch MDR Synchronization Response -->
 					<xsd:enumeration value="SET_MDR_SYNC_MESSAGE_RESPONSE"/>
 
+                    <!-- Sending FLUX RESPONSE MESSAGE to the plugin-->
 					<xsd:enumeration value="SET_FLUX_FA_RESPONSE_MESSAGE"/>
+
+                    <!-- Receiving FLUX RESPONSE MESSAGE from the plugin-->
+                    <xsd:enumeration value="RCV_FLUX_FA_RESPONSE_MESSAGE"/>
 
 					<!-- FLUX FA Message from FLUX Activity Plugin -->
 					<xsd:enumeration value="SET_FLUX_FA_REPORT_MESSAGE"/>
@@ -71,7 +75,7 @@
 
                 </xsd:restriction>
             </xsd:simpleType>
-            
+
             <xsd:complexType name="ExchangeBaseRequest" abstract="true">
                 <xsd:sequence>
                     <xsd:element name="method" type="module:ExchangeModuleMethod"/>
@@ -188,12 +192,24 @@
 						<xsd:extension base="module:ExchangeBaseRequest">
 							<xsd:sequence>
 								<xsd:element name="request" type="xsd:string"/>
-                                <xsd:element name="status" type="exchange:ExchangeLogStatusTypeType" minOccurs="1" maxOccurs="1"/>
+                                <xsd:element name="status" type="exchange:ExchangeLogStatusTypeType"/>
 							</xsd:sequence>
 						</xsd:extension>
 					</xsd:complexContent>
 				</xsd:complexType>
 			</xsd:element>
+
+            <xsd:element name="RcvFLUXFaResponseMessageRequest">
+                <xsd:complexType>
+                    <xsd:complexContent>
+                        <xsd:extension base="module:ExchangeBaseRequest">
+                            <xsd:sequence>
+                                <xsd:element name="request" type="xsd:string"/>
+                            </xsd:sequence>
+                        </xsd:extension>
+                    </xsd:complexContent>
+                </xsd:complexType>
+            </xsd:element>
 
 			<xsd:element name="SetFLUXFAReportMessageRequest">
                 <xsd:complexType>
@@ -255,7 +271,7 @@
                     </xsd:complexContent>
                 </xsd:complexType>
             </xsd:element>
-            
+
             <xsd:element name="SetCommandResponse">
                 <xsd:complexType>
                     <xsd:sequence>
@@ -263,7 +279,7 @@
                     </xsd:sequence>
                 </xsd:complexType>
             </xsd:element>
-            
+
             <xsd:element name="SendMovementToPluginRequest">
                 <xsd:complexType>
                     <xsd:complexContent>
@@ -275,7 +291,7 @@
                     </xsd:complexContent>
                 </xsd:complexType>
             </xsd:element>
-            
+
             <xsd:element name="SendMovementToPluginResponse">
                 <xsd:complexType>
                     <xsd:sequence>
@@ -283,7 +299,7 @@
                     </xsd:sequence>
                 </xsd:complexType>
             </xsd:element>
-            
+
             <xsd:element name="GetServiceListRequest">
                 <xsd:complexType>
                     <xsd:complexContent>
@@ -295,7 +311,7 @@
                     </xsd:complexContent>
                 </xsd:complexType>
             </xsd:element>
-            
+
             <xsd:element name="GetServiceListResponse">
                 <xsd:complexType>
                     <xsd:sequence>
@@ -303,7 +319,7 @@
                     </xsd:sequence>
                 </xsd:complexType>
             </xsd:element>
-            
+
             <xsd:element name="UpdatePluginSettingRequest">
                 <xsd:complexType>
                     <xsd:complexContent>
@@ -316,7 +332,7 @@
                     </xsd:complexContent>
                 </xsd:complexType>
             </xsd:element>
-            
+
             <xsd:element name="UpdatePluginSettingResponse">
                 <xsd:complexType>
                     <xsd:sequence>
@@ -324,7 +340,7 @@
                     </xsd:sequence>
                 </xsd:complexType>
             </xsd:element>
-            
+
             <!-- Ping request -->
             <xsd:element name="pingRequest">
                 <xsd:complexType>
@@ -412,18 +428,18 @@
             </xsd:element>
         </xsd:schema>
     </types>
-    
+
     <message name="ExchangeFault">
         <part name="body" element="common:exchangeFault"/>
     </message>
-    
+
     <message name="GetServiceListRequest">
         <part name="body" element="module:GetServiceListRequest"/>
     </message>
     <message name="GetServiceListResponse">
         <part name="body" element="module:GetServiceListResponse"/>
     </message>
-    
+
     <message name="SetCommandRequest">
         <part name="body" element="module:SetCommandRequest"/>
     </message>
@@ -508,7 +524,7 @@
             <output message="module:GetServiceListResponse"/>
             <fault name="ExchangeFault" message="module:ExchangeFault"/>
         </operation>
-        
+
         <operation name="CreatePoll">
             <input message="module:SetCommandRequest"/>
             <output message="module:SetCommandResponse"/>
@@ -587,7 +603,7 @@
 
     <binding name="ExchangeModuleSoapBinding" type="module:ExchangeModulePortType">
         <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
-        
+
         <operation name="GetServiceList">
             <input>
                 <soap:body use="literal"/>
@@ -599,7 +615,7 @@
                 <soap:fault name="ExchangeFault" use="literal"/>
             </fault>
         </operation>
-        
+
         <operation name="CreatePoll">
             <input>
                 <soap:body use="literal"/>
