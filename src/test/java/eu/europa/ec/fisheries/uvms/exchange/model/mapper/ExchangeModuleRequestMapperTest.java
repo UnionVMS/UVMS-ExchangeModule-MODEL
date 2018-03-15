@@ -1,9 +1,9 @@
 package eu.europa.ec.fisheries.uvms.exchange.model.mapper;
 
+import static org.junit.Assert.assertEquals;
+
 import eu.europa.ec.fisheries.schema.exchange.v1.ExchangeLogStatusTypeType;
 import org.junit.Test;
-
-import static org.junit.Assert.assertEquals;
 
 public class ExchangeModuleRequestMapperTest {
 

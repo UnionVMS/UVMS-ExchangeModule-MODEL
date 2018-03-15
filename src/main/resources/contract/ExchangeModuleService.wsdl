@@ -88,6 +88,7 @@
                     <xsd:element name="fluxDataFlow" minOccurs="0" type="xsd:string" />
                     <xsd:element name="destination" minOccurs="0" type="xsd:string" />
                     <xsd:element name="onValue" minOccurs="0" type="xsd:string" />
+                    <xsd:element name="recipient" minOccurs="0" type="xsd:string" />
                     <xsd:element name="refType" type="exchange:TypeRefType" />
                 </xsd:sequence>
             </xsd:complexType>
@@ -101,18 +102,6 @@
                     </xsd:extension>
                 </xsd:complexContent>
             </xsd:complexType>
-
-            <xsd:element name="SetMovementReportRequest">
-                <xsd:complexType>
-                    <xsd:complexContent>
-                        <xsd:extension base="module:ExchangeBaseRequest">
-                            <xsd:sequence>
-                                <xsd:element name="request" type="movement:SetReportMovementType"/>
-                            </xsd:sequence>
-                        </xsd:extension>
-                    </xsd:complexContent>
-                </xsd:complexType>
-            </xsd:element>
 
             <xsd:element name="ReceiveSalesReportRequest">
                 <xsd:complexType>
@@ -212,6 +201,30 @@
             </xsd:element>
 
 			<xsd:element name="SetFLUXFAReportMessageRequest">
+                <xsd:complexType>
+                    <xsd:complexContent>
+                        <xsd:extension base="module:ExchangeBaseRequest">
+                            <xsd:sequence>
+                                <xsd:element name="request" type="xsd:string"/>
+                            </xsd:sequence>
+                        </xsd:extension>
+                    </xsd:complexContent>
+                </xsd:complexType>
+            </xsd:element>
+
+            <xsd:element name="SetMovementReportRequest">
+                <xsd:complexType>
+                    <xsd:complexContent>
+                        <xsd:extension base="module:ExchangeBaseRequest">
+                            <xsd:sequence>
+                                <xsd:element name="request" type="movement:SetReportMovementType"/>
+                            </xsd:sequence>
+                        </xsd:extension>
+                    </xsd:complexContent>
+                </xsd:complexType>
+            </xsd:element>
+
+            <xsd:element name="SetFLUXMovementReportRequest">
                 <xsd:complexType>
                     <xsd:complexContent>
                         <xsd:extension base="module:ExchangeBaseRequest">
