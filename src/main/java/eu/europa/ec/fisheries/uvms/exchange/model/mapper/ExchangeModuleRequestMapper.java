@@ -11,9 +11,6 @@ copy of the GNU General Public License along with the IFDM Suite. If not, see <h
  */
 package eu.europa.ec.fisheries.uvms.exchange.model.mapper;
 
-import java.util.Date;
-import java.util.List;
-
 import eu.europa.ec.fisheries.schema.exchange.common.v1.CommandType;
 import eu.europa.ec.fisheries.schema.exchange.common.v1.CommandTypeType;
 import eu.europa.ec.fisheries.schema.exchange.module.v1.ExchangeBaseRequest;
@@ -56,6 +53,8 @@ import eu.europa.ec.fisheries.schema.exchange.v1.ExchangeLogStatusTypeType;
 import eu.europa.ec.fisheries.uvms.commons.date.DateUtils;
 import eu.europa.ec.fisheries.uvms.exchange.model.exception.ExchangeModelMapperException;
 import eu.europa.ec.fisheries.uvms.exchange.model.exception.ExchangeModelMarshallException;
+import java.util.Date;
+import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -84,6 +83,17 @@ public class ExchangeModuleRequestMapper {
         request.setMethod(ExchangeModuleMethod.SET_MOVEMENT_REPORT);
         request.setUsername(username);
         request.setRequest(reportType);
+        return JAXBMarshaller.marshallJaxBObjectToString(request);
+    }
+
+    public static String createSetMovementReportRequest(SetReportMovementType message, String username, String fluxDFValue, Date date,
+                                                      String messageGuid, PluginType pluginType, String senderReceiver, String onValue) throws ExchangeModelMarshallException {
+        SetMovementReportRequest request = new SetMovementReportRequest();
+        request.setMethod(ExchangeModuleMethod.SET_MOVEMENT_REPORT);
+        request.setUsername(username);
+        request.setRequest(message);
+        request.setDate(date);
+        populateBaseProperties(request, fluxDFValue, date, messageGuid, pluginType, senderReceiver, onValue, username);
         return JAXBMarshaller.marshallJaxBObjectToString(request);
     }
 
