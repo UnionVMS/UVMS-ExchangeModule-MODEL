@@ -30,6 +30,8 @@
 					<xsd:enumeration value="SET_FLUX_RESPONSE"/>
 					<xsd:enumeration value="SEND_SALES_REPORT"/>
 					<xsd:enumeration value="SEND_SALES_RESPONSE"/>
+                    <xsd:enumeration value="SEND_VESSEL_INFORMATION"/>
+                    <xsd:enumeration value="SEND_VESSEL_QUERY"/>
                 </xsd:restriction>
             </xsd:simpleType>
             
