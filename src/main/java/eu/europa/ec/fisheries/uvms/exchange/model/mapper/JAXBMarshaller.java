@@ -27,6 +27,8 @@ import eu.europa.ec.fisheries.uvms.exchange.model.exception.ExchangeModelMarshal
 
 public class JAXBMarshaller {
 
+    private static final String COM_SUN_XML_BIND_XML_DECLARATION = "com.sun.xml.bind.xmlDeclaration";
+
     private static Map<String, JAXBContext> contexts = new HashMap<>();
 
     /**
@@ -47,6 +49,7 @@ public class JAXBMarshaller {
             }
             Marshaller marshaller = jaxbContext.createMarshaller();
             marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+            marshaller.setProperty(COM_SUN_XML_BIND_XML_DECLARATION, Boolean.FALSE);
             StringWriter sw = new StringWriter();
             marshaller.marshal(data, sw);
             String marshalled = sw.toString();
