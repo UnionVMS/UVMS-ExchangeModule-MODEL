@@ -86,6 +86,7 @@
             <xsd:enumeration value="SEND_FLUX_RESPONSE_MSG"/>
             <xsd:enumeration value="SEND_FA_QUERY_MSG"/>
             <xsd:enumeration value="RECEIVE_FA_QUERY_MSG"/>
+            <xsd:enumeration value="RECEIVE_ASSET_INFORMATION"/>
         </xsd:restriction>
     </xsd:simpleType>
 
@@ -109,6 +110,7 @@
             <xsd:enumeration value="FA_QUERY"/>
             <xsd:enumeration value="FA_REPORT"/>
             <xsd:enumeration value="FA_RESPONSE"/>
+            <xsd:enumeration value="ASSETS"/>
         </xsd:restriction>
     </xsd:simpleType>
 

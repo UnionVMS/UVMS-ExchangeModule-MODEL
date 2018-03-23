@@ -176,6 +176,18 @@
                 </xsd:complexType>
             </xsd:element>
 
+            <xsd:element name="ReceiveAssetInformationRequest">
+                <xsd:complexType>
+                    <xsd:complexContent>
+                        <xsd:extension base="module:ExchangeBaseRequest">
+                            <xsd:sequence>
+                                <xsd:element name="assets" type="xsd:string"/>
+                            </xsd:sequence>
+                        </xsd:extension>
+                    </xsd:complexContent>
+                </xsd:complexType>
+            </xsd:element>
+
 			<xsd:element name="SetFLUXFAResponseMessageRequest">
 				<xsd:complexType>
 					<xsd:complexContent>
