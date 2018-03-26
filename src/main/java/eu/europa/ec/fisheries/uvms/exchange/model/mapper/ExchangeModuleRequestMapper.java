@@ -38,7 +38,9 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import static eu.europa.ec.fisheries.schema.exchange.module.v1.ExchangeModuleMethod.QUERY_ASSET_INFORMATION;
 import static eu.europa.ec.fisheries.schema.exchange.module.v1.ExchangeModuleMethod.RECEIVE_ASSET_INFORMATION;
+import static eu.europa.ec.fisheries.schema.exchange.module.v1.ExchangeModuleMethod.SEND_ASSET_INFORMATION;
 
 public class ExchangeModuleRequestMapper {
 
@@ -80,11 +82,33 @@ public class ExchangeModuleRequestMapper {
     }
 
 
-    public static String createReceiveAssetInformation(String message, String username) throws ExchangeModelMarshallException {
+    public static String createReceiveAssetInformation(String assets, String username) throws ExchangeModelMarshallException {
         ReceiveAssetInformationRequest request = new ReceiveAssetInformationRequest();
-        request.setAssets(message);
+        request.setAssets(assets);
         request.setUsername(username);
         request.setMethod(RECEIVE_ASSET_INFORMATION);
+        request.setSenderOrReceiver("flux-vessel-plugin");
+        request.setDate(new Date());
+
+        return JAXBMarshaller.marshallJaxBObjectToString(request);
+    }
+
+    public static String createSendAssetInformation(String assets, String username) throws ExchangeModelMarshallException {
+        SendAssetInformationRequest request = new SendAssetInformationRequest();
+        request.setAssets(assets);
+        request.setUsername(username);
+        request.setMethod(SEND_ASSET_INFORMATION);
+        request.setSenderOrReceiver("flux-vessel-plugin");
+        request.setDate(new Date());
+
+        return JAXBMarshaller.marshallJaxBObjectToString(request);
+    }
+
+    public static String createQueryAssetInformation(String assets, String username) throws ExchangeModelMarshallException {
+        QueryAssetInformationRequest request = new QueryAssetInformationRequest();
+        request.setAssets(assets);
+        request.setUsername(username);
+        request.setMethod(QUERY_ASSET_INFORMATION);
         request.setSenderOrReceiver("flux-vessel-plugin");
         request.setDate(new Date());
 

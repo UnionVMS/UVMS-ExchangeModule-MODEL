@@ -87,6 +87,8 @@
             <xsd:enumeration value="SEND_FA_QUERY_MSG"/>
             <xsd:enumeration value="RECEIVE_FA_QUERY_MSG"/>
             <xsd:enumeration value="RECEIVE_ASSET_INFORMATION"/>
+            <xsd:enumeration value="SEND_ASSET_INFORMATION"/>
+            <xsd:enumeration value="QUERY_ASSET_INFORMATION"/>
         </xsd:restriction>
     </xsd:simpleType>
 
