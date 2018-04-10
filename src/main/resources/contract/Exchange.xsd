@@ -25,6 +25,7 @@
         <xsd:sequence>
             <xsd:element name="rawMsg" type="xsd:string"/>
             <xsd:element name="type" type="exchange:TypeRefType" />
+            <xsd:element name="refGuid" type="xsd:string"/>
         </xsd:sequence>
     </xsd:complexType>
 
