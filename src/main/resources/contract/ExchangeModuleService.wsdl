@@ -35,6 +35,9 @@
                     <xsd:enumeration value="RECEIVE_SALES_QUERY"/>
                     <xsd:enumeration value="RECEIVE_SALES_RESPONSE"/>
                     <xsd:enumeration value="RECEIVE_INVALID_SALES_MESSAGE"/> <!-- XSD validation of message failed -->
+                    <xsd:enumeration value="RECEIVE_ASSET_INFORMATION"/>
+                    <xsd:enumeration value="SEND_ASSET_INFORMATION"/>
+                    <xsd:enumeration value="QUERY_ASSET_INFORMATION"/>
 
                     <!-- admin/config wants to-->
                     <xsd:enumeration value="PING"/>
@@ -169,6 +172,42 @@
                         <xsd:extension base="module:ExchangeOutgoingBaseRequest">
                             <xsd:sequence>
                                 <xsd:element name="response" type="xsd:string"/>
+                            </xsd:sequence>
+                        </xsd:extension>
+                    </xsd:complexContent>
+                </xsd:complexType>
+            </xsd:element>
+
+            <xsd:element name="ReceiveAssetInformationRequest">
+                <xsd:complexType>
+                    <xsd:complexContent>
+                        <xsd:extension base="module:ExchangeBaseRequest">
+                            <xsd:sequence>
+                                <xsd:element name="assets" type="xsd:string"/>
+                            </xsd:sequence>
+                        </xsd:extension>
+                    </xsd:complexContent>
+                </xsd:complexType>
+            </xsd:element>
+
+            <xsd:element name="SendAssetInformationRequest">
+                <xsd:complexType>
+                    <xsd:complexContent>
+                        <xsd:extension base="module:ExchangeBaseRequest">
+                            <xsd:sequence>
+                                <xsd:element name="assets" type="xsd:string"/>
+                            </xsd:sequence>
+                        </xsd:extension>
+                    </xsd:complexContent>
+                </xsd:complexType>
+            </xsd:element>
+
+            <xsd:element name="QueryAssetInformationRequest">
+                <xsd:complexType>
+                    <xsd:complexContent>
+                        <xsd:extension base="module:ExchangeBaseRequest">
+                            <xsd:sequence>
+                                <xsd:element name="assets" type="xsd:string"/>
                             </xsd:sequence>
                         </xsd:extension>
                     </xsd:complexContent>

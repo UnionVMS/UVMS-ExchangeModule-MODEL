@@ -30,6 +30,8 @@
 					<xsd:enumeration value="SET_FLUX_RESPONSE"/>
 					<xsd:enumeration value="SEND_SALES_REPORT"/>
 					<xsd:enumeration value="SEND_SALES_RESPONSE"/>
+                    <xsd:enumeration value="SEND_VESSEL_INFORMATION"/>
+                    <xsd:enumeration value="SEND_VESSEL_QUERY"/>
                 </xsd:restriction>
             </xsd:simpleType>
             
@@ -69,6 +71,30 @@
                             <xsd:sequence>
                                 <xsd:element name="response" type="xsd:string"/>
                                 <xsd:element name="recipient" type="xsd:string"/>
+                            </xsd:sequence>
+                        </xsd:extension>
+                    </xsd:complexContent>
+                </xsd:complexType>
+            </xsd:element>
+
+            <xsd:element name="SendAssetInformationRequest">
+                <xsd:complexType>
+                    <xsd:complexContent>
+                        <xsd:extension base="plugin:PluginBaseRequest">
+                            <xsd:sequence>
+                                <xsd:element name="request" type="xsd:string"/>
+                            </xsd:sequence>
+                        </xsd:extension>
+                    </xsd:complexContent>
+                </xsd:complexType>
+            </xsd:element>
+
+            <xsd:element name="SendQueryAssetInformationRequest">
+                <xsd:complexType>
+                    <xsd:complexContent>
+                        <xsd:extension base="plugin:PluginBaseRequest">
+                            <xsd:sequence>
+                                <xsd:element name="query" type="xsd:string"/>
                             </xsd:sequence>
                         </xsd:extension>
                     </xsd:complexContent>
