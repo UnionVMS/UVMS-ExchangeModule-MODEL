@@ -25,6 +25,7 @@
         <xsd:sequence>
             <xsd:element name="rawMsg" type="xsd:string"/>
             <xsd:element name="type" type="exchange:TypeRefType" />
+            <xsd:element name="refGuid" type="xsd:string"/>
         </xsd:sequence>
     </xsd:complexType>
 
@@ -90,6 +91,9 @@
             <xsd:enumeration value="SEND_FLUX_RESPONSE_MSG"/>
             <xsd:enumeration value="SEND_FA_QUERY_MSG"/>
             <xsd:enumeration value="RECEIVE_FA_QUERY_MSG"/>
+            <xsd:enumeration value="RECEIVE_ASSET_INFORMATION"/>
+            <xsd:enumeration value="SEND_ASSET_INFORMATION"/>
+            <xsd:enumeration value="QUERY_ASSET_INFORMATION"/>
         </xsd:restriction>
     </xsd:simpleType>
 
@@ -113,6 +117,7 @@
             <xsd:enumeration value="FA_QUERY"/>
             <xsd:enumeration value="FA_REPORT"/>
             <xsd:enumeration value="FA_RESPONSE"/>
+            <xsd:enumeration value="ASSETS"/>
         </xsd:restriction>
     </xsd:simpleType>
 
