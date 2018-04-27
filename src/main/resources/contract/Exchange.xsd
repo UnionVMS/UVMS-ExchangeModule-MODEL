@@ -48,6 +48,10 @@
             <xsd:element name="level" type="exchange:RuleValidationLevel"/>
             <xsd:element name="status" type="exchange:RuleValidationStatus"/>
             <xsd:element name="xpaths" type="xsd:string"/>
+            <xsd:element name="note" type="xsd:string"/>
+            <xsd:element name="expression" type="xsd:string"/>
+            <xsd:element name="entity" type="xsd:string"/>
+            <xsd:element name="message" type="xsd:string"/>
         </xsd:sequence>
     </xsd:complexType>
 
