@@ -431,6 +431,7 @@
                             <xsd:sequence>
                                 <xsd:element name="logGuid" type="xsd:string" minOccurs="1" maxOccurs="1"/>
                                 <xsd:element name="newStatus" type="exchange:ExchangeLogStatusTypeType" minOccurs="1" maxOccurs="1"/>
+                                <xsd:element name="duplicate" type="xsd:boolean" minOccurs="1" maxOccurs="1" default="false"/>
                             </xsd:sequence>
                         </xsd:extension>
                     </xsd:complexContent>
