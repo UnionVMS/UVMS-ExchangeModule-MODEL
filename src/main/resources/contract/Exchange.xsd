@@ -12,6 +12,7 @@
             <xsd:element name="dateRecieved" type="xsd:dateTime" />
             <xsd:element name="type" type="exchange:LogType"/>
             <xsd:element name="incoming" type="xsd:boolean"/>
+            <xsd:element name="duplicate" type="xsd:boolean" default="false"/>
             <xsd:element name="typeRef" type="exchange:LogRefType"/>
             <xsd:element name="status" type="exchange:ExchangeLogStatusTypeType" />
             <xsd:element name="destination" type="xsd:string" />
@@ -183,6 +184,7 @@
             <xsd:element name="typeRef" type="exchange:LogRefType"/>
             <xsd:element name="history" type="exchange:ExchangeLogStatusHistoryType" minOccurs="1" maxOccurs="unbounded"/>
             <xsd:element name="identifier" type="xsd:string"/>
+            <xsd:element name="duplicate" type="xsd:boolean" default="false"/>
         </xsd:sequence>
     </xsd:complexType>
 

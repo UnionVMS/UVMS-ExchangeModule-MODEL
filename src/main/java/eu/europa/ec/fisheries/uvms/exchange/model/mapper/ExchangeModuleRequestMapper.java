@@ -69,6 +69,8 @@ import org.slf4j.LoggerFactory;
 public class ExchangeModuleRequestMapper {
 
     final static Logger LOG = LoggerFactory.getLogger(ExchangeModuleRequestMapper.class);
+    private static final String FLUX_VESSEL_PLUGIN1 = "flux-vessel-plugin";
+    private static final String FLUX_VESSEL_PLUGIN = FLUX_VESSEL_PLUGIN1;
 
     public static String createRegisterServiceRequest(ServiceType serviceType, CapabilityListType capabilityList, SettingListType settingList) throws ExchangeModelMarshallException {
         RegisterServiceRequest request = new RegisterServiceRequest();
@@ -111,7 +113,7 @@ public class ExchangeModuleRequestMapper {
         request.setAssets(assets);
         request.setUsername(username);
         request.setMethod(RECEIVE_ASSET_INFORMATION);
-        request.setSenderOrReceiver("flux-vessel-plugin");
+        request.setSenderOrReceiver(FLUX_VESSEL_PLUGIN);
         request.setDate(new Date());
 
         return JAXBMarshaller.marshallJaxBObjectToString(request);
@@ -122,7 +124,7 @@ public class ExchangeModuleRequestMapper {
         request.setAssets(assets);
         request.setUsername(username);
         request.setMethod(SEND_ASSET_INFORMATION);
-        request.setSenderOrReceiver("flux-vessel-plugin");
+        request.setSenderOrReceiver(FLUX_VESSEL_PLUGIN1);
         request.setDate(new Date());
 
         return JAXBMarshaller.marshallJaxBObjectToString(request);
@@ -133,7 +135,7 @@ public class ExchangeModuleRequestMapper {
         request.setAssets(assets);
         request.setUsername(username);
         request.setMethod(QUERY_ASSET_INFORMATION);
-        request.setSenderOrReceiver("flux-vessel-plugin");
+        request.setSenderOrReceiver(FLUX_VESSEL_PLUGIN1);
         request.setDate(new Date());
 
         return JAXBMarshaller.marshallJaxBObjectToString(request);
@@ -490,10 +492,11 @@ public class ExchangeModuleRequestMapper {
         return JAXBMarshaller.marshallJaxBObjectToString(request);
     }
 
-    public static String createUpdateLogStatusRequest(String logGuid, ExchangeLogStatusTypeType newStatus, Boolean duplicate) throws ExchangeModelMarshallException {
+    public static String createUpdateLogStatusRequest(String logGuid, ExchangeLogStatusTypeType newStatus, boolean duplicate) throws ExchangeModelMarshallException {
         UpdateLogStatusRequest request = new UpdateLogStatusRequest();
         request.setMethod(ExchangeModuleMethod.UPDATE_LOG_STATUS);
         request.setLogGuid(logGuid);
+        request.setDuplicate(duplicate);
         request.setNewStatus(newStatus);
         return JAXBMarshaller.marshallJaxBObjectToString(request);
     }

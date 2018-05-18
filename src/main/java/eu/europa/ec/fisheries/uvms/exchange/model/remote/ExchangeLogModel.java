@@ -13,6 +13,7 @@ package eu.europa.ec.fisheries.uvms.exchange.model.remote;
 
 import javax.ejb.Remote;
 import java.util.List;
+import java.util.Set;
 
 import eu.europa.ec.fisheries.schema.exchange.v1.ExchangeHistoryListQuery;
 import eu.europa.ec.fisheries.schema.exchange.v1.ExchangeListQuery;
@@ -44,6 +45,8 @@ public interface ExchangeLogModel {
 	ExchangeLogType getExchangeLogByGuid(String guid) throws ExchangeModelException;
 
     ExchangeLogType getExchangeLogByGuidAndType(String guid, TypeRefType typeRefType) throws ExchangeModelException;
+
+    Set<ExchangeLogType> getExchangeLogByRefUUIDAndType(String refUUID, TypeRefType typeRefType) throws ExchangeModelException;
 
     ExchangeLogType setPollStatus(PollStatus pollStatus, String username) throws ExchangeModelException;
 
