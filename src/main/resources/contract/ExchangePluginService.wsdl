@@ -107,6 +107,7 @@
 						<xsd:extension base="plugin:PluginBaseRequest">
 							<xsd:sequence>
 								<xsd:element name="request" type="xsd:string" />
+                                <xsd:element name="fr" type="xsd:string" />
 							</xsd:sequence>
 						</xsd:extension>
 					</xsd:complexContent>
