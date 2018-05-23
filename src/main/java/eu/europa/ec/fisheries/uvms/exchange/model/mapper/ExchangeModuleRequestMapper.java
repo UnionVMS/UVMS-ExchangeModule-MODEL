@@ -344,11 +344,12 @@ public class ExchangeModuleRequestMapper {
         return JAXBMarshaller.marshallJaxBObjectToString(response);
     }
 
-    public static String createFluxMdrSyncEntityRequest(String reportType, String username) throws ExchangeModelMarshallException {
+    public static String createFluxMdrSyncEntityRequest(String reportType, String username, String fr) throws ExchangeModelMarshallException {
         SetFLUXMDRSyncMessageExchangeRequest request = new SetFLUXMDRSyncMessageExchangeRequest();
         request.setMethod(ExchangeModuleMethod.SET_MDR_SYNC_MESSAGE_REQUEST);
         request.setUsername(username);
         request.setRequest(reportType);
+        request.setFr(fr);
         return JAXBMarshaller.marshallJaxBObjectToString(request);
     }
 
