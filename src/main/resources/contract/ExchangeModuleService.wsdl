@@ -69,6 +69,9 @@
                     <!-- FLUX FA Message to FLUX Activity Plugin -->
                     <xsd:enumeration value="SEND_FA_QUERY_MESSAGE"/>
 
+                    <!-- FLUX UNKNOWN message received -->
+                    <xsd:enumeration value="UNKNOWN"/>
+
                     <!-- report back to exchange what the validation status of a received message was, to update the log -->
                     <xsd:enumeration value="UPDATE_LOG_STATUS" />
 
