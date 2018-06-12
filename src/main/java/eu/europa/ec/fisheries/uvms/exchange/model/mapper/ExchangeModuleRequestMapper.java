@@ -388,6 +388,15 @@ public class ExchangeModuleRequestMapper {
         return JAXBMarshaller.marshallJaxBObjectToString(request);
     }
 
+    public static String createFARequestForUnknownType(String message, String username, String fluxDFValue, Date date,
+                                                   String messageGuid, PluginType pluginType, String senderReceiver, String onValue) throws ExchangeModelMarshallException {
+        SetFLUXFAReportMessageRequest request = new SetFLUXFAReportMessageRequest();
+        request.setMethod(ExchangeModuleMethod.UNKNOWN);
+        request.setRequest(message);
+        populateBaseProperties(request, fluxDFValue, date, messageGuid, pluginType, senderReceiver, onValue, username);
+        return JAXBMarshaller.marshallJaxBObjectToString(request);
+    }
+
     public static String createFaQueryRequest(String message, String username, String fluxDFValue, Date date,
                                                    String messageGuid, PluginType pluginType, String senderReceiver, String onValue) throws ExchangeModelMarshallException {
         SetFAQueryMessageRequest request = new SetFAQueryMessageRequest();
