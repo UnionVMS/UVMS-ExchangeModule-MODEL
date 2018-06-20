@@ -151,6 +151,7 @@
                         <xsd:extension base="module:ExchangeBaseRequest">
                             <xsd:sequence>
                                 <xsd:element name="respondToInvalidMessageRequest" type="xsd:string"/>
+                                <xsd:element name="originalMessage" type="xsd:string" minOccurs="0"/>
                             </xsd:sequence>
                         </xsd:extension>
                     </xsd:complexContent>
