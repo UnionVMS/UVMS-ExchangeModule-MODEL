@@ -38,6 +38,7 @@
                     <xsd:enumeration value="RECEIVE_ASSET_INFORMATION"/>
                     <xsd:enumeration value="SEND_ASSET_INFORMATION"/>
                     <xsd:enumeration value="QUERY_ASSET_INFORMATION"/>
+                    <xsd:enumeration value="RECEIVE_ASSET_RESPONSE"/>
 
                     <!-- admin/config wants to-->
                     <xsd:enumeration value="PING"/>
@@ -200,6 +201,20 @@
                         <xsd:extension base="module:ExchangeBaseRequest">
                             <xsd:sequence>
                                 <xsd:element name="assets" type="xsd:string"/>
+                            </xsd:sequence>
+                        </xsd:extension>
+                    </xsd:complexContent>
+                </xsd:complexType>
+            </xsd:element>
+
+            <xsd:element name="ReceiveAssetResponse">
+                <xsd:complexType>
+                    <xsd:complexContent>
+                        <xsd:extension base="module:ExchangeBaseRequest">
+                            <xsd:sequence>
+                                <xsd:element name="response" type="xsd:string"/>
+                                <xsd:element name="guidOfOriginalMessage" type="xsd:string"/>
+                                <xsd:element name="responseCode" type="xsd:string"/>
                             </xsd:sequence>
                         </xsd:extension>
                     </xsd:complexContent>

@@ -11,39 +11,12 @@ copy of the GNU General Public License along with the IFDM Suite. If not, see <h
  */
 package eu.europa.ec.fisheries.uvms.exchange.model.mapper;
 
-import static eu.europa.ec.fisheries.schema.exchange.module.v1.ExchangeModuleMethod.QUERY_ASSET_INFORMATION;
-import static eu.europa.ec.fisheries.schema.exchange.module.v1.ExchangeModuleMethod.RECEIVE_ASSET_INFORMATION;
-import static eu.europa.ec.fisheries.schema.exchange.module.v1.ExchangeModuleMethod.SEND_ASSET_INFORMATION;
-
 import java.util.Date;
 import java.util.List;
 
 import eu.europa.ec.fisheries.schema.exchange.common.v1.CommandType;
 import eu.europa.ec.fisheries.schema.exchange.common.v1.CommandTypeType;
-import eu.europa.ec.fisheries.schema.exchange.module.v1.ExchangeBaseRequest;
-import eu.europa.ec.fisheries.schema.exchange.module.v1.ExchangeModuleMethod;
-import eu.europa.ec.fisheries.schema.exchange.module.v1.GetServiceListRequest;
-import eu.europa.ec.fisheries.schema.exchange.module.v1.ProcessedMovementResponse;
-import eu.europa.ec.fisheries.schema.exchange.module.v1.QueryAssetInformationRequest;
-import eu.europa.ec.fisheries.schema.exchange.module.v1.RcvFLUXFaResponseMessageRequest;
-import eu.europa.ec.fisheries.schema.exchange.module.v1.ReceiveAssetInformationRequest;
-import eu.europa.ec.fisheries.schema.exchange.module.v1.ReceiveInvalidSalesMessage;
-import eu.europa.ec.fisheries.schema.exchange.module.v1.ReceiveSalesQueryRequest;
-import eu.europa.ec.fisheries.schema.exchange.module.v1.ReceiveSalesReportRequest;
-import eu.europa.ec.fisheries.schema.exchange.module.v1.ReceiveSalesResponseRequest;
-import eu.europa.ec.fisheries.schema.exchange.module.v1.SendAssetInformationRequest;
-import eu.europa.ec.fisheries.schema.exchange.module.v1.SendMovementToPluginRequest;
-import eu.europa.ec.fisheries.schema.exchange.module.v1.SendSalesReportRequest;
-import eu.europa.ec.fisheries.schema.exchange.module.v1.SendSalesResponseRequest;
-import eu.europa.ec.fisheries.schema.exchange.module.v1.SetCommandRequest;
-import eu.europa.ec.fisheries.schema.exchange.module.v1.SetFAQueryMessageRequest;
-import eu.europa.ec.fisheries.schema.exchange.module.v1.SetFLUXFAReportMessageRequest;
-import eu.europa.ec.fisheries.schema.exchange.module.v1.SetFLUXFAResponseMessageRequest;
-import eu.europa.ec.fisheries.schema.exchange.module.v1.SetFLUXMDRSyncMessageExchangeRequest;
-import eu.europa.ec.fisheries.schema.exchange.module.v1.SetFLUXMDRSyncMessageExchangeResponse;
-import eu.europa.ec.fisheries.schema.exchange.module.v1.SetMovementReportRequest;
-import eu.europa.ec.fisheries.schema.exchange.module.v1.UpdateLogStatusRequest;
-import eu.europa.ec.fisheries.schema.exchange.module.v1.UpdatePluginSettingRequest;
+import eu.europa.ec.fisheries.schema.exchange.module.v1.*;
 import eu.europa.ec.fisheries.schema.exchange.movement.v1.MovementRefType;
 import eu.europa.ec.fisheries.schema.exchange.movement.v1.MovementType;
 import eu.europa.ec.fisheries.schema.exchange.movement.v1.RecipientInfoType;
@@ -65,6 +38,8 @@ import eu.europa.ec.fisheries.uvms.exchange.model.exception.ExchangeModelMapperE
 import eu.europa.ec.fisheries.uvms.exchange.model.exception.ExchangeModelMarshallException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import static eu.europa.ec.fisheries.schema.exchange.module.v1.ExchangeModuleMethod.*;
 
 public class ExchangeModuleRequestMapper {
 
@@ -127,6 +102,19 @@ public class ExchangeModuleRequestMapper {
         request.setDate(new Date());
 
         return JAXBMarshaller.marshallJaxBObjectToString(request);
+    }
+
+    public static String createReceiveAssetResponse(String response, String username, String guidOfOriginalMessage, String responseCode) throws ExchangeModelMarshallException {
+        ReceiveAssetResponse receiveAssetResponse = new ReceiveAssetResponse();
+        receiveAssetResponse.setResponse(response);
+        receiveAssetResponse.setUsername(username);
+        receiveAssetResponse.setMethod(RECEIVE_ASSET_RESPONSE);
+        receiveAssetResponse.setSenderOrReceiver(FLUX_VESSEL_PLUGIN);
+        receiveAssetResponse.setDate(new Date());
+        receiveAssetResponse.setResponseCode(responseCode);
+        receiveAssetResponse.setGuidOfOriginalMessage(guidOfOriginalMessage);
+
+        return JAXBMarshaller.marshallJaxBObjectToString(receiveAssetResponse);
     }
 
     public static String createQueryAssetInformation(String assets, String username) throws ExchangeModelMarshallException {
