@@ -177,13 +177,19 @@ public class ExchangeModuleRequestMapper {
     }
 
     public static String createReceiveInvalidSalesMessage(String respondToInvalidMessageRequest, String guid, String sender, Date date, String username, PluginType pluginType) throws ExchangeModelMarshallException {
+        return createReceiveInvalidSalesMessage(respondToInvalidMessageRequest, guid, sender,
+                date, username, pluginType, null);
+    }
+
+    public static String createReceiveInvalidSalesMessage(String respondToInvalidMessageRequest, String guid, String sender, Date date, String username, PluginType pluginType, String originalMessage) throws ExchangeModelMarshallException {
         ReceiveInvalidSalesMessage receiveInvalidSalesMessage = new ReceiveInvalidSalesMessage();
         receiveInvalidSalesMessage.setRespondToInvalidMessageRequest(respondToInvalidMessageRequest);
-
+        receiveInvalidSalesMessage.setOriginalMessage(originalMessage);
         enrichBaseRequest(receiveInvalidSalesMessage, ExchangeModuleMethod.RECEIVE_INVALID_SALES_MESSAGE, guid, null, sender, date, username, pluginType, null);
 
         return JAXBMarshaller.marshallJaxBObjectToString(receiveInvalidSalesMessage);
     }
+
 
     /**
      @deprecated use createSendSalesResponseRequest(String response,
