@@ -114,7 +114,6 @@ public class ExchangeModuleRequestMapper {
         request.setMethod(RECEIVE_ASSET_INFORMATION);
         request.setSenderOrReceiver(FLUX_VESSEL_PLUGIN);
         request.setDate(new Date());
-
         return JAXBMarshaller.marshallJaxBObjectToString(request);
     }
 
@@ -125,18 +124,16 @@ public class ExchangeModuleRequestMapper {
         request.setMethod(SEND_ASSET_INFORMATION);
         request.setSenderOrReceiver(FLUX_VESSEL_PLUGIN);
         request.setDate(new Date());
-
         return JAXBMarshaller.marshallJaxBObjectToString(request);
     }
 
-    public static String createQueryAssetInformation(String assets, String username) throws ExchangeModelMarshallException {
+    public static String createQueryAssetInformation(String assets, String username, String todt) throws ExchangeModelMarshallException {
         QueryAssetInformationRequest request = new QueryAssetInformationRequest();
         request.setAssets(assets);
         request.setUsername(username);
         request.setMethod(QUERY_ASSET_INFORMATION);
         request.setSenderOrReceiver(FLUX_VESSEL_PLUGIN);
         request.setDate(new Date());
-
         return JAXBMarshaller.marshallJaxBObjectToString(request);
     }
 
@@ -477,6 +474,22 @@ public class ExchangeModuleRequestMapper {
         request.setFluxDataFlow(df);
         request.setMessageGuid(messageGuid);
         request.setDate(DateUtils.nowUTC().toDate());
+        request.setPluginType(pluginType);
+        request.setSenderOrReceiver(fr);
+        request.setStatus(status);
+        request.setDestination(destination);
+        return JAXBMarshaller.marshallJaxBObjectToString(request);
+    }
+
+    public static String createFluxFAResponseRequest(String response, String username, String df, String messageGuid, String fr, ExchangeLogStatusTypeType status, String destination, PluginType pluginType, String todt) throws ExchangeModelMarshallException {
+        SetFLUXFAResponseMessageRequest request = new SetFLUXFAResponseMessageRequest();
+        request.setMethod(ExchangeModuleMethod.SET_FLUX_FA_RESPONSE_MESSAGE);
+        request.setUsername(username);
+        request.setRequest(response);
+        request.setFluxDataFlow(df);
+        request.setMessageGuid(messageGuid);
+        request.setDate(DateUtils.nowUTC().toDate());
+        request.setTodt(todt);
         request.setPluginType(pluginType);
         request.setSenderOrReceiver(fr);
         request.setStatus(status);
