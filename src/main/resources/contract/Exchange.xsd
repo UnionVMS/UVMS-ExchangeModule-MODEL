@@ -9,6 +9,9 @@
         <xsd:sequence>
             <xsd:element name="guid" type="xsd:string"/>
             <xsd:element name="senderReceiver" type="xsd:string"/>
+            <xsd:element name="on" type="xsd:string"/>
+            <xsd:element name="todt" type="xsd:string"/>
+            <xsd:element name="to" type="xsd:string"/>
             <xsd:element name="dateRecieved" type="xsd:dateTime" />
             <xsd:element name="type" type="exchange:LogType"/>
             <xsd:element name="incoming" type="xsd:boolean"/>
