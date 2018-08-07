@@ -91,6 +91,7 @@
                     <xsd:element name="messageGuid" minOccurs="0" type="xsd:string"/>
                     <xsd:element name="refGuid" minOccurs="0" type="xsd:string"/>
                     <xsd:element name="todt" minOccurs="0" type="xsd:string"/>
+                    <xsd:element name="df" minOccurs="0" type="xsd:string"/>
                     <xsd:element name="date" minOccurs="0" type="xsd:dateTime"/>
                     <xsd:element name="to" minOccurs="0" type="xsd:integer"/>
                     <xsd:element name="fluxDataFlow" minOccurs="0" type="xsd:string" />
