@@ -15,6 +15,7 @@ import static eu.europa.ec.fisheries.schema.exchange.module.v1.ExchangeModuleMet
 import static eu.europa.ec.fisheries.schema.exchange.module.v1.ExchangeModuleMethod.RECEIVE_ASSET_INFORMATION;
 import static eu.europa.ec.fisheries.schema.exchange.module.v1.ExchangeModuleMethod.SEND_ASSET_INFORMATION;
 
+import java.math.BigInteger;
 import java.util.Date;
 import java.util.List;
 
@@ -114,7 +115,6 @@ public class ExchangeModuleRequestMapper {
         request.setMethod(RECEIVE_ASSET_INFORMATION);
         request.setSenderOrReceiver(FLUX_VESSEL_PLUGIN);
         request.setDate(new Date());
-
         return JAXBMarshaller.marshallJaxBObjectToString(request);
     }
 
@@ -125,7 +125,6 @@ public class ExchangeModuleRequestMapper {
         request.setMethod(SEND_ASSET_INFORMATION);
         request.setSenderOrReceiver(FLUX_VESSEL_PLUGIN);
         request.setDate(new Date());
-
         return JAXBMarshaller.marshallJaxBObjectToString(request);
     }
 
@@ -136,7 +135,6 @@ public class ExchangeModuleRequestMapper {
         request.setMethod(QUERY_ASSET_INFORMATION);
         request.setSenderOrReceiver(FLUX_VESSEL_PLUGIN);
         request.setDate(new Date());
-
         return JAXBMarshaller.marshallJaxBObjectToString(request);
     }
 
@@ -483,6 +481,24 @@ public class ExchangeModuleRequestMapper {
         request.setFluxDataFlow(df);
         request.setMessageGuid(messageGuid);
         request.setDate(DateUtils.nowUTC().toDate());
+        request.setPluginType(pluginType);
+        request.setSenderOrReceiver(fr);
+        request.setStatus(status);
+        request.setDestination(destination);
+        return JAXBMarshaller.marshallJaxBObjectToString(request);
+    }
+
+    public static String createFluxFAResponseRequest(String response, String username, String df, String messageGuid, String fr, ExchangeLogStatusTypeType status, String destination, PluginType pluginType, String todt, BigInteger to, String onValue) throws ExchangeModelMarshallException {
+        SetFLUXFAResponseMessageRequest request = new SetFLUXFAResponseMessageRequest();
+        request.setMethod(ExchangeModuleMethod.SET_FLUX_FA_RESPONSE_MESSAGE);
+        request.setUsername(username);
+        request.setRequest(response);
+        request.setFluxDataFlow(df);
+        request.setMessageGuid(messageGuid);
+        request.setDate(DateUtils.nowUTC().toDate());
+        request.setTodt(todt);
+        request.setTo(to);
+        request.setOnValue(onValue);
         request.setPluginType(pluginType);
         request.setSenderOrReceiver(fr);
         request.setStatus(status);
