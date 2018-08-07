@@ -15,6 +15,7 @@ import static eu.europa.ec.fisheries.schema.exchange.module.v1.ExchangeModuleMet
 import static eu.europa.ec.fisheries.schema.exchange.module.v1.ExchangeModuleMethod.RECEIVE_ASSET_INFORMATION;
 import static eu.europa.ec.fisheries.schema.exchange.module.v1.ExchangeModuleMethod.SEND_ASSET_INFORMATION;
 
+import java.math.BigInteger;
 import java.util.Date;
 import java.util.List;
 
@@ -127,7 +128,7 @@ public class ExchangeModuleRequestMapper {
         return JAXBMarshaller.marshallJaxBObjectToString(request);
     }
 
-    public static String createQueryAssetInformation(String assets, String username, String todt) throws ExchangeModelMarshallException {
+    public static String createQueryAssetInformation(String assets, String username) throws ExchangeModelMarshallException {
         QueryAssetInformationRequest request = new QueryAssetInformationRequest();
         request.setAssets(assets);
         request.setUsername(username);
@@ -481,7 +482,7 @@ public class ExchangeModuleRequestMapper {
         return JAXBMarshaller.marshallJaxBObjectToString(request);
     }
 
-    public static String createFluxFAResponseRequest(String response, String username, String df, String messageGuid, String fr, ExchangeLogStatusTypeType status, String destination, PluginType pluginType, String todt) throws ExchangeModelMarshallException {
+    public static String createFluxFAResponseRequest(String response, String username, String df, String messageGuid, String fr, ExchangeLogStatusTypeType status, String destination, PluginType pluginType, String todt, BigInteger to, String onValue) throws ExchangeModelMarshallException {
         SetFLUXFAResponseMessageRequest request = new SetFLUXFAResponseMessageRequest();
         request.setMethod(ExchangeModuleMethod.SET_FLUX_FA_RESPONSE_MESSAGE);
         request.setUsername(username);
@@ -490,6 +491,8 @@ public class ExchangeModuleRequestMapper {
         request.setMessageGuid(messageGuid);
         request.setDate(DateUtils.nowUTC().toDate());
         request.setTodt(todt);
+        request.setTo(to);
+        request.setOnValue(onValue);
         request.setPluginType(pluginType);
         request.setSenderOrReceiver(fr);
         request.setStatus(status);
