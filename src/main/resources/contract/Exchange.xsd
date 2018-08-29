@@ -13,6 +13,7 @@
             <xsd:element name="todt" type="xsd:string"/>
             <xsd:element name="df" type="xsd:string"/>
             <xsd:element name="to" type="xsd:string"/>
+            <xsd:element name="ad" type="xsd:string"/>
             <xsd:element name="dateRecieved" type="xsd:dateTime" />
             <xsd:element name="type" type="exchange:LogType"/>
             <xsd:element name="incoming" type="xsd:boolean"/>
@@ -81,6 +82,7 @@
         <xsd:restriction base="xsd:string">
             <xsd:enumeration value="RECEIVE_MOVEMENT"/>
             <xsd:enumeration value="SEND_MOVEMENT"/>
+            <xsd:enumeration value="PROCESSED_MOVEMENT"/>
             <xsd:enumeration value="SEND_EMAIL"/>
             <xsd:enumeration value="SEND_POLL"/>
             <xsd:enumeration value="RECEIVE_SALES_REPORT"/>
@@ -112,6 +114,7 @@
     <xsd:simpleType name="TypeRefType">
         <xsd:restriction base="xsd:string">
             <xsd:enumeration value="MOVEMENT"/>
+            <xsd:enumeration value="MOVEMENT_RESPONSE"/>
             <xsd:enumeration value="POLL"/>
             <xsd:enumeration value="ALARM"/>
             <xsd:enumeration value="UNKNOWN"/>

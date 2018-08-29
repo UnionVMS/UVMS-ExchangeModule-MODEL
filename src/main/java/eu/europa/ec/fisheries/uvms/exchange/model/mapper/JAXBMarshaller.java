@@ -11,6 +11,9 @@ copy of the GNU General Public License along with the IFDM Suite. If not, see <h
  */
 package eu.europa.ec.fisheries.uvms.exchange.model.mapper;
 
+import eu.europa.ec.fisheries.uvms.exchange.model.exception.ExchangeModelMarshallException;
+import org.apache.commons.lang3.StringUtils;
+
 import javax.jms.JMSException;
 import javax.jms.TextMessage;
 import javax.xml.bind.JAXBContext;
@@ -22,8 +25,6 @@ import java.io.StringReader;
 import java.io.StringWriter;
 import java.util.HashMap;
 import java.util.Map;
-
-import eu.europa.ec.fisheries.uvms.exchange.model.exception.ExchangeModelMarshallException;
 
 public class JAXBMarshaller {
 
@@ -112,5 +113,27 @@ public class JAXBMarshaller {
         } catch (JAXBException ex) {
             throw new ExchangeModelMarshallException("Error when unmarshalling text", ex);
         }
+    }
+
+    public static <T> String marshallJaxBObjectToString(T data, String encoding, boolean formatted) throws JAXBException {
+        JAXBContext jaxbContext = contexts.get(data.getClass().getName());
+        if (jaxbContext == null) {
+            jaxbContext = JAXBContext.newInstance(data.getClass());
+            contexts.put(data.getClass().getName(), jaxbContext);
+        }
+
+        Marshaller marshaller = jaxbContext.createMarshaller();
+        if (StringUtils.isNotEmpty(encoding)) {
+            marshaller.setProperty("jaxb.encoding", encoding);
+        }
+
+        if (formatted) {
+            marshaller.setProperty("jaxb.formatted.output", true);
+        }
+
+        marshaller.setProperty("jaxb.fragment", Boolean.TRUE);
+        StringWriter sw = new StringWriter();
+        marshaller.marshal(data, sw);
+        return sw.toString();
     }
 }
