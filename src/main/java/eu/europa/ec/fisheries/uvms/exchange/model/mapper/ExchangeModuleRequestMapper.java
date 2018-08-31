@@ -11,45 +11,10 @@ copy of the GNU General Public License along with the IFDM Suite. If not, see <h
  */
 package eu.europa.ec.fisheries.uvms.exchange.model.mapper;
 
-import static eu.europa.ec.fisheries.schema.exchange.module.v1.ExchangeModuleMethod.QUERY_ASSET_INFORMATION;
-import static eu.europa.ec.fisheries.schema.exchange.module.v1.ExchangeModuleMethod.RECEIVE_ASSET_INFORMATION;
-import static eu.europa.ec.fisheries.schema.exchange.module.v1.ExchangeModuleMethod.SEND_ASSET_INFORMATION;
-
-import java.math.BigInteger;
-import java.util.Date;
-import java.util.List;
-
 import eu.europa.ec.fisheries.schema.exchange.common.v1.CommandType;
 import eu.europa.ec.fisheries.schema.exchange.common.v1.CommandTypeType;
-import eu.europa.ec.fisheries.schema.exchange.module.v1.ExchangeBaseRequest;
-import eu.europa.ec.fisheries.schema.exchange.module.v1.ExchangeModuleMethod;
-import eu.europa.ec.fisheries.schema.exchange.module.v1.GetServiceListRequest;
-import eu.europa.ec.fisheries.schema.exchange.module.v1.ProcessedMovementResponse;
-import eu.europa.ec.fisheries.schema.exchange.module.v1.QueryAssetInformationRequest;
-import eu.europa.ec.fisheries.schema.exchange.module.v1.RcvFLUXFaResponseMessageRequest;
-import eu.europa.ec.fisheries.schema.exchange.module.v1.ReceiveAssetInformationRequest;
-import eu.europa.ec.fisheries.schema.exchange.module.v1.ReceiveInvalidSalesMessage;
-import eu.europa.ec.fisheries.schema.exchange.module.v1.ReceiveSalesQueryRequest;
-import eu.europa.ec.fisheries.schema.exchange.module.v1.ReceiveSalesReportRequest;
-import eu.europa.ec.fisheries.schema.exchange.module.v1.ReceiveSalesResponseRequest;
-import eu.europa.ec.fisheries.schema.exchange.module.v1.SendAssetInformationRequest;
-import eu.europa.ec.fisheries.schema.exchange.module.v1.SendMovementToPluginRequest;
-import eu.europa.ec.fisheries.schema.exchange.module.v1.SendSalesReportRequest;
-import eu.europa.ec.fisheries.schema.exchange.module.v1.SendSalesResponseRequest;
-import eu.europa.ec.fisheries.schema.exchange.module.v1.SetCommandRequest;
-import eu.europa.ec.fisheries.schema.exchange.module.v1.SetFAQueryMessageRequest;
-import eu.europa.ec.fisheries.schema.exchange.module.v1.SetFLUXFAReportMessageRequest;
-import eu.europa.ec.fisheries.schema.exchange.module.v1.SetFLUXFAResponseMessageRequest;
-import eu.europa.ec.fisheries.schema.exchange.module.v1.SetFLUXMDRSyncMessageExchangeRequest;
-import eu.europa.ec.fisheries.schema.exchange.module.v1.SetFLUXMDRSyncMessageExchangeResponse;
-import eu.europa.ec.fisheries.schema.exchange.module.v1.SetMovementReportRequest;
-import eu.europa.ec.fisheries.schema.exchange.module.v1.UpdateLogStatusRequest;
-import eu.europa.ec.fisheries.schema.exchange.module.v1.UpdatePluginSettingRequest;
-import eu.europa.ec.fisheries.schema.exchange.movement.v1.MovementRefType;
-import eu.europa.ec.fisheries.schema.exchange.movement.v1.MovementType;
-import eu.europa.ec.fisheries.schema.exchange.movement.v1.RecipientInfoType;
-import eu.europa.ec.fisheries.schema.exchange.movement.v1.SendMovementToPluginType;
-import eu.europa.ec.fisheries.schema.exchange.movement.v1.SetReportMovementType;
+import eu.europa.ec.fisheries.schema.exchange.module.v1.*;
+import eu.europa.ec.fisheries.schema.exchange.movement.v1.*;
 import eu.europa.ec.fisheries.schema.exchange.plugin.types.v1.EmailType;
 import eu.europa.ec.fisheries.schema.exchange.plugin.types.v1.PluginType;
 import eu.europa.ec.fisheries.schema.exchange.plugin.types.v1.PollType;
@@ -64,13 +29,15 @@ import eu.europa.ec.fisheries.schema.exchange.v1.ExchangeLogStatusTypeType;
 import eu.europa.ec.fisheries.uvms.commons.date.DateUtils;
 import eu.europa.ec.fisheries.uvms.exchange.model.exception.ExchangeModelMapperException;
 import eu.europa.ec.fisheries.uvms.exchange.model.exception.ExchangeModelMarshallException;
-import org.apache.commons.lang3.StringUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
+import javax.xml.bind.JAXBException;
+import java.util.Date;
+import java.util.List;
+
+import static eu.europa.ec.fisheries.schema.exchange.module.v1.ExchangeModuleMethod.*;
 
 public class ExchangeModuleRequestMapper {
 
-    final static Logger LOG = LoggerFactory.getLogger(ExchangeModuleRequestMapper.class);
     private static final String FLUX_VESSEL_PLUGIN = "flux-vessel-plugin";
 
     public static String createRegisterServiceRequest(ServiceType serviceType, CapabilityListType capabilityList, SettingListType settingList) throws ExchangeModelMarshallException {
@@ -438,16 +405,15 @@ public class ExchangeModuleRequestMapper {
         return JAXBMarshaller.marshallJaxBObjectToString(request);
     }
 
-    private static void populateBaseProperties(ExchangeBaseRequest request, String fluxDFValue, Date date, String messageGuid, PluginType pluginType, String senderReceiver, String onValue, String username,  String todt, String to) {
+    private static void populateBaseProperties(ExchangeBaseRequest request, String fluxDFValue, Date date, String messageGuid, PluginType pluginType,
+                                               String senderReceiver, String onValue, String username,  String todt, String to) {
         request.setUsername(username);
         request.setFluxDataFlow(fluxDFValue);
         request.setDate(date);
         request.setMessageGuid(messageGuid);
         request.setPluginType(pluginType);
         request.setTodt(todt);
-        if (StringUtils.isNotBlank(to)){
-            request.setTo(new BigInteger(to));
-        }
+        request.setTo(to);
         request.setSenderOrReceiver(senderReceiver);
         request.setOnValue(onValue);
     }
@@ -493,7 +459,9 @@ public class ExchangeModuleRequestMapper {
         return JAXBMarshaller.marshallJaxBObjectToString(request);
     }
 
-    public static String createFluxFAResponseRequest(String response, String username, String df, String messageGuid, String fr, ExchangeLogStatusTypeType status, String destination, PluginType pluginType, String todt, BigInteger to, String onValue) throws ExchangeModelMarshallException {
+    public static String createFluxFAResponseRequest(String response, String username, String df, String messageGuid, String fr,
+                                                     ExchangeLogStatusTypeType status, String destination, PluginType pluginType, String todt,
+                                                     String to, String onValue) throws ExchangeModelMarshallException {
         SetFLUXFAResponseMessageRequest request = new SetFLUXFAResponseMessageRequest();
         request.setMethod(ExchangeModuleMethod.SET_FLUX_FA_RESPONSE_MESSAGE);
         request.setUsername(username);
@@ -561,5 +529,34 @@ public class ExchangeModuleRequestMapper {
             throw new NullPointerException();
         }
         return reference;
+    }
+
+    public static String createSetFLUXMovementReportRequest(String message, String username, String fluxDFValue, Date date,
+                                                            String messageGuid, PluginType pluginType, String senderReceiver, String onValue,
+                                                            String guid, String registeredClassName, String ad, String to, String todt) throws JAXBException {
+        SetFLUXMovementReportRequest request = new SetFLUXMovementReportRequest();
+        request.setMethod(ExchangeModuleMethod.RECEIVE_MOVEMENT_REPORT_BATCH);
+        request.setRequest(message);
+        request.setMessageGuid(guid);
+        populateBaseProperties(request, fluxDFValue, date, messageGuid, pluginType, senderReceiver, onValue,
+                username, registeredClassName, ad, to, todt);
+        return JAXBMarshaller.marshallJaxBObjectToString(request, "Unicode", true);
+    }
+
+    private static void populateBaseProperties(ExchangeBaseRequest request, String fluxDFValue, Date date, String messageGuid,
+                                               PluginType pluginType, String senderReceiver, String onValue, String username,
+                                               String registeredClassName, String ad, String to, String todt) {
+        request.setUsername(username);
+        request.setFluxDataFlow(fluxDFValue);
+        request.setDf(fluxDFValue);
+        request.setDate(date);
+        request.setMessageGuid(messageGuid);
+        request.setPluginType(pluginType);
+        request.setSenderOrReceiver(senderReceiver);
+        request.setOnValue(onValue);
+        request.setRegisteredClassName(registeredClassName);
+        request.setTo(to);
+        request.setTodt(todt);
+        request.setAd(ad);
     }
 }

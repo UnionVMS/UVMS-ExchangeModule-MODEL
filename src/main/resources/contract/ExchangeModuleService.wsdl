@@ -31,6 +31,7 @@
 
                     <!-- plugin wants to -->
                     <xsd:enumeration value="SET_MOVEMENT_REPORT"/>
+                    <xsd:enumeration value="RECEIVE_MOVEMENT_REPORT_BATCH"/>
                     <xsd:enumeration value="RECEIVE_SALES_REPORT"/>
                     <xsd:enumeration value="RECEIVE_SALES_QUERY"/>
                     <xsd:enumeration value="RECEIVE_SALES_RESPONSE"/>
@@ -44,6 +45,9 @@
 
                     <!-- asynch processed movement response -->
                     <xsd:enumeration value="PROCESSED_MOVEMENT"/>
+
+                    <!-- asynch processed movement response -->
+                    <xsd:enumeration value="PROCESSED_MOVEMENT_BATCH"/>
 
 					<!-- Asynch MDR Synchronization Request -->
 					<xsd:enumeration value="SET_MDR_SYNC_MESSAGE_REQUEST"/>
@@ -93,12 +97,14 @@
                     <xsd:element name="todt" minOccurs="0" type="xsd:string"/>
                     <xsd:element name="df" minOccurs="0" type="xsd:string"/>
                     <xsd:element name="date" minOccurs="0" type="xsd:dateTime"/>
-                    <xsd:element name="to" minOccurs="0" type="xsd:integer"/>
+                    <xsd:element name="to" minOccurs="0" type="xsd:string"/>
+                    <xsd:element name="ad" minOccurs="0" type="xsd:string"/>
                     <xsd:element name="fluxDataFlow" minOccurs="0" type="xsd:string" />
                     <xsd:element name="destination" minOccurs="0" type="xsd:string" />
                     <xsd:element name="onValue" minOccurs="0" type="xsd:string" />
                     <xsd:element name="recipient" minOccurs="0" type="xsd:string" />
                     <xsd:element name="refType" type="exchange:TypeRefType" />
+                    <xsd:element name="registeredClassName" type="xsd:string" />
                 </xsd:sequence>
             </xsd:complexType>
 
@@ -425,6 +431,19 @@
                         <xsd:extension base="module:ExchangeBaseRequest">
                             <xsd:sequence>
                                 <xsd:element name="orgRequest" type="movement:SetReportMovementType" minOccurs="1" maxOccurs="1"/>
+                                <xsd:element name="movementRefType" type="movement:MovementRefType" minOccurs="1" maxOccurs="1"/>
+                            </xsd:sequence>
+                        </xsd:extension>
+                    </xsd:complexContent>
+                </xsd:complexType>
+            </xsd:element>
+
+            <xsd:element name="ProcessedMovementResponseBatch">
+                <xsd:complexType>
+                    <xsd:complexContent>
+                        <xsd:extension base="module:ExchangeBaseRequest">
+                            <xsd:sequence>
+                                <xsd:element name="orgRequest" type="movement:SetReportMovementType" minOccurs="1" maxOccurs="unbounded"/>
                                 <xsd:element name="movementRefType" type="movement:MovementRefType" minOccurs="1" maxOccurs="1"/>
                             </xsd:sequence>
                         </xsd:extension>
