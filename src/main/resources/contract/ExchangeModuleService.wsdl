@@ -78,6 +78,7 @@
 
                     <!-- report back to exchange what the validation status of a received message was, to update the log -->
                     <xsd:enumeration value="UPDATE_LOG_STATUS" />
+                    <xsd:enumeration value="UPDATE_LOG_BUSINESS_ERROR" />
 
                     <xsd:enumeration value="LOG_REF_ID_BY_TYPE_EXISTS" />
 
@@ -458,7 +459,6 @@
                             <xsd:sequence>
                                 <xsd:element name="logGuid" type="xsd:string" minOccurs="1" maxOccurs="1"/>
                                 <xsd:element name="newStatus" type="exchange:ExchangeLogStatusTypeType" minOccurs="1" maxOccurs="1"/>
-                                <xsd:element name="duplicate" type="xsd:boolean" minOccurs="1" maxOccurs="1" default="false"/>
                             </xsd:sequence>
                         </xsd:extension>
                     </xsd:complexContent>

@@ -11,10 +11,46 @@ copy of the GNU General Public License along with the IFDM Suite. If not, see <h
  */
 package eu.europa.ec.fisheries.uvms.exchange.model.mapper;
 
+import static eu.europa.ec.fisheries.schema.exchange.module.v1.ExchangeModuleMethod.QUERY_ASSET_INFORMATION;
+import static eu.europa.ec.fisheries.schema.exchange.module.v1.ExchangeModuleMethod.RECEIVE_ASSET_INFORMATION;
+import static eu.europa.ec.fisheries.schema.exchange.module.v1.ExchangeModuleMethod.SEND_ASSET_INFORMATION;
+
+import javax.xml.bind.JAXBException;
+import java.util.Date;
+import java.util.List;
+
 import eu.europa.ec.fisheries.schema.exchange.common.v1.CommandType;
 import eu.europa.ec.fisheries.schema.exchange.common.v1.CommandTypeType;
-import eu.europa.ec.fisheries.schema.exchange.module.v1.*;
-import eu.europa.ec.fisheries.schema.exchange.movement.v1.*;
+import eu.europa.ec.fisheries.schema.exchange.module.v1.ExchangeBaseRequest;
+import eu.europa.ec.fisheries.schema.exchange.module.v1.ExchangeModuleMethod;
+import eu.europa.ec.fisheries.schema.exchange.module.v1.GetServiceListRequest;
+import eu.europa.ec.fisheries.schema.exchange.module.v1.ProcessedMovementResponse;
+import eu.europa.ec.fisheries.schema.exchange.module.v1.QueryAssetInformationRequest;
+import eu.europa.ec.fisheries.schema.exchange.module.v1.RcvFLUXFaResponseMessageRequest;
+import eu.europa.ec.fisheries.schema.exchange.module.v1.ReceiveAssetInformationRequest;
+import eu.europa.ec.fisheries.schema.exchange.module.v1.ReceiveInvalidSalesMessage;
+import eu.europa.ec.fisheries.schema.exchange.module.v1.ReceiveSalesQueryRequest;
+import eu.europa.ec.fisheries.schema.exchange.module.v1.ReceiveSalesReportRequest;
+import eu.europa.ec.fisheries.schema.exchange.module.v1.ReceiveSalesResponseRequest;
+import eu.europa.ec.fisheries.schema.exchange.module.v1.SendAssetInformationRequest;
+import eu.europa.ec.fisheries.schema.exchange.module.v1.SendMovementToPluginRequest;
+import eu.europa.ec.fisheries.schema.exchange.module.v1.SendSalesReportRequest;
+import eu.europa.ec.fisheries.schema.exchange.module.v1.SendSalesResponseRequest;
+import eu.europa.ec.fisheries.schema.exchange.module.v1.SetCommandRequest;
+import eu.europa.ec.fisheries.schema.exchange.module.v1.SetFAQueryMessageRequest;
+import eu.europa.ec.fisheries.schema.exchange.module.v1.SetFLUXFAReportMessageRequest;
+import eu.europa.ec.fisheries.schema.exchange.module.v1.SetFLUXFAResponseMessageRequest;
+import eu.europa.ec.fisheries.schema.exchange.module.v1.SetFLUXMDRSyncMessageExchangeRequest;
+import eu.europa.ec.fisheries.schema.exchange.module.v1.SetFLUXMDRSyncMessageExchangeResponse;
+import eu.europa.ec.fisheries.schema.exchange.module.v1.SetFLUXMovementReportRequest;
+import eu.europa.ec.fisheries.schema.exchange.module.v1.SetMovementReportRequest;
+import eu.europa.ec.fisheries.schema.exchange.module.v1.UpdateLogStatusRequest;
+import eu.europa.ec.fisheries.schema.exchange.module.v1.UpdatePluginSettingRequest;
+import eu.europa.ec.fisheries.schema.exchange.movement.v1.MovementRefType;
+import eu.europa.ec.fisheries.schema.exchange.movement.v1.MovementType;
+import eu.europa.ec.fisheries.schema.exchange.movement.v1.RecipientInfoType;
+import eu.europa.ec.fisheries.schema.exchange.movement.v1.SendMovementToPluginType;
+import eu.europa.ec.fisheries.schema.exchange.movement.v1.SetReportMovementType;
 import eu.europa.ec.fisheries.schema.exchange.plugin.types.v1.EmailType;
 import eu.europa.ec.fisheries.schema.exchange.plugin.types.v1.PluginType;
 import eu.europa.ec.fisheries.schema.exchange.plugin.types.v1.PollType;
@@ -29,12 +65,6 @@ import eu.europa.ec.fisheries.schema.exchange.v1.ExchangeLogStatusTypeType;
 import eu.europa.ec.fisheries.uvms.commons.date.DateUtils;
 import eu.europa.ec.fisheries.uvms.exchange.model.exception.ExchangeModelMapperException;
 import eu.europa.ec.fisheries.uvms.exchange.model.exception.ExchangeModelMarshallException;
-
-import javax.xml.bind.JAXBException;
-import java.util.Date;
-import java.util.List;
-
-import static eu.europa.ec.fisheries.schema.exchange.module.v1.ExchangeModuleMethod.*;
 
 public class ExchangeModuleRequestMapper {
 
@@ -492,15 +522,6 @@ public class ExchangeModuleRequestMapper {
         UpdateLogStatusRequest request = new UpdateLogStatusRequest();
         request.setMethod(ExchangeModuleMethod.UPDATE_LOG_STATUS);
         request.setLogGuid(logGuid);
-        request.setNewStatus(newStatus);
-        return JAXBMarshaller.marshallJaxBObjectToString(request);
-    }
-
-    public static String createUpdateLogStatusRequest(String logGuid, ExchangeLogStatusTypeType newStatus, boolean duplicate) throws ExchangeModelMarshallException {
-        UpdateLogStatusRequest request = new UpdateLogStatusRequest();
-        request.setMethod(ExchangeModuleMethod.UPDATE_LOG_STATUS);
-        request.setLogGuid(logGuid);
-        request.setDuplicate(duplicate);
         request.setNewStatus(newStatus);
         return JAXBMarshaller.marshallJaxBObjectToString(request);
     }
