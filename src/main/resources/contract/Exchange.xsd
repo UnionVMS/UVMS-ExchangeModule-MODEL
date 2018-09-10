@@ -23,6 +23,7 @@
             <xsd:element name="source" type="xsd:string" />
             <xsd:element name="typeRefType" type="exchange:TypeRefType" />
             <xsd:element name="relatedLogData" minOccurs="0" maxOccurs="unbounded" type="exchange:RelatedLogInfo" />
+            <xsd:element name="businessError" type="xsd:string"/>
         </xsd:sequence>
     </xsd:complexType>
 

@@ -65,6 +65,7 @@ import eu.europa.ec.fisheries.schema.exchange.v1.ExchangeLogStatusTypeType;
 import eu.europa.ec.fisheries.uvms.commons.date.DateUtils;
 import eu.europa.ec.fisheries.uvms.exchange.model.exception.ExchangeModelMapperException;
 import eu.europa.ec.fisheries.uvms.exchange.model.exception.ExchangeModelMarshallException;
+import org.apache.commons.lang3.exception.ExceptionUtils;
 
 public class ExchangeModuleRequestMapper {
 
@@ -533,7 +534,7 @@ public class ExchangeModuleRequestMapper {
             request.setLogGuid(logGuid);
         }
         if (e != null){
-            request.setBusinessModuleExceptionMessage(e.getMessage());
+            request.setBusinessModuleExceptionMessage(ExceptionUtils.getMessage(e) + ":" + ExceptionUtils.getStackTrace(e));
         }
         return JAXBMarshaller.marshallJaxBObjectToString(request);
     }
