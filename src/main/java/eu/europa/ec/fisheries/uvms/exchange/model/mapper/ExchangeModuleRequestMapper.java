@@ -530,9 +530,7 @@ public class ExchangeModuleRequestMapper {
     public static String createUpdateLogStatusRequest(String logGuid, Exception e) throws ExchangeModelMarshallException {
         UpdateLogStatusRequest request = new UpdateLogStatusRequest();
         request.setMethod(ExchangeModuleMethod.UPDATE_LOG_BUSINESS_ERROR);
-        if (logGuid != null){
-            request.setLogGuid(logGuid);
-        }
+        request.setLogGuid(logGuid);
         if (e != null){
             request.setBusinessModuleExceptionMessage(ExceptionUtils.getMessage(e) + ":" + ExceptionUtils.getStackTrace(e));
         }
