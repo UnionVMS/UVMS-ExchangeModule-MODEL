@@ -526,6 +526,18 @@ public class ExchangeModuleRequestMapper {
         return JAXBMarshaller.marshallJaxBObjectToString(request);
     }
 
+    public static String createUpdateLogStatusRequest(String logGuid, Exception e) throws ExchangeModelMarshallException {
+        UpdateLogStatusRequest request = new UpdateLogStatusRequest();
+        request.setMethod(ExchangeModuleMethod.UPDATE_LOG_BUSINESS_ERROR);
+        if (logGuid != null){
+            request.setLogGuid(logGuid);
+        }
+        if (e != null){
+            request.setBusinessModuleExceptionMessage(e.getMessage());
+        }
+        return JAXBMarshaller.marshallJaxBObjectToString(request);
+    }
+
     private static void enrichBaseRequest(ExchangeBaseRequest exchangeBaseRequest, ExchangeModuleMethod method, String guid, String dataFlow,
                                           String senderOrReceiver, Date date, String username, PluginType pluginType, String on) {
         exchangeBaseRequest.setMethod(checkNotNull(method));
