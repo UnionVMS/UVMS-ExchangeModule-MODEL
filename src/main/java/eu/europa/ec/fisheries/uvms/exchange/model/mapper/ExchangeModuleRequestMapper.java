@@ -102,7 +102,7 @@ public class ExchangeModuleRequestMapper {
         request.setUsername(username);
         request.setRequest(message);
         request.setDate(date);
-        populateBaseProperties(request, fluxDFValue, date, messageGuid, pluginType, senderReceiver, onValue, username, null, null);
+        populateBaseProperties(request, fluxDFValue, date, messageGuid, pluginType, senderReceiver, onValue, username, null, null, "");
         return JAXBMarshaller.marshallJaxBObjectToString(request);
     }
 
@@ -383,62 +383,66 @@ public class ExchangeModuleRequestMapper {
     }
 
     public static String createFluxFAReportRequest(String message, String username, String fluxDFValue, Date date,
-                                               String messageGuid, PluginType pluginType, String senderReceiver, String onValue, String todt, String to) throws ExchangeModelMarshallException {
+                                                   String messageGuid, PluginType pluginType, String senderReceiver, String onValue,
+                                                   String todt, String to, String ad) throws ExchangeModelMarshallException {
         SetFLUXFAReportMessageRequest request = new SetFLUXFAReportMessageRequest();
         request.setMethod(ExchangeModuleMethod.SET_FLUX_FA_REPORT_MESSAGE);
         request.setRequest(message);
-        populateBaseProperties(request, fluxDFValue, date, messageGuid, pluginType, senderReceiver, onValue, username, todt, to);
+        populateBaseProperties(request, fluxDFValue, date, messageGuid, pluginType, senderReceiver, onValue, username, todt, to, ad);
         return JAXBMarshaller.marshallJaxBObjectToString(request);
     }
 
     public static String createFARequestForUnknownType(String message, String username, String fluxDFValue, Date date,
-                                                   String messageGuid, PluginType pluginType, String senderReceiver, String onValue,  String todt, String to) throws ExchangeModelMarshallException {
+                                                       String messageGuid, PluginType pluginType, String senderReceiver, String onValue,
+                                                       String todt, String to, String ad) throws ExchangeModelMarshallException {
         SetFLUXFAReportMessageRequest request = new SetFLUXFAReportMessageRequest();
         request.setMethod(ExchangeModuleMethod.UNKNOWN);
         request.setRequest(message);
-        populateBaseProperties(request, fluxDFValue, date, messageGuid, pluginType, senderReceiver, onValue, username, todt, to);
+        populateBaseProperties(request, fluxDFValue, date, messageGuid, pluginType, senderReceiver, onValue, username, todt, to, ad);
         return JAXBMarshaller.marshallJaxBObjectToString(request);
     }
 
     public static String createFaQueryRequest(String message, String username, String fluxDFValue, Date date,
-                                                   String messageGuid, PluginType pluginType, String senderReceiver, String onValue,  String todt, String to) throws ExchangeModelMarshallException {
+                                              String messageGuid, PluginType pluginType, String senderReceiver, String onValue,
+                                              String todt, String to, String ad) throws ExchangeModelMarshallException {
         SetFAQueryMessageRequest request = new SetFAQueryMessageRequest();
         request.setMethod(ExchangeModuleMethod.SET_FA_QUERY_MESSAGE);
         request.setRequest(message);
-        populateBaseProperties(request, fluxDFValue, date, messageGuid, pluginType, senderReceiver, onValue, username, todt, to);
+        populateBaseProperties(request, fluxDFValue, date, messageGuid, pluginType, senderReceiver, onValue, username, todt, to, ad);
         return JAXBMarshaller.marshallJaxBObjectToString(request);
     }
 
     public static String createFluxResponseRequest(String message, String username, String dfValue, Date date,
-                                                   String messageGuid, PluginType pluginType, String senderReceiver, String onValue,  String todt, String to) throws ExchangeModelMarshallException {
+                                                   String messageGuid, PluginType pluginType, String senderReceiver, String onValue,
+                                                   String todt, String to, String ad) throws ExchangeModelMarshallException {
         RcvFLUXFaResponseMessageRequest request = new RcvFLUXFaResponseMessageRequest();
         request.setMethod(ExchangeModuleMethod.RCV_FLUX_FA_RESPONSE_MESSAGE);
         request.setRequest(message);
         request.setResponseMessageGuid(messageGuid);
-        populateBaseProperties(request, dfValue, date, messageGuid, pluginType, senderReceiver, onValue, username, todt, to);
+        populateBaseProperties(request, dfValue, date, messageGuid, pluginType, senderReceiver, onValue, username, todt, to, ad);
         return JAXBMarshaller.marshallJaxBObjectToString(request);
     }
 
     public static String createSendFaQueryMessageRequest(String faQueryMessageStr, String username, String logId, String fluxDataFlow,
-                                                         String senderOrReceiver, String todt, String to) throws ExchangeModelMarshallException {
+                                                         String senderOrReceiver, String todt, String to, String ad) throws ExchangeModelMarshallException {
         SetFAQueryMessageRequest request = new SetFAQueryMessageRequest();
         request.setMethod(ExchangeModuleMethod.SEND_FA_QUERY_MESSAGE);
         request.setRequest(faQueryMessageStr);
-        populateBaseProperties(request, fluxDataFlow, DateUtils.nowUTC().toDate(), logId, null, senderOrReceiver, null, username, todt, to);
+        populateBaseProperties(request, fluxDataFlow, DateUtils.nowUTC().toDate(), logId, null, senderOrReceiver, null, username, todt, to, ad);
         return JAXBMarshaller.marshallJaxBObjectToString(request);
     }
 
     public static String createSendFaReportMessageRequest(String faReportMessageStr, String username, String logId, String fluxDataFlow,
-                                                         String senderOrReceiver, String onValue, String todt, String to) throws ExchangeModelMarshallException {
+                                                         String senderOrReceiver, String onValue, String todt, String to, String ad) throws ExchangeModelMarshallException {
         SetFLUXFAReportMessageRequest request = new SetFLUXFAReportMessageRequest();
         request.setMethod(ExchangeModuleMethod.SEND_FLUX_FA_REPORT_MESSAGE);
         request.setRequest(faReportMessageStr);
-        populateBaseProperties(request, fluxDataFlow, DateUtils.nowUTC().toDate(), logId, null, senderOrReceiver, onValue, username, todt, to);
+        populateBaseProperties(request, fluxDataFlow, DateUtils.nowUTC().toDate(), logId, null, senderOrReceiver, onValue, username, todt, to, ad);
         return JAXBMarshaller.marshallJaxBObjectToString(request);
     }
 
     private static void populateBaseProperties(ExchangeBaseRequest request, String fluxDFValue, Date date, String messageGuid, PluginType pluginType,
-                                               String senderReceiver, String onValue, String username,  String todt, String to) {
+                                               String senderReceiver, String onValue, String username,  String todt, String to, String ad) {
         request.setUsername(username);
         request.setFluxDataFlow(fluxDFValue);
         request.setDate(date);
@@ -448,6 +452,7 @@ public class ExchangeModuleRequestMapper {
         request.setTo(to);
         request.setSenderOrReceiver(senderReceiver);
         request.setOnValue(onValue);
+        request.setAd(ad);
     }
 
 
