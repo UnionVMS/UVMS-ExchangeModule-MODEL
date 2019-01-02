@@ -102,7 +102,7 @@
             <xsd:element name="positionFixType" type="xsd:string"   nillable="true"/>
             <xsd:element name="RAIMFlag" type="xsd:boolean"   nillable="true"/>
             <xsd:element name="DTE" type="xsd:boolean"   nillable="true"/>
-            <xsd:element name="assignedModeFlag" type="xsd:string"  nillable="true"/>
+            <xsd:element name="assignedModeFlag" type="xsd:boolean"  nillable="true"/>
 
 
         </xsd:sequence>
