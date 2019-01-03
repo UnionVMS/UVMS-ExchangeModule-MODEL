@@ -91,6 +91,20 @@
             <xsd:element name="mmsi" type="xsd:string"/>
             <xsd:element name="tripNumber" type="xsd:double" nillable="true"/>
             <xsd:element name="internalReferenceNumber" type="xsd:string"/>
+
+            <xsd:element name="positionAccuracy" type="xsd:boolean"    nillable="true"/>
+            <xsd:element name="trueHeading" type="xsd:int"   nillable="true"/>
+            <xsd:element name="typeOfShipAndCargo" type="xsd:int"   nillable="true"/>
+            <xsd:element name="dimensionToBow" type="xsd:int"   nillable="true"/>
+            <xsd:element name="dimensionToStern" type="xsd:int"   nillable="true"/>
+            <xsd:element name="dimensionToPort" type="xsd:int"   nillable="true"/>
+            <xsd:element name="dimensionToStarBoard" type="xsd:int"   nillable="true"/>
+            <xsd:element name="positionFixType" type="xsd:string"   nillable="true"/>
+            <xsd:element name="RAIMFlag" type="xsd:boolean"   nillable="true"/>
+            <xsd:element name="DTE" type="xsd:boolean"   nillable="true"/>
+            <xsd:element name="assignedModeFlag" type="xsd:boolean"  nillable="true"/>
+
+
         </xsd:sequence>
     </xsd:complexType>
     
