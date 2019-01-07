@@ -10,13 +10,13 @@
 
     <groupId>eu.europa.ec.fisheries.uvms.exchange</groupId>
     <artifactId>exchange-model</artifactId>
-    <version>4.0.26-SNAPSHOT</version>
+    <version>4.0.26</version>
     <packaging>ejb</packaging>
 
     <scm>
         <url>${scm.url}</url>
         <connection>${scm.connection}</connection>
-        <tag>HEAD</tag>
+        <tag>exchange-model-4.0.26</tag>
     </scm>
 
     <properties>
