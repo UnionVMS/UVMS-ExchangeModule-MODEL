@@ -117,6 +117,15 @@
             <xsd:element name="dimensionToPort" type="xsd:int"   nillable="true"/>
             <xsd:element name="dimensionToStarBoard" type="xsd:int"   nillable="true"/>
             <xsd:element name="motherShipMMSI" type="xsd:string"   nillable="true"/>
+            <xsd:element name="aisVersion" type="xsd:int"   nillable="true"/>
+            <xsd:element name="imoNumber" type="xsd:string"   nillable="true"/>
+            <xsd:element name="positionFixType" type="xsd:string"   nillable="true"/>
+            <xsd:element name="draught" type="xsd:int"   nillable="true"/>
+            <xsd:element name="destination" type="xsd:string"   nillable="true"/>
+            <xsd:element name="DTE" type="xsd:boolean"   nillable="true"/>
+            <xsd:element name="ETA" type="xsd:dateTime"/>
+            <xsd:element name="repeatIndicator" type="xsd:int"   nillable="true"/>
+
 
 
 
