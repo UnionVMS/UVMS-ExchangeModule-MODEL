@@ -92,6 +92,7 @@
             <xsd:element name="tripNumber" type="xsd:double" nillable="true"/>
             <xsd:element name="internalReferenceNumber" type="xsd:string"/>
             <xsd:element name="repeatIndicator" type="xsd:int"   nillable="true"/>
+            <xsd:element name="trueHeading" type="xsd:int"    nillable="true"/>
         </xsd:sequence>
     </xsd:complexType>
 
