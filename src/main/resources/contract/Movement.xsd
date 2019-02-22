@@ -91,7 +91,13 @@
             <xsd:element name="mmsi" type="xsd:string"/>
             <xsd:element name="tripNumber" type="xsd:double" nillable="true"/>
             <xsd:element name="internalReferenceNumber" type="xsd:string"/>
+            <xsd:element name="repeatIndicator" type="xsd:int"   nillable="true"/>
+        </xsd:sequence>
+    </xsd:complexType>
 
+
+    <!--xsd:complexType name="NotYet">
+        <xsd:sequence>
             <xsd:element name="aisMessageType" type="xsd:int"  nillable="true"/>
             <xsd:element name="positionAccuracy" type="xsd:boolean"    nillable="true"/>
             <xsd:element name="trueHeading" type="xsd:int"    nillable="true"/>
@@ -124,13 +130,13 @@
             <xsd:element name="destination" type="xsd:string"   nillable="true"/>
             <xsd:element name="DTE" type="xsd:boolean"   nillable="true"/>
             <xsd:element name="ETA" type="xsd:dateTime"/>
-            <xsd:element name="repeatIndicator" type="xsd:int"   nillable="true"/>
-
-
-
-
         </xsd:sequence>
-    </xsd:complexType>
+    </xsd:complexType-->
+
+
+
+
+
     
     <xsd:complexType name="MovementPoint">
         <xsd:sequence>
