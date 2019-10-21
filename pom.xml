@@ -2,15 +2,15 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>fish.focus.uvms.maven</groupId>
-        <artifactId>uvms-pom</artifactId>
+        <groupId>eu.europa.ec.fisheries.uvms</groupId>
+        <artifactId>mare-pom</artifactId>
+        <version>1.6.0-MARE</version>
         <relativePath />
-        <version>1.18</version>
     </parent>
 
     <groupId>eu.europa.ec.fisheries.uvms.exchange</groupId>
     <artifactId>exchange-model</artifactId>
-    <version>4.0.35-SNAPSHOT</version>
+    <version>${uvms.exchange.model.version}</version>
     <packaging>ejb</packaging>
 
     <scm>
@@ -45,7 +45,7 @@
         <dependency>
             <groupId>eu.europa.ec.fisheries.uvms.commons</groupId>
             <artifactId>uvms-commons-date</artifactId>
-            <version>3.4-SNAPSHOT</version>
+            <version>${uvms.commonsLibrary.version}</version>
         </dependency>
         <dependency>
             <groupId>org.jvnet.jaxb2_commons</groupId>
