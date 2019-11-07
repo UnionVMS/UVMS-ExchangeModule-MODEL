@@ -5,3 +5,8 @@ scripts
 scripts/*
 logging.properties
 /.idea
+.project
+.classpath
+.settings/
+pom.xml.versionsBackup
+.flattened-pom.xml
