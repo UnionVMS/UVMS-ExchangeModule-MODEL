@@ -45,6 +45,7 @@ import eu.europa.ec.fisheries.schema.exchange.module.v1.SetFLUXMDRSyncMessageExc
 import eu.europa.ec.fisheries.schema.exchange.module.v1.SetFLUXMovementReportRequest;
 import eu.europa.ec.fisheries.schema.exchange.module.v1.SetMovementReportRequest;
 import eu.europa.ec.fisheries.schema.exchange.module.v1.UpdateLogStatusRequest;
+import eu.europa.ec.fisheries.schema.exchange.module.v1.UpdateOnMessageRequest;
 import eu.europa.ec.fisheries.schema.exchange.module.v1.UpdatePluginSettingRequest;
 import eu.europa.ec.fisheries.schema.exchange.movement.v1.MovementRefType;
 import eu.europa.ec.fisheries.schema.exchange.movement.v1.MovementType;
@@ -534,6 +535,14 @@ public class ExchangeModuleRequestMapper {
         request.setMethod(ExchangeModuleMethod.UPDATE_LOG_STATUS);
         request.setLogGuid(logGuid);
         request.setNewStatus(newStatus);
+        return JAXBMarshaller.marshallJaxBObjectToString(request);
+    }
+
+    public static String createUpdateOnMessageRequest(String onValue, String responseMsgGuid) throws ExchangeModelMarshallException {
+        UpdateOnMessageRequest request = new UpdateOnMessageRequest();
+        request.setMethod(ExchangeModuleMethod.UPDATE_ON_RESPONSE_MESSAGE);
+        request.setResponseMessageGuid(responseMsgGuid);
+        request.setOnValue(onValue);
         return JAXBMarshaller.marshallJaxBObjectToString(request);
     }
 
