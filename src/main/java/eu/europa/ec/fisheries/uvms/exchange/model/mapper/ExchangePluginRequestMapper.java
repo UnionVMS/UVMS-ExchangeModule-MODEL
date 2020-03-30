@@ -85,7 +85,7 @@ public class ExchangePluginRequestMapper {
         return JAXBMarshaller.marshallJaxBObjectToString(pluginRequest);
     }
 
-    public static String createSetFLUXFAResponseRequestWithOn(String  fluxFAResponse, String destination, String df, String fr, String onValue) throws ExchangeModelMarshallException {
+    public static String createSetFLUXFAResponseRequestWithOn(String  fluxFAResponse, String destination, String df, String fr, String onValue, String responseMsgGuid) throws ExchangeModelMarshallException {
         SetFLUXFAResponseRequest request = new SetFLUXFAResponseRequest();
         request.setMethod(ExchangePluginMethod.SET_FLUX_RESPONSE);
         request.setResponse(fluxFAResponse);
@@ -93,6 +93,7 @@ public class ExchangePluginRequestMapper {
         request.setFluxDataFlow(df);
         request.setSenderOrReceiver(fr);
         request.setOnValue(onValue);
+        request.setResponseLogGuid(responseMsgGuid);
         return JAXBMarshaller.marshallJaxBObjectToString(request);
     }
 
@@ -101,33 +102,36 @@ public class ExchangePluginRequestMapper {
      *  @Deprecated Use createSetFLUXFAResponseRequestWithOn(..){} instead.
      */
     @Deprecated
-    public static String createSetFLUXFAResponseRequest(String  fluxFAResponse, String destination, String df, String fr) throws ExchangeModelMarshallException {
+    public static String createSetFLUXFAResponseRequest(String  fluxFAResponse, String destination, String df, String fr, String responseMsgGuid) throws ExchangeModelMarshallException {
         SetFLUXFAResponseRequest request = new SetFLUXFAResponseRequest();
         request.setMethod(ExchangePluginMethod.SET_FLUX_RESPONSE);
         request.setResponse(fluxFAResponse);
         request.setDestination(destination);
         request.setFluxDataFlow(df);
         request.setSenderOrReceiver(fr);
+        request.setResponseLogGuid(responseMsgGuid);
         return JAXBMarshaller.marshallJaxBObjectToString(request);
     }
 
-    public static String createSendFLUXFAQueryRequest(String request, String destination, String df, String fr) throws ExchangeModelMarshallException {
+    public static String createSendFLUXFAQueryRequest(String request, String destination, String df, String fr, String responseMsgGuid) throws ExchangeModelMarshallException {
         SetFLUXFAQueryRequest faqReq = new SetFLUXFAQueryRequest();
         faqReq.setMethod(ExchangePluginMethod.SEND_FA_QUERY);
         faqReq.setResponse(request);
         faqReq.setDestination(destination);
         faqReq.setFluxDataFlow(df);
         faqReq.setSenderOrReceiver(fr);
+        faqReq.setResponseLogGuid(responseMsgGuid);
         return JAXBMarshaller.marshallJaxBObjectToString(faqReq);
     }
 
-    public static String createSendFLUXFAReportRequest(String request, String destination, String df, String fr) throws ExchangeModelMarshallException {
+    public static String createSendFLUXFAReportRequest(String request, String destination, String df, String fr, String responseMsgGuid) throws ExchangeModelMarshallException {
         SetFLUXFAReportRequest faqReq = new SetFLUXFAReportRequest();
         faqReq.setMethod(ExchangePluginMethod.SEND_FA_REPORT);
         faqReq.setResponse(request);
         faqReq.setDestination(destination);
         faqReq.setFluxDataFlow(df);
         faqReq.setSenderOrReceiver(fr);
+        faqReq.setResponseLogGuid(responseMsgGuid);
         return JAXBMarshaller.marshallJaxBObjectToString(faqReq);
     }
 }

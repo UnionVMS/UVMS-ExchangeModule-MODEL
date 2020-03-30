@@ -80,6 +80,8 @@
                     <xsd:enumeration value="UPDATE_LOG_STATUS" />
                     <xsd:enumeration value="UPDATE_LOG_BUSINESS_ERROR" />
 
+                    <xsd:enumeration value="UPDATE_ON_RESPONSE_MESSAGE" />
+
                     <xsd:enumeration value="LOG_REF_ID_BY_TYPE_EXISTS" />
 
                     <xsd:enumeration value="LOG_ID_BY_TYPE_EXISTS" />
@@ -467,6 +469,18 @@
                 </xsd:complexType>
             </xsd:element>
 
+            <xsd:element name="UpdateOnMessageRequest">
+                <xsd:complexType>
+                    <xsd:complexContent>
+                        <xsd:extension base="module:ExchangeBaseRequest">
+                            <xsd:sequence>
+                                <xsd:element name="onValue" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                            </xsd:sequence>
+                        </xsd:extension>
+                    </xsd:complexContent>
+                </xsd:complexType>
+            </xsd:element>
+
             <xsd:element name="LogRefIdByTypeExistsRequest">
                 <xsd:complexType>
                     <xsd:complexContent>
@@ -564,6 +578,10 @@
         <part name="body" element="module:UpdateLogStatusRequest"/>
     </message>
 
+    <message name="UpdateOnMessageRequest">
+        <part name="body" element="module:UpdateOnMessageRequest"/>
+    </message>
+
     <message name="UpdatePluginSettingRequest">
         <part name="body" element="module:UpdatePluginSettingRequest"/>
     </message>
@@ -651,6 +669,11 @@
 
         <operation name="UpdateLogStatus">
             <input message="module:UpdateLogStatusRequest"/>
+            <fault name="ExchangeFault" message="module:ExchangeFault"/>
+        </operation>
+
+        <operation name="UpdateOnMessage">
+            <input message="module:UpdateOnMessageRequest"/>
             <fault name="ExchangeFault" message="module:ExchangeFault"/>
         </operation>
 
