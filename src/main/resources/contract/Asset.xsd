@@ -33,6 +33,7 @@
             <xsd:enumeration value="ID" />
             <xsd:enumeration value="CFR" />
             <xsd:enumeration value="IRCS" />
+            <xsd:enumeration value="EXT_MARK" />
             <xsd:enumeration value="IMO" />
             <xsd:enumeration value="MMSI"/>
             <xsd:enumeration value="GUID"/>
