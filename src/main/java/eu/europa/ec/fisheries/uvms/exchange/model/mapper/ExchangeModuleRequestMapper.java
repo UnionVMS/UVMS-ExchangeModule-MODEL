@@ -439,7 +439,7 @@ public class ExchangeModuleRequestMapper {
         SetFLUXFAReportMessageRequest request = new SetFLUXFAReportMessageRequest();
         request.setMethod(ExchangeModuleMethod.SEND_FLUX_FA_REPORT_MESSAGE);
         request.setRequest(faReportMessageStr);
-        populateBaseProperties(request, fluxDataFlow, DateUtils.nowUTC().toDate(), logId, null, senderOrReceiver, onValue, username, todt, to, ad);
+        populateBaseProperties(request, fluxDataFlow, DateUtils.nowUTC().toDate(), logId, PluginType.FLUX, senderOrReceiver, onValue, username, todt, to, ad);
         return JAXBMarshaller.marshallJaxBObjectToString(request);
     }
 
