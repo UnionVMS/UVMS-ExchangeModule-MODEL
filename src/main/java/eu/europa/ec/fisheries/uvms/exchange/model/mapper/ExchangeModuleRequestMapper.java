@@ -430,7 +430,7 @@ public class ExchangeModuleRequestMapper {
         SetFAQueryMessageRequest request = new SetFAQueryMessageRequest();
         request.setMethod(ExchangeModuleMethod.SEND_FA_QUERY_MESSAGE);
         request.setRequest(faQueryMessageStr);
-        populateBaseProperties(request, fluxDataFlow, DateUtils.nowUTC().toDate(), logId, null, senderOrReceiver, null, username, todt, to, ad);
+        populateBaseProperties(request, fluxDataFlow, DateUtils.nowUTC().toDate(), logId, PluginType.FLUX, senderOrReceiver, null, username, todt, to, ad);
         return JAXBMarshaller.marshallJaxBObjectToString(request);
     }
 
