@@ -31,6 +31,7 @@
 
                     <!-- plugin wants to -->
                     <xsd:enumeration value="SET_MOVEMENT_REPORT"/>
+                    <xsd:enumeration value="SEND_MOVEMENT_REPORT"/>
                     <xsd:enumeration value="RECEIVE_MOVEMENT_REPORT_BATCH"/>
                     <xsd:enumeration value="RECEIVE_SALES_REPORT"/>
                     <xsd:enumeration value="RECEIVE_SALES_QUERY"/>
@@ -281,6 +282,18 @@
             </xsd:element>
 
             <xsd:element name="SetFLUXMovementReportRequest">
+                <xsd:complexType>
+                    <xsd:complexContent>
+                        <xsd:extension base="module:ExchangeBaseRequest">
+                            <xsd:sequence>
+                                <xsd:element name="request" type="xsd:string"/>
+                            </xsd:sequence>
+                        </xsd:extension>
+                    </xsd:complexContent>
+                </xsd:complexType>
+            </xsd:element>
+
+            <xsd:element name="SendFLUXMovementReportRequest">
                 <xsd:complexType>
                     <xsd:complexContent>
                         <xsd:extension base="module:ExchangeBaseRequest">

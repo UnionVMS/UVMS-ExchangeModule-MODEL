@@ -182,4 +182,8 @@ public class ExchangePluginResponseMapper {
     public static String mapToSetPollStatusToFailedResponse(String serviceClassName, AcknowledgeType ackType, String pollGuid) throws ExchangeModelMarshallException {
         return mapToSetPollStatusAcknowledgeResponse(serviceClassName, ackType, pollGuid, ExchangeLogStatusTypeType.FAILED, ExchangePluginMethod.SET_COMMAND);
     }
+
+    public static String mapToSendFluxMovementReportResponse(String serviceClassName, AcknowledgeType ackType) throws ExchangeModelMarshallException {
+        return mapToAcknowledgeResponse(serviceClassName, ackType, ExchangePluginMethod.SEND_MOVEMENT_REPORT);
+    }
 }

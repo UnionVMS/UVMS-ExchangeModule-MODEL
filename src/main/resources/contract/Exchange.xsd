@@ -84,6 +84,7 @@
         <xsd:restriction base="xsd:string">
             <xsd:enumeration value="RECEIVE_MOVEMENT"/>
             <xsd:enumeration value="SEND_MOVEMENT"/>
+            <xsd:enumeration value="SEND_MOVEMENT_REPORT"/>
             <xsd:enumeration value="PROCESSED_MOVEMENT"/>
             <xsd:enumeration value="SEND_EMAIL"/>
             <xsd:enumeration value="SEND_POLL"/>
@@ -117,6 +118,7 @@
         <xsd:restriction base="xsd:string">
             <xsd:enumeration value="MOVEMENT"/>
             <xsd:enumeration value="MOVEMENT_RESPONSE"/>
+            <xsd:enumeration value="MOVEMENT_REPORT"/>
             <xsd:enumeration value="POLL"/>
             <xsd:enumeration value="ALARM"/>
             <xsd:enumeration value="UNKNOWN"/>
