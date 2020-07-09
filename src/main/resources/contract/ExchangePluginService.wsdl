@@ -28,7 +28,8 @@
                     <xsd:enumeration value="SEND_FA_REPORT"/>
                     <xsd:enumeration value="SEND_FA_QUERY"/>
 					<xsd:enumeration value="SET_FLUX_RESPONSE"/>
-					<xsd:enumeration value="SEND_SALES_REPORT"/>
+                    <xsd:enumeration value="SEND_MOVEMENT_REPORT"/>
+                    <xsd:enumeration value="SEND_SALES_REPORT"/>
 					<xsd:enumeration value="SEND_SALES_RESPONSE"/>
                     <xsd:enumeration value="SEND_VESSEL_INFORMATION"/>
                     <xsd:enumeration value="SEND_VESSEL_QUERY"/>
@@ -51,6 +52,19 @@
                     <xsd:element name="method" type="plugin:ExchangePluginMethod"/>
                 </xsd:sequence>
             </xsd:complexType>
+
+            <xsd:element name="SendFLUXMovementReportRequest">
+                <xsd:complexType>
+                    <xsd:complexContent>
+                        <xsd:extension base="plugin:PluginBaseRequest">
+                            <xsd:sequence>
+                                <xsd:element name="report" type="xsd:string"/>
+                                <xsd:element name="recipient" type="xsd:string"/>
+                            </xsd:sequence>
+                        </xsd:extension>
+                    </xsd:complexContent>
+                </xsd:complexType>
+            </xsd:element>
 
             <xsd:element name="SendSalesReportRequest">
                 <xsd:complexType>
@@ -287,6 +301,13 @@
     <message name="SetReportResponse">
         <part name="body" element="plugin:AcknowledgeResponse"/>
     </message>
+
+    <message name="SendFluxMovementReportRequest">
+        <part name="body" element="plugin:SendFLUXMovementReportRequest"/>
+    </message>
+    <message name="SendFluxMovementReportResponse">
+        <part name="body" element="plugin:AcknowledgeResponse"/>
+    </message>
     
     <message name="StartRequest">
         <part name="body" element="plugin:StartRequest"/>
@@ -326,6 +347,12 @@
         <operation name="SetReport">
             <input message="plugin:SetReportRequest"/>
             <output message="plugin:SetReportRequest"/>
+            <fault name="PluginFault" message="plugin:PluginFault"/>
+        </operation>
+
+        <operation name="SendFluxMovementReport">
+            <input message="plugin:SendFluxMovementReportRequest"/>
+            <output message="plugin:SendFluxMovementReportResponse"/>
             <fault name="PluginFault" message="plugin:PluginFault"/>
         </operation>
         
@@ -376,6 +403,18 @@
         </operation>
         
         <operation name="SetReport">
+            <input>
+                <soap:body use="literal"/>
+            </input>
+            <output>
+                <soap:body use="literal"/>
+            </output>
+            <fault name="PluginFault">
+                <soap:fault name="PluginFault" use="literal"/>
+            </fault>
+        </operation>
+
+        <operation name="SendFluxMovementReport">
             <input>
                 <soap:body use="literal"/>
             </input>
