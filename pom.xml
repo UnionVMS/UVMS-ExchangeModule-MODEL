@@ -29,7 +29,6 @@
         <wsdl.registry.name>ExchangeRegistryService</wsdl.registry.name>
         <project.scm.id>github</project.scm.id>
         <binding.xml>binding-date.xml</binding.xml>
-
     </properties>
 
     <dependencies>
@@ -51,6 +50,11 @@
             <groupId>org.jvnet.jaxb2_commons</groupId>
             <artifactId>jaxb2-basics</artifactId>
             <version>0.9.5</version>
+        </dependency>
+        <dependency>
+            <groupId>eu.europa.ec.fisheries.uvms.commons</groupId>
+            <artifactId>uvms-commons-xml</artifactId>
+            <version>${uvms.commonsLibrary.version}</version>
         </dependency>
     </dependencies>
 

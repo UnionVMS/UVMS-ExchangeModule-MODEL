@@ -11,26 +11,19 @@ copy of the GNU General Public License along with the IFDM Suite. If not, see <h
  */
 package eu.europa.ec.fisheries.uvms.exchange.model.mapper;
 
+import eu.europa.ec.fisheries.uvms.commons.xml.AbstractJAXBMarshaller;
+import eu.europa.ec.fisheries.uvms.commons.xml.JAXBRuntimeException;
 import eu.europa.ec.fisheries.uvms.exchange.model.exception.ExchangeModelMarshallException;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.jms.JMSException;
 import javax.jms.TextMessage;
-import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
-import javax.xml.bind.Unmarshaller;
-import javax.xml.transform.stream.StreamSource;
-import java.io.StringReader;
-import java.io.StringWriter;
 import java.util.HashMap;
 import java.util.Map;
 
-public class JAXBMarshaller {
-
-    private static final String COM_SUN_XML_BIND_XML_DECLARATION = "com.sun.xml.bind.xmlDeclaration";
-
-    private static Map<String, JAXBContext> contexts = new HashMap<>();
+public class JAXBMarshaller extends AbstractJAXBMarshaller {
 
     /**
      * Marshalls a JAXB Object to a XML String representation
@@ -38,26 +31,29 @@ public class JAXBMarshaller {
      * @param <T>
      * @param data
      * @return
-     * @throws
-     * eu.europa.ec.fisheries.uvms.exchange.model.exception.ExchangeModelMarshallException
+     * @throws eu.europa.ec.fisheries.uvms.exchange.model.exception.ExchangeModelMarshallException
      */
     public static <T> String marshallJaxBObjectToString(T data) throws ExchangeModelMarshallException {
         try {
-            JAXBContext jaxbContext = contexts.get(data.getClass().getName());
-            if (jaxbContext == null) {
-                jaxbContext = JAXBContext.newInstance(data.getClass());
-                contexts.put(data.getClass().getName(), jaxbContext);
-            }
-            Marshaller marshaller = jaxbContext.createMarshaller();
-            marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-            marshaller.setProperty(Marshaller.JAXB_FRAGMENT, Boolean.TRUE);
-            StringWriter sw = new StringWriter();
-            marshaller.marshal(data, sw);
-            String marshalled = sw.toString();
-            return marshalled;
-        } catch (JAXBException ex) {
+            Map<String,Object> properties = new HashMap<>();
+            properties.put(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
+            properties.put(Marshaller.JAXB_FRAGMENT, Boolean.TRUE);
+            return marshallToString(data, properties);
+        } catch (JAXBException | JAXBRuntimeException ex) {
             throw new ExchangeModelMarshallException("Error when marshalling Object to String", ex);
         }
+    }
+
+    public static <T> String marshallJaxBObjectToString(T data, String encoding, boolean formatted) throws JAXBException, JAXBRuntimeException {
+        Map<String,Object> properties = new HashMap<>();
+        properties.put(Marshaller.JAXB_FRAGMENT, Boolean.TRUE);
+        if (StringUtils.isNotEmpty(encoding)) {
+            properties.put(Marshaller.JAXB_ENCODING,encoding);
+        }
+        if (formatted) {
+            properties.put(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
+        }
+        return marshallToString(data, properties);
     }
 
     /**
@@ -66,74 +62,32 @@ public class JAXBMarshaller {
      *
      * @param <R>
      * @param textMessage
-     * @param clazz pperException
+     * @param clazz       pperException
      * @return
-     * @throws
-     * eu.europa.ec.fisheries.uvms.exchange.model.exception.ExchangeModelMarshallException
+     * @throws eu.europa.ec.fisheries.uvms.exchange.model.exception.ExchangeModelMarshallException
      */
-    public static <R> R unmarshallTextMessage(TextMessage textMessage, Class clazz) throws ExchangeModelMarshallException {
+    public static <R> R unmarshallTextMessage(TextMessage textMessage, Class<R> clazz) throws ExchangeModelMarshallException {
         try {
-            JAXBContext jc = contexts.get(clazz.getName());
-            if (jc == null) {
-                jc = JAXBContext.newInstance(clazz);
-                contexts.put(clazz.getName(), jc);
-            }
-            Unmarshaller unmarshaller = jc.createUnmarshaller();
-            StringReader sr = new StringReader(textMessage.getText());
-            StreamSource source = new StreamSource(sr);
-            R object = (R) unmarshaller.unmarshal(source);
-            return object;
-        } catch (JMSException | JAXBException ex) {
-            throw new ExchangeModelMarshallException("Error when unmarshalling response in ResponseMapper",ex);
+            return unmarshallString(textMessage.getText(), clazz);
+        } catch (JMSException ex) {
+            throw new ExchangeModelMarshallException("Error when unmarshalling response in ResponseMapper", ex);
         }
     }
-
 
     /**
      * Unmarshalls a string to the desired class.
      *
      * @param text
      * @param clazz class to marshall to. The class must be the
-     * root object of the unmarchalled message!
+     *              root object of the unmarchalled message!
      * @return
      * @throws ExchangeModelMarshallException
      */
-    public static <R> R unmarshallString(String text, Class clazz) throws ExchangeModelMarshallException {
+    public static <R> R unmarshallString(String text, Class<R> clazz) throws ExchangeModelMarshallException {
         try {
-            JAXBContext jc = contexts.get(clazz.getName());
-            if (jc == null) {
-                jc = JAXBContext.newInstance(clazz);
-                contexts.put(clazz.getName(), jc);
-            }
-            Unmarshaller unmarshaller = jc.createUnmarshaller();
-            StringReader sr = new StringReader(text);
-            StreamSource source = new StreamSource(sr);
-            R object = (R) unmarshaller.unmarshal(source);
-            return object;
-        } catch (JAXBException ex) {
+            return unmarshallTo(text, clazz);
+        } catch (JAXBException | JAXBRuntimeException ex) {
             throw new ExchangeModelMarshallException("Error when unmarshalling text", ex);
         }
-    }
-
-    public static <T> String marshallJaxBObjectToString(T data, String encoding, boolean formatted) throws JAXBException {
-        JAXBContext jaxbContext = contexts.get(data.getClass().getName());
-        if (jaxbContext == null) {
-            jaxbContext = JAXBContext.newInstance(data.getClass());
-            contexts.put(data.getClass().getName(), jaxbContext);
-        }
-
-        Marshaller marshaller = jaxbContext.createMarshaller();
-        if (StringUtils.isNotEmpty(encoding)) {
-            marshaller.setProperty("jaxb.encoding", encoding);
-        }
-
-        if (formatted) {
-            marshaller.setProperty("jaxb.formatted.output", true);
-        }
-
-        marshaller.setProperty("jaxb.fragment", Boolean.TRUE);
-        StringWriter sw = new StringWriter();
-        marshaller.marshal(data, sw);
-        return sw.toString();
     }
 }

@@ -64,6 +64,7 @@ import eu.europa.ec.fisheries.schema.exchange.service.v1.SettingListType;
 import eu.europa.ec.fisheries.schema.exchange.service.v1.SettingType;
 import eu.europa.ec.fisheries.schema.exchange.v1.ExchangeLogStatusTypeType;
 import eu.europa.ec.fisheries.uvms.commons.date.DateUtils;
+import eu.europa.ec.fisheries.uvms.commons.xml.JAXBRuntimeException;
 import eu.europa.ec.fisheries.uvms.exchange.model.exception.ExchangeModelMapperException;
 import eu.europa.ec.fisheries.uvms.exchange.model.exception.ExchangeModelMarshallException;
 import org.apache.commons.lang3.exception.ExceptionUtils;
@@ -273,7 +274,7 @@ public class ExchangeModuleRequestMapper {
         return request;
     }
 
-    public static SendMovementToPluginType createSendMovementToPluginType(String pluginName, PluginType type, Date fwdDate, String fwdRule, String recipient, MovementType payload, List<RecipientInfoType> recipientInfoList, String assetName, String ircs, String mmsi, String externalMarking, String flagState) throws ExchangeModelMapperException {
+    public static SendMovementToPluginType createSendMovementToPluginType(String pluginName, PluginType type, Date fwdDate, String fwdRule, String recipient, MovementType payload, List<RecipientInfoType> recipientInfoList, String assetName, String ircs, String mmsi, String externalMarking, String flagState) {
         SendMovementToPluginType report = new SendMovementToPluginType();
         mapToMovementType(payload, ircs, mmsi, externalMarking, flagState, assetName);
         report.setTimestamp(DateUtils.nowUTC().toDate());
@@ -309,7 +310,7 @@ public class ExchangeModuleRequestMapper {
         return JAXBMarshaller.marshallJaxBObjectToString(request);
     }
 
-    private static SetCommandRequest createSetCommandRequest(String pluginName, CommandTypeType type, String username, String fwdRule) throws ExchangeModelMapperException {
+    private static SetCommandRequest createSetCommandRequest(String pluginName, CommandTypeType type, String username, String fwdRule) {
         SetCommandRequest request = new SetCommandRequest();
         request.setMethod(ExchangeModuleMethod.SET_COMMAND);
         CommandType commandType = new CommandType();
@@ -598,7 +599,7 @@ public class ExchangeModuleRequestMapper {
 
     public static String createSetFLUXMovementReportRequest(String message, String username, String fluxDFValue, Date date,
                                                             String messageGuid, PluginType pluginType, String senderReceiver, String onValue,
-                                                            String guid, String registeredClassName, String ad, String to, String todt) throws JAXBException {
+                                                            String guid, String registeredClassName, String ad, String to, String todt) throws JAXBException, JAXBRuntimeException {
         SetFLUXMovementReportRequest request = new SetFLUXMovementReportRequest();
         request.setMethod(ExchangeModuleMethod.RECEIVE_MOVEMENT_REPORT_BATCH);
         request.setRequest(message);
