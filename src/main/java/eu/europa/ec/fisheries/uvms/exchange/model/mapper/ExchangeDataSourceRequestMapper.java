@@ -43,8 +43,7 @@ public class ExchangeDataSourceRequestMapper {
             request.setUsername(username);
             return JAXBMarshaller.marshallJaxBObjectToString(request);
         } catch (Exception e) {
-            LOG.error("[ Error when mapping GetServiceListRequest to String ] {}", e.getMessage());
-            throw new ExchangeModelMapperException("[ Error when mapping GetServiceListRequest to String ]");
+            throw new ExchangeModelMapperException("Error when mapping GetServiceListRequest to String",e);
         }
     }
 
@@ -55,8 +54,7 @@ public class ExchangeDataSourceRequestMapper {
             request.setQuery(query);
             return JAXBMarshaller.marshallJaxBObjectToString(request);
         } catch (Exception e) {
-            LOG.error("[ Error when mapping GetServiceListRequest to String ] {}", e.getMessage());
-            throw new ExchangeModelMapperException("[ Error when mapping GetServiceListRequest to String ]");
+            throw new ExchangeModelMapperException("Error when mapping GetServiceListRequest to String",e);
         }
     }
 
@@ -76,8 +74,7 @@ public class ExchangeDataSourceRequestMapper {
             request.setServiceId(serviceId);
             return JAXBMarshaller.marshallJaxBObjectToString(request);
         } catch (Exception e) {
-            LOG.error("[ Error when mapping GetServiceListRequest to String ] {}", e.getMessage());
-            throw new ExchangeModelMapperException("[ Error when mapping GetServiceListRequest to String ]");
+            throw new ExchangeModelMapperException("Error when mapping GetServiceListRequest to String",e);
         }
     }
 
@@ -106,8 +103,7 @@ public class ExchangeDataSourceRequestMapper {
             request.setSettingList(settingList);
             return JAXBMarshaller.marshallJaxBObjectToString(request);
         } catch (Exception e) {
-            LOG.error("[ Error when mapping RegisterServiceRequest to String ] {}", e.getMessage());
-            throw new ExchangeModelMapperException("[ Error when mapping RegisterServiceRequest to String ]");
+            throw new ExchangeModelMapperException("Error when mapping RegisterServiceRequest to String ",e);
         }
     }
 
@@ -119,8 +115,7 @@ public class ExchangeDataSourceRequestMapper {
             request.setUsername(username);
             return JAXBMarshaller.marshallJaxBObjectToString(request);
         } catch (Exception e) {
-            LOG.error("[ Error when mapping RegisterServiceRequest to String ] {}", e.getMessage());
-            throw new ExchangeModelMapperException("[ Error when mapping RegisterServiceRequest to String ]");
+            throw new ExchangeModelMapperException("[ Error when mapping RegisterServiceRequest to String ]",e);
         }
     }
 
@@ -131,8 +126,7 @@ public class ExchangeDataSourceRequestMapper {
             request.setMethod(ExchangeDataSourceMethod.GET_SETTINGS);
             return JAXBMarshaller.marshallJaxBObjectToString(request);
         } catch (Exception e) {
-            LOG.error("[ Error when mapping GetServiceSettingsRequest to String ] {}", e.getMessage());
-            throw new ExchangeModelMapperException("[ Error when mapping GetServiceSettingsRequest to String ]");
+            throw new ExchangeModelMapperException("Error when mapping GetServiceSettingsRequest to String",e);
         }
     }
 
@@ -143,8 +137,7 @@ public class ExchangeDataSourceRequestMapper {
             request.setMethod(ExchangeDataSourceMethod.GET_CAPABILITIES);
             return JAXBMarshaller.marshallJaxBObjectToString(request);
         } catch (Exception e) {
-            LOG.error("[ Error when mapping GetServiceCapabilitiesRequest to String ] {}", e.getMessage());
-            throw new ExchangeModelMapperException("[ Error when mapping GetServiceCapabilitiesRequest to String ]");
+            throw new ExchangeModelMapperException("Error when mapping GetServiceCapabilitiesRequest to String",e);
         }
     }
 
@@ -157,8 +150,7 @@ public class ExchangeDataSourceRequestMapper {
             request.setUsername(username);
             return JAXBMarshaller.marshallJaxBObjectToString(request);
         } catch (ExchangeModelMarshallException e) {
-            LOG.error("[ Error when mapping SetServiceSettingsRequest ] ");
-            throw new ExchangeModelMapperException("[ Error when mapping SetServiceSettingsRequest ]");
+            throw new ExchangeModelMapperException("Error when mapping SetServiceSettingsRequest",e);
         }
     }
 
@@ -171,8 +163,7 @@ public class ExchangeDataSourceRequestMapper {
             request.setUsername(username);
             return JAXBMarshaller.marshallJaxBObjectToString(request);
         } catch (ExchangeModelMarshallException e) {
-            LOG.error("[ Error when mapping SetServiceStatusRequest ]");
-            throw new ExchangeModelMapperException("[ Error when mapping SetServiceStatusRequest ]");
+            throw new ExchangeModelMapperException("Error when mapping SetServiceStatusRequest",e);
         }
     }
 

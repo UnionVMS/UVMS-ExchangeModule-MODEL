@@ -22,6 +22,9 @@ import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /**
  *
 * @deprecated As of release 4.0.5 replaced by uvms-commons-date#DateUtils
@@ -30,6 +33,7 @@ import org.joda.time.format.DateTimeFormatter;
 public class DateUtils {
     final static String DATE_TIME_FORMAT = "yyyy-MM-dd HH:mm:ss Z";
     final static String DATE_FORMAT = "yyyy-MM-dd";
+    final static Logger LOG = LoggerFactory.getLogger(DateUtils.class);
 	
     public static XMLGregorianCalendar dateToXmlGregorian(Date timestamp) {
         GregorianCalendar cal = new GregorianCalendar();
@@ -38,6 +42,7 @@ public class DateUtils {
         try {
             xmlCalendar = DatatypeFactory.newInstance().newXMLGregorianCalendar(cal);
         } catch (DatatypeConfigurationException ex) {
+            LOG.warn("Could not create new instance for Gregorian Calendar and timestamp: " + timestamp);
         }
         return xmlCalendar;
     }
