@@ -56,7 +56,7 @@ public class JAXBMarshaller {
             String marshalled = sw.toString();
             return marshalled;
         } catch (JAXBException ex) {
-            throw new ExchangeModelMarshallException("[ Error when marshalling Object to String ]", ex);
+            throw new ExchangeModelMarshallException("Error when marshalling Object to String", ex);
         }
     }
 
@@ -84,7 +84,7 @@ public class JAXBMarshaller {
             R object = (R) unmarshaller.unmarshal(source);
             return object;
         } catch (JMSException | JAXBException ex) {
-            throw new ExchangeModelMarshallException("[Error when unmarshalling response in ResponseMapper ]");
+            throw new ExchangeModelMarshallException("Error when unmarshalling response in ResponseMapper",ex);
         }
     }
 
