@@ -432,7 +432,7 @@ public class ExchangeModuleRequestMapper {
         request.setRequest(faQueryMessageStr);
         request.setDestination(ad);
         request.setAd(ad);
-        populateBaseProperties(request, fluxDataFlow, DateUtils.nowUTC().toDate(), logId, PluginType.FLUX, senderOrReceiver, null, username, todt, to, ad);
+        populateBasePropertiesForOutgoing(request, fluxDataFlow, DateUtils.nowUTC().toDate(), logId, PluginType.FLUX, senderOrReceiver, null, username, ad);
         return JAXBMarshaller.marshallJaxBObjectToString(request);
     }
 
@@ -443,8 +443,20 @@ public class ExchangeModuleRequestMapper {
         request.setRequest(faReportMessageStr);
         request.setDestination(ad);
         request.setAd(ad);
-        populateBaseProperties(request, fluxDataFlow, DateUtils.nowUTC().toDate(), logId, PluginType.FLUX, senderOrReceiver, onValue, username, todt, to, ad);
+        populateBasePropertiesForOutgoing(request, fluxDataFlow, DateUtils.nowUTC().toDate(), logId, PluginType.FLUX, senderOrReceiver, onValue, username, ad);
         return JAXBMarshaller.marshallJaxBObjectToString(request);
+    }
+
+    private static void populateBasePropertiesForOutgoing(ExchangeBaseRequest request, String fluxDFValue, Date date, String messageGuid, PluginType pluginType,
+                                                          String senderReceiver, String onValue, String username, String ad) {
+        request.setUsername(username);
+        request.setFluxDataFlow(fluxDFValue);
+        request.setDate(date);
+        request.setMessageGuid(messageGuid);
+        request.setPluginType(pluginType);
+        request.setSenderOrReceiver(senderReceiver);
+        request.setOnValue(onValue);
+        request.setAd(ad);
     }
 
     private static void populateBaseProperties(ExchangeBaseRequest request, String fluxDFValue, Date date, String messageGuid, PluginType pluginType,
@@ -515,8 +527,6 @@ public class ExchangeModuleRequestMapper {
         request.setFluxDataFlow(df);
         request.setMessageGuid(messageGuid);
         request.setDate(DateUtils.nowUTC().toDate());
-        request.setTodt(todt);
-        request.setTo(to);
         request.setOnValue(onValue);
         request.setPluginType(pluginType);
         request.setSenderOrReceiver(fr);
