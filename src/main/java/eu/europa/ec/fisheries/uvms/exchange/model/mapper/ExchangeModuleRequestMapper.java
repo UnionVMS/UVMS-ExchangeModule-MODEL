@@ -427,23 +427,25 @@ public class ExchangeModuleRequestMapper {
     }
 
     public static String createSendFaQueryMessageRequest(String faQueryMessageStr, String username, String logId, String fluxDataFlow,
-                                                         String senderOrReceiver, String todt, String to, String ad) throws ExchangeModelMarshallException {
+                                                         String senderOrReceiver, String todt, String to, String ad,ExchangeLogStatusTypeType validation) throws ExchangeModelMarshallException {
         SetFAQueryMessageRequest request = new SetFAQueryMessageRequest();
         request.setMethod(ExchangeModuleMethod.SEND_FA_QUERY_MESSAGE);
         request.setRequest(faQueryMessageStr);
         request.setDestination(ad);
         request.setAd(ad);
+        request.setValidation(validation);
         populateBasePropertiesForOutgoing(request, fluxDataFlow, DateUtils.nowUTC().toDate(), logId, PluginType.FLUX, senderOrReceiver, null, username, ad);
         return JAXBMarshaller.marshallJaxBObjectToString(request);
     }
 
     public static String createSendFaReportMessageRequest(String faReportMessageStr, String username, String logId, String fluxDataFlow,
-                                                         String senderOrReceiver, String onValue, String todt, String to, String ad) throws ExchangeModelMarshallException {
+                                                         String senderOrReceiver, String onValue, String todt, String to, String ad,ExchangeLogStatusTypeType validation) throws ExchangeModelMarshallException {
         SetFLUXFAReportMessageRequest request = new SetFLUXFAReportMessageRequest();
         request.setMethod(ExchangeModuleMethod.SEND_FLUX_FA_REPORT_MESSAGE);
         request.setRequest(faReportMessageStr);
         request.setDestination(ad);
         request.setAd(ad);
+        request.setValidation(validation);
         populateBasePropertiesForOutgoing(request, fluxDataFlow, DateUtils.nowUTC().toDate(), logId, PluginType.FLUX, senderOrReceiver, onValue, username, ad);
         return JAXBMarshaller.marshallJaxBObjectToString(request);
     }
