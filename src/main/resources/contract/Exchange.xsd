@@ -128,6 +128,7 @@
             <xsd:enumeration value="FA_QUERY"/>
             <xsd:enumeration value="FA_REPORT"/>
             <xsd:enumeration value="FA_RESPONSE"/>
+            <xsd:enumeration value="FA"/>
             <xsd:enumeration value="ASSETS"/>
         </xsd:restriction>
     </xsd:simpleType>
