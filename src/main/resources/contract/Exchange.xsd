@@ -234,6 +234,7 @@
             <xsd:enumeration value="WARN"/>
             <xsd:enumeration value="ERROR"/>
             <xsd:enumeration value="SENT"/>
+            <xsd:enumeration value="BLOCKED"/>
         </xsd:restriction>
     </xsd:simpleType>
 

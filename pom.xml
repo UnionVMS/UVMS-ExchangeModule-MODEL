@@ -29,6 +29,7 @@
         <wsdl.registry.name>ExchangeRegistryService</wsdl.registry.name>
         <project.scm.id>github</project.scm.id>
         <binding.xml>binding-date.xml</binding.xml>
+        <junit.version>4.12</junit.version>
     </properties>
 
     <dependencies>
@@ -55,6 +56,12 @@
             <groupId>eu.europa.ec.fisheries.uvms.commons</groupId>
             <artifactId>uvms-commons-xml</artifactId>
             <version>${uvms.commonsLibrary.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 
