@@ -29,6 +29,7 @@
                     <xsd:enumeration value="SEND_FA_QUERY"/>
 					<xsd:enumeration value="SET_FLUX_RESPONSE"/>
                     <xsd:enumeration value="SEND_MOVEMENT_REPORT"/>
+                    <xsd:enumeration value="SEND_MOVEMENT"/>
                     <xsd:enumeration value="SEND_SALES_REPORT"/>
 					<xsd:enumeration value="SEND_SALES_RESPONSE"/>
                     <xsd:enumeration value="SEND_VESSEL_INFORMATION"/>
@@ -55,6 +56,19 @@
             </xsd:complexType>
 
             <xsd:element name="SendFLUXMovementReportRequest">
+                <xsd:complexType>
+                    <xsd:complexContent>
+                        <xsd:extension base="plugin:PluginBaseRequest">
+                            <xsd:sequence>
+                                <xsd:element name="report" type="xsd:string"/>
+                                <xsd:element name="recipient" type="xsd:string"/>
+                            </xsd:sequence>
+                        </xsd:extension>
+                    </xsd:complexContent>
+                </xsd:complexType>
+            </xsd:element>
+
+            <xsd:element name="SendFLUXMovementRequest">
                 <xsd:complexType>
                     <xsd:complexContent>
                         <xsd:extension base="plugin:PluginBaseRequest">

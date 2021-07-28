@@ -148,4 +148,18 @@ public class ExchangePluginRequestMapper {
         request.setDestination(ad);
         return JAXBMarshaller.marshallJaxBObjectToString(request);
     }
+
+    public static String createSendFLUXMovementRequest(String report, String destination, String senderOrReceiver, String dataflow, String unsentMessageGuid, String ad) throws ExchangeModelMarshallException {
+        SendFLUXMovementRequest request = new SendFLUXMovementRequest();
+        request.setMethod(ExchangePluginMethod.SEND_MOVEMENT);
+        request.setRecipient(senderOrReceiver);
+        request.setReport(report);
+        request.setSenderOrReceiver(senderOrReceiver);
+        request.setDestination(destination);
+        request.setFluxDataFlow(dataflow);
+        request.setResponseLogGuid(unsentMessageGuid);
+        request.setAd(ad);
+        request.setDestination(ad);
+        return JAXBMarshaller.marshallJaxBObjectToString(request);
+    }
 }
