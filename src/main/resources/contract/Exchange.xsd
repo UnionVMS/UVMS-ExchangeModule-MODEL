@@ -24,6 +24,7 @@
             <xsd:element name="typeRefType" type="exchange:TypeRefType" />
             <xsd:element name="relatedLogData" minOccurs="0" maxOccurs="unbounded" type="exchange:RelatedLogInfo" />
             <xsd:element name="businessModuleExceptionMessage" type="xsd:string"/>
+            <xsd:element name="responseStatus" type="exchange:ExchangeLogResponseStatusEnum" />
         </xsd:sequence>
     </xsd:complexType>
 
@@ -234,6 +235,14 @@
             <xsd:enumeration value="WARN"/>
             <xsd:enumeration value="ERROR"/>
             <xsd:enumeration value="SENT"/>
+            <xsd:enumeration value="BLOCKED"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:simpleType name="ExchangeLogResponseStatusEnum">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="ALLOWED"/>
+            <xsd:enumeration value="BLOCKED"/>
         </xsd:restriction>
     </xsd:simpleType>
 

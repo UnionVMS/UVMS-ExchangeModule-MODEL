@@ -239,6 +239,7 @@
 							<xsd:sequence>
 								<xsd:element name="request" type="xsd:string"/>
                                 <xsd:element name="status" type="exchange:ExchangeLogStatusTypeType"/>
+                                <xsd:element name="responseStatus" type="exchange:ExchangeLogResponseStatusEnum"/>
 							</xsd:sequence>
 						</xsd:extension>
 					</xsd:complexContent>
@@ -464,6 +465,8 @@
                             <xsd:sequence>
                                 <xsd:element name="orgRequest" type="movement:SetReportMovementType" minOccurs="1" maxOccurs="unbounded"/>
                                 <xsd:element name="movementRefType" type="movement:MovementRefType" minOccurs="1" maxOccurs="1"/>
+                                <xsd:element name="status" type="exchange:ExchangeLogStatusTypeType"/>
+                                <xsd:element name="responseStatus" type="exchange:ExchangeLogResponseStatusEnum"/>
                             </xsd:sequence>
                         </xsd:extension>
                     </xsd:complexContent>
