@@ -62,6 +62,7 @@ import eu.europa.ec.fisheries.schema.exchange.service.v1.CapabilityListType;
 import eu.europa.ec.fisheries.schema.exchange.service.v1.ServiceType;
 import eu.europa.ec.fisheries.schema.exchange.service.v1.SettingListType;
 import eu.europa.ec.fisheries.schema.exchange.service.v1.SettingType;
+import eu.europa.ec.fisheries.schema.exchange.v1.ExchangeLogResponseStatusEnum;
 import eu.europa.ec.fisheries.schema.exchange.v1.ExchangeLogStatusTypeType;
 import eu.europa.ec.fisheries.uvms.commons.date.DateUtils;
 import eu.europa.ec.fisheries.uvms.commons.xml.JAXBRuntimeException;
@@ -483,7 +484,8 @@ public class ExchangeModuleRequestMapper {
 
     public static String createFluxFAResponseRequestWithOnValue(String response, String username, String df, String messageGuid, String fr,
                                                                 String onVal, ExchangeLogStatusTypeType status, String destination, PluginType pluginType,
-                                                                String responseGuid) throws ExchangeModelMarshallException {
+                                                                String responseGuid,
+                                                                ExchangeLogResponseStatusEnum responseStatus) throws ExchangeModelMarshallException {
         SetFLUXFAResponseMessageRequest request = new SetFLUXFAResponseMessageRequest();
         request.setMethod(ExchangeModuleMethod.SET_FLUX_FA_RESPONSE_MESSAGE);
         request.setUsername(username);
@@ -497,6 +499,7 @@ public class ExchangeModuleRequestMapper {
         request.setDestination(destination);
         request.setOnValue(onVal);
         request.setResponseMessageGuid(responseGuid);
+        request.setResponseStatus(responseStatus);
         return JAXBMarshaller.marshallJaxBObjectToString(request);
     }
 
