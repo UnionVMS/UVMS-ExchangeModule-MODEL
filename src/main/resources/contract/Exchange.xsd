@@ -272,6 +272,7 @@
             <xsd:enumeration value="DATE_FORWARDED"/>
             <xsd:enumeration value="GUID"/>
             <xsd:enumeration value="REF_GUID"/>
+            <xsd:enumeration value="RESPONSE_STATUS"/>
         </xsd:restriction>
     </xsd:simpleType>
 
