@@ -503,6 +503,27 @@ public class ExchangeModuleRequestMapper {
         return JAXBMarshaller.marshallJaxBObjectToString(request);
     }
 
+    public static String createFluxFAMovementResponseRequestWithOnValue(String response, String username, String df, String messageGuid, String fr,
+                                                                String onVal, ExchangeLogStatusTypeType status, String destination, PluginType pluginType,
+                                                                String responseGuid,
+                                                                ExchangeLogResponseStatusEnum responseStatus) throws ExchangeModelMarshallException {
+        SetFLUXFAResponseMessageRequest request = new SetFLUXFAResponseMessageRequest();
+        request.setMethod(ExchangeModuleMethod.PROCESSED_MOVEMENT_BATCH);
+        request.setUsername(username);
+        request.setRequest(response);
+        request.setFluxDataFlow(df);
+        request.setMessageGuid(messageGuid);
+        request.setDate(DateUtils.nowUTC().toDate());
+        request.setPluginType(pluginType);
+        request.setSenderOrReceiver(fr);
+        request.setStatus(status);
+        request.setDestination(destination);
+        request.setOnValue(onVal);
+        request.setResponseMessageGuid(responseGuid);
+        request.setResponseStatus(responseStatus);
+        return JAXBMarshaller.marshallJaxBObjectToString(request);
+    }
+
     /**
      *
      *@Deprecated Use the createFluxFAResponseRequestWithOnValue(...){} method instead
