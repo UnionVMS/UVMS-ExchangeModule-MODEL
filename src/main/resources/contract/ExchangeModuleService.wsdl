@@ -87,6 +87,8 @@
 
                     <xsd:enumeration value="LOG_ID_BY_TYPE_EXISTS" />
 
+                    <xsd:enumeration value="MOVEMENT_RESPONSE" />
+
                 </xsd:restriction>
             </xsd:simpleType>
 
